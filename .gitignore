@@ -100,6 +100,7 @@ celerybeat.pid
 .venv
 env/
 venv/
+venv_etf/
 ENV/
 env.bak/
 venv.bak/
@@ -126,6 +127,10 @@ dmypy.json
 data/raw/
 data/processed/
 data/features/
+debug_columns.py
+etf_trading_system_fixed.py
+*_test.py
+*_old.py
 models/
 checkpoints/
 mlruns/
