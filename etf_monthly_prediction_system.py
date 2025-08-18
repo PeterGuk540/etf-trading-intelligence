@@ -8,6 +8,8 @@ import numpy as np
 import yfinance as yf
 import requests
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
+import calendar
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import torch
@@ -22,44 +24,116 @@ FRED_API_KEY = "ccf75f3e8501e936dafd9f3e77729525"
 SECTOR_ETFS = ['XLF', 'XLC', 'XLY', 'XLP', 'XLE', 'XLV', 'XLI', 'XLB', 'XLRE', 'XLK', 'XLU']
 PREDICTION_HORIZON = 21  # One month (21 trading days)
 
-# Date configuration for validation
-TODAY = datetime(2024, 8, 10)  # Current date
-TRAIN_END = datetime(2024, 6, 30)  # Training data ends June 30
-VALIDATION_START = datetime(2024, 7, 1)  # July for validation
-VALIDATION_END = datetime(2024, 7, 31)
-PREDICTION_START = datetime(2024, 8, 1)  # August for future predictions
+# Dynamic date configuration based on current date
+TODAY = datetime.now()  # Get actual current date
+
+# For predictions, we use the current month
+CURRENT_MONTH_START = datetime(TODAY.year, TODAY.month, 1)
+
+# For validation, we need complete data, so go back 2 months to ensure we have forward returns
+TWO_MONTHS_AGO = TODAY - relativedelta(months=2)
+VALIDATION_END = datetime(TWO_MONTHS_AGO.year, TWO_MONTHS_AGO.month, calendar.monthrange(TWO_MONTHS_AGO.year, TWO_MONTHS_AGO.month)[1])
+VALIDATION_START = datetime(TWO_MONTHS_AGO.year, TWO_MONTHS_AGO.month, 1)
+
+# Training ends before validation
+TRAIN_END = VALIDATION_START - timedelta(days=1)
+
+# Dynamic configuration
+PREDICTION_START = CURRENT_MONTH_START  # Current month for predictions (e.g., August 2025)
 
 print("="*80)
 print("MONTHLY ETF PREDICTION SYSTEM WITH VALIDATION")
 print("="*80)
-print(f"\n📅 Date Configuration:")
+print(f"\n📅 Dynamic Date Configuration (Today: {TODAY.date()}):")
 print(f"  Training: 2020-01-01 to {TRAIN_END.date()}")
-print(f"  Validation: {VALIDATION_START.date()} to {VALIDATION_END.date()}")
-print(f"  Prediction: {PREDICTION_START.date()} onwards")
-print(f"  Horizon: {PREDICTION_HORIZON} trading days (1 month)")
+print(f"  Validation: {VALIDATION_START.date()} to {VALIDATION_END.date()} ({VALIDATION_START.strftime('%B %Y')})")
+print(f"  Prediction: {PREDICTION_START.date()} onwards ({PREDICTION_START.strftime('%B %Y')})")
+print(f"  Horizon: {PREDICTION_HORIZON} trading days")
+print("\n  Note: Validation uses data from 2 months ago to ensure complete forward returns")
 
 class MonthlyPredictionPipeline:
     """Complete pipeline for monthly predictions"""
     
     def __init__(self):
+        # Complete list of 62 FRED indicators from Data_Generation.ipynb
         self.fred_indicators = {
-            'DGS10': 'treasury_10y',
+            # Interest Rates & Yields (10 indicators)
+            'DGS1': 'treasury_1y',
             'DGS2': 'treasury_2y', 
+            'DGS5': 'treasury_5y',
+            'DGS10': 'treasury_10y',
+            'DGS30': 'treasury_30y',
+            'DFEDTARU': 'fed_funds_upper',
+            'DFEDTARL': 'fed_funds_lower',
+            'TB3MS': 'treasury_3m',
+            'TB6MS': 'treasury_6m',
+            'MORTGAGE30US': 'mortgage_30y',
+            
+            # Yield Curves & Spreads (8 indicators)
+            'T10Y2Y': 'yield_curve_10y2y',
+            'T10Y3M': 'yield_curve_10y3m',
             'T5YIE': 'inflation_5y',
-            'DEXUSEU': 'usd_eur',
-            'DCOILWTICO': 'oil_wti',
-            'GOLDAMGBD228NLBM': 'gold',
-            'VIXCLS': 'vix',
-            'UNRATE': 'unemployment',
-            'CPIAUCSL': 'cpi',
-            'INDPRO': 'industrial_prod',
-            'HOUST': 'housing_starts',
-            'UMCSENT': 'consumer_sentiment',
-            'BAMLH0A0HYM2': 'high_yield_spread',
+            'T10YIE': 'inflation_10y',
             'TEDRATE': 'ted_spread',
-            'T10Y2Y': 'yield_curve',
+            'BAMLH0A0HYM2': 'high_yield_spread',
+            'BAMLC0A0CM': 'investment_grade_spread',
+            'DPRIME': 'prime_rate',
+            
+            # Economic Activity (12 indicators)
+            'GDP': 'gdp',
+            'GDPC1': 'real_gdp',
+            'INDPRO': 'industrial_production',
+            'CAPACITY': 'capacity_utilization',
+            'RETAILSL': 'retail_sales',
+            'HOUST': 'housing_starts',
+            'PERMIT': 'building_permits',
+            'AUTOSOLD': 'auto_sales',
+            'DEXPORT': 'exports',
+            'DIMPORT': 'imports',
+            'NETEXP': 'net_exports',
+            'BUSLOANS': 'business_loans',
+            
+            # Employment (8 indicators)
+            'UNRATE': 'unemployment_rate',
+            'EMRATIO': 'employment_ratio',
+            'CIVPART': 'participation_rate',
             'NFCI': 'financial_conditions',
-            'USSLIND': 'leading_index'
+            'ICSA': 'initial_claims',
+            'PAYEMS': 'nonfarm_payrolls',
+            'AWHAETP': 'avg_hourly_earnings',
+            'AWHMAN': 'avg_weekly_hours',
+            
+            # Inflation & Prices (8 indicators)
+            'CPIAUCSL': 'cpi',
+            'CPILFESL': 'core_cpi',
+            'PPIACO': 'ppi',
+            'PPIFGS': 'ppi_finished_goods',
+            'GASREGW': 'gas_price',
+            'DCOILWTICO': 'oil_wti',
+            'DCOILBRENTEU': 'oil_brent',
+            'GOLDAMGBD228NLBM': 'gold',
+            
+            # Money Supply & Credit (6 indicators)
+            'M1SL': 'm1_money',
+            'M2SL': 'm2_money',
+            'BOGMBASE': 'monetary_base',
+            'TOTRESNS': 'bank_reserves',
+            'CONSUMER': 'consumer_credit',
+            'TOTALSL': 'total_loans',
+            
+            # Market Indicators (5 indicators)
+            'VIXCLS': 'vix',
+            'DEXUSEU': 'usd_eur',
+            'DEXJPUS': 'usd_jpy',
+            'DEXUSUK': 'usd_gbp',
+            'DXY': 'dollar_index',
+            
+            # Consumer & Business Sentiment (5 indicators)
+            'UMCSENT': 'consumer_sentiment',
+            'CBCCI': 'consumer_confidence',
+            'USSLIND': 'leading_index',
+            'USCCCI': 'coincident_index',
+            'OEMV': 'business_optimism'
         }
         
     def fetch_all_data(self):
@@ -107,76 +181,171 @@ class MonthlyPredictionPipeline:
         
         return data, fred_data
     
+    def compute_momentum(self, close_series, window, skip=0):
+        """Compute momentum as in Data_Generation.ipynb"""
+        return close_series.shift(skip) / close_series.shift(skip + window) - 1
+    
+    def compute_macd(self, close_series, fast=12, slow=26, signal=9):
+        """Compute MACD indicators"""
+        exp1 = close_series.ewm(span=fast, adjust=False).mean()
+        exp2 = close_series.ewm(span=slow, adjust=False).mean()
+        macd = exp1 - exp2
+        macd_signal = macd.ewm(span=signal, adjust=False).mean()
+        macd_hist = macd - macd_signal
+        return macd, macd_signal, macd_hist
+    
+    def compute_kdj(self, high, low, close, period=9):
+        """Compute KDJ indicators"""
+        lowest_low = low.rolling(period).min()
+        highest_high = high.rolling(period).max()
+        rsv = 100 * ((close - lowest_low) / (highest_high - lowest_low))
+        k = rsv.ewm(alpha=1/3, adjust=False).mean()
+        d = k.ewm(alpha=1/3, adjust=False).mean()
+        j = 3 * k - 2 * d
+        return k, d, j
+    
+    def compute_atr(self, high, low, close, period=14):
+        """Compute Average True Range"""
+        high_low = high - low
+        high_close = np.abs(high - close.shift())
+        low_close = np.abs(low - close.shift())
+        ranges = pd.concat([high_low, high_close, low_close], axis=1)
+        true_range = ranges.max(axis=1)
+        return true_range.rolling(period).mean()
+    
+    def compute_mfi(self, high, low, close, volume, period=14):
+        """Compute Money Flow Index"""
+        typical_price = (high + low + close) / 3
+        raw_money_flow = typical_price * volume
+        positive_flow = pd.Series(0, index=close.index)
+        negative_flow = pd.Series(0, index=close.index)
+        positive_flow[typical_price > typical_price.shift()] = raw_money_flow[typical_price > typical_price.shift()]
+        negative_flow[typical_price < typical_price.shift()] = raw_money_flow[typical_price < typical_price.shift()]
+        positive_mf = positive_flow.rolling(period).sum()
+        negative_mf = negative_flow.rolling(period).sum()
+        mfi = 100 - (100 / (1 + positive_mf / (negative_mf + 1e-10)))
+        return mfi
+    
     def create_features(self, data, fred_data):
-        """Create technical and fundamental features"""
+        """Create all 20 alpha factors and beta factors"""
         features = {}
         
         for etf in SECTOR_ETFS:
             print(f"\nProcessing {etf}...")
             df = pd.DataFrame(index=data.index)
             
-            # Price data
+            # Get price columns
             close_col = f'Close_{etf}'
+            open_col = f'Open_{etf}'
+            high_col = f'High_{etf}'
+            low_col = f'Low_{etf}'
             volume_col = f'Volume_{etf}'
             
-            if close_col not in data.columns:
-                close_col = etf  # Try simple column name
-                volume_col = f'Volume_{etf}'
+            # Extract data with fallbacks
+            close = data[close_col] if close_col in data.columns else data.get(etf, pd.Series(index=data.index))
+            high = data[high_col] if high_col in data.columns else close
+            low = data[low_col] if low_col in data.columns else close
+            volume = data[volume_col] if volume_col in data.columns else pd.Series(1000000, index=data.index)
+            spy_close = data['Close_SPY'] if 'Close_SPY' in data.columns else data['SPY']
             
-            # Basic price/volume features
-            df['price'] = data[close_col] if close_col in data.columns else data[etf]
-            df['volume'] = data[volume_col] if volume_col in data.columns else 0
-            df['spy_price'] = data['Close_SPY'] if 'Close_SPY' in data.columns else data['SPY']
+            # === 20 ALPHA FACTORS ===
             
-            # Technical indicators
-            # 1. Returns at multiple horizons
-            for period in [5, 10, 21, 63]:
-                df[f'return_{period}d'] = df['price'].pct_change(period)
-                df[f'spy_return_{period}d'] = df['spy_price'].pct_change(period)
-                df[f'relative_return_{period}d'] = df[f'return_{period}d'] - df[f'spy_return_{period}d']
+            # 1-2. Momentum (1 week, 1 month)
+            df['momentum_1w'] = self.compute_momentum(close, 5)
+            df['momentum_1m'] = self.compute_momentum(close, 21)
             
-            # 2. Moving averages
-            for period in [10, 20, 50]:
-                df[f'sma_{period}'] = df['price'].rolling(period).mean()
-                df[f'price_to_sma_{period}'] = df['price'] / df[f'sma_{period}']
-            
-            # 3. Volatility
-            returns = df['price'].pct_change()
-            for period in [10, 21, 63]:
-                df[f'volatility_{period}d'] = returns.rolling(period).std() * np.sqrt(252)
-            
-            # 4. RSI
-            delta = df['price'].diff()
+            # 3. RSI (14-day)
+            delta = close.diff()
             gain = delta.where(delta > 0, 0).rolling(14).mean()
             loss = -delta.where(delta < 0, 0).rolling(14).mean()
-            rs = gain / loss
-            df['rsi'] = 100 - (100 / (1 + rs))
+            df['rsi_14d'] = 100 - (100 / (1 + gain / (loss + 1e-10)))
             
-            # 5. Bollinger Bands
-            sma20 = df['price'].rolling(20).mean()
-            std20 = df['price'].rolling(20).std()
-            df['bb_upper'] = sma20 + 2 * std20
-            df['bb_lower'] = sma20 - 2 * std20
-            df['bb_position'] = (df['price'] - df['bb_lower']) / (df['bb_upper'] - df['bb_lower'])
+            # 4. Volatility (21-day)
+            df['volatility_21d'] = close.pct_change().rolling(21).std() * np.sqrt(252)
             
-            # 6. Volume indicators
-            df['volume_ratio'] = df['volume'].rolling(20).mean() / df['volume'].rolling(60).mean()
-            df['volume_change'] = df['volume'].pct_change(5)
+            # 5. Sharpe Ratio (10-day)
+            returns = close.pct_change()
+            df['sharpe_10d'] = (returns.rolling(10).mean() / (returns.rolling(10).std() + 1e-10)) * np.sqrt(252)
             
-            # Add FRED features
+            # 6. Ratio Momentum (ETF/SPY momentum)
+            etf_spy_ratio = close / spy_close
+            df['ratio_momentum'] = self.compute_momentum(etf_spy_ratio, 21)
+            
+            # 7. Volume Ratio (5d/20d)
+            df['volume_ratio'] = volume.rolling(5).mean() / (volume.rolling(20).mean() + 1e-10)
+            
+            # 8-10. MACD, Signal, Histogram
+            macd, macd_signal, macd_hist = self.compute_macd(close)
+            df['macd'] = macd
+            df['macd_signal'] = macd_signal
+            df['macd_hist'] = macd_hist
+            
+            # 11. Bollinger Band %B
+            sma20 = close.rolling(20).mean()
+            std20 = close.rolling(20).std()
+            bb_upper = sma20 + 2 * std20
+            bb_lower = sma20 - 2 * std20
+            df['bb_pctb'] = (close - bb_lower) / (bb_upper - bb_lower + 1e-10)
+            
+            # 12-14. KDJ Indicators
+            k, d, j = self.compute_kdj(high, low, close)
+            df['kdj_k'] = k
+            df['kdj_d'] = d
+            df['kdj_j'] = j
+            
+            # 15. ATR (Average True Range)
+            df['atr_14d'] = self.compute_atr(high, low, close, 14)
+            
+            # 16-17. Price Breakouts
+            df['high_20d'] = close / (close.rolling(20).max() + 1e-10)
+            df['low_20d'] = close / (close.rolling(20).min() + 1e-10)
+            
+            # 18. MFI (Money Flow Index)
+            df['mfi_14d'] = self.compute_mfi(high, low, close, volume, 14)
+            
+            # 19. Volume-Weighted Average Price
+            df['vwap'] = (close * volume).rolling(20).sum() / (volume.rolling(20).sum() + 1e-10)
+            
+            # 20. Price Position (0-1 normalized)
+            rolling_min = close.rolling(63).min()
+            rolling_max = close.rolling(63).max()
+            df['price_position'] = (close - rolling_min) / (rolling_max - rolling_min + 1e-10)
+            
+            # === BETA FACTORS (62 indicators x 3 = 186 features) ===
             for col in fred_data.columns:
+                # Raw value
                 df[f'fred_{col}'] = fred_data[col]
-                # Add changes
-                df[f'fred_{col}_change'] = fred_data[col].pct_change(21)
+                # 1-month change
+                df[f'fred_{col}_chg_1m'] = fred_data[col].pct_change(21)
+                # 3-month change
+                df[f'fred_{col}_chg_3m'] = fred_data[col].pct_change(63)
+            
+            # Additional derived features
+            # Yield curve slopes
+            if 'treasury_10y' in fred_data.columns and 'treasury_2y' in fred_data.columns:
+                df['yield_curve_10y2y'] = fred_data['treasury_10y'] - fred_data['treasury_2y']
+            if 'treasury_10y' in fred_data.columns and 'treasury_3m' in fred_data.columns:
+                df['yield_curve_10y3m'] = fred_data['treasury_10y'] - fred_data['treasury_3m']
+            
+            # Real rates
+            if 'treasury_10y' in fred_data.columns and 'inflation_10y' in fred_data.columns:
+                df['real_rate_10y'] = fred_data['treasury_10y'] - fred_data['inflation_10y']
             
             # Create target: 21-day forward relative return
-            spy_forward = df['spy_price'].pct_change(PREDICTION_HORIZON).shift(-PREDICTION_HORIZON)
-            etf_forward = df['price'].pct_change(PREDICTION_HORIZON).shift(-PREDICTION_HORIZON)
+            spy_forward = spy_close.pct_change(PREDICTION_HORIZON).shift(-PREDICTION_HORIZON)
+            etf_forward = close.pct_change(PREDICTION_HORIZON).shift(-PREDICTION_HORIZON)
             df['target'] = etf_forward - spy_forward
+            
+            # Clean up infinities and NaNs
+            df = df.replace([np.inf, -np.inf], np.nan)
             
             features[etf] = df
             
-            print(f"  Created {len(df.columns)-1} features")
+            alpha_count = 20  # Fixed 20 alpha factors
+            beta_count = len([col for col in df.columns if 'fred' in col])
+            total_features = len(df.columns) - 1  # Exclude target
+            
+            print(f"  Created {total_features} features ({alpha_count} alpha + {beta_count} beta)")
         
         return features
     

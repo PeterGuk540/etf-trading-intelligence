@@ -95,9 +95,10 @@ def fetch_and_prepare_data():
     """Fetch data and create features"""
     print("\n📊 Fetching market data...")
     
-    # Download ALL available data since 2019
+    # Download ALL available data since 2019 to current date
     tickers = SECTOR_ETFS + ['SPY']
-    data = yf.download(tickers, start='2019-01-01', end='2024-08-10', auto_adjust=True)
+    end_date = datetime.now().strftime('%Y-%m-%d')
+    data = yf.download(tickers, start='2019-01-01', end=end_date, auto_adjust=True)
     
     # Handle multi-index
     if isinstance(data.columns, pd.MultiIndex):
@@ -110,34 +111,73 @@ def fetch_and_prepare_data():
 
 
 def create_features_and_target(data, etf):
-    """Create simple features for an ETF"""
+    """Create comprehensive features matching Data_Generation.ipynb"""
     df = pd.DataFrame(index=data.index)
     
     # Get columns
     close_col = f'Close_{etf}' if f'Close_{etf}' in data.columns else etf
+    high_col = f'High_{etf}' if f'High_{etf}' in data.columns else close_col
+    low_col = f'Low_{etf}' if f'Low_{etf}' in data.columns else close_col
+    volume_col = f'Volume_{etf}' if f'Volume_{etf}' in data.columns else None
     spy_col = f'Close_SPY' if f'Close_SPY' in data.columns else 'SPY'
     
-    # Prices
-    df['price'] = data[close_col] if close_col in data.columns else data[etf]
-    df['spy'] = data[spy_col] if spy_col in data.columns else data['SPY']
+    # Extract data
+    close = data[close_col] if close_col in data.columns else data[etf]
+    high = data[high_col] if high_col in data.columns else close
+    low = data[low_col] if low_col in data.columns else close
+    volume = data[volume_col] if volume_col and volume_col in data.columns else pd.Series(1000000, index=data.index)
+    spy = data[spy_col] if spy_col in data.columns else data['SPY']
     
-    # Simple features
-    for period in [5, 10, 20]:
-        df[f'ret_{period}'] = df['price'].pct_change(period)
-        df[f'spy_ret_{period}'] = df['spy'].pct_change(period)
-        df[f'vol_{period}'] = df['price'].pct_change().rolling(period).std()
-        df[f'sma_{period}'] = df['price'] / df['price'].rolling(period).mean()
+    # === 20 ALPHA FACTORS (simplified version for validation) ===
     
-    # RSI
-    delta = df['price'].diff()
+    # 1-2. Momentum
+    df['momentum_1w'] = close.pct_change(5)
+    df['momentum_1m'] = close.pct_change(21)
+    
+    # 3. RSI
+    delta = close.diff()
     gain = delta.where(delta > 0, 0).rolling(14).mean()
     loss = -delta.where(delta < 0, 0).rolling(14).mean()
-    df['rsi'] = 100 - (100 / (1 + gain / loss))
+    df['rsi'] = 100 - (100 / (1 + gain / (loss + 1e-10)))
+    
+    # 4. Volatility
+    df['volatility_21d'] = close.pct_change().rolling(21).std() * np.sqrt(252)
+    
+    # 5. Sharpe
+    returns = close.pct_change()
+    df['sharpe_10d'] = returns.rolling(10).mean() / (returns.rolling(10).std() + 1e-10)
+    
+    # 6-10. Price features
+    for period in [5, 10, 20, 50]:
+        df[f'sma_{period}'] = close / close.rolling(period).mean()
+    
+    # 11. Bollinger Band %B
+    sma20 = close.rolling(20).mean()
+    std20 = close.rolling(20).std()
+    df['bb_pctb'] = (close - (sma20 - 2*std20)) / (4*std20 + 1e-10)
+    
+    # 12-13. Volume features
+    df['volume_ratio'] = volume.rolling(5).mean() / (volume.rolling(20).mean() + 1e-10)
+    df['volume_chg'] = volume.pct_change(5)
+    
+    # 14-16. Additional price features
+    df['high_20d'] = close / (close.rolling(20).max() + 1e-10)
+    df['low_20d'] = close / (close.rolling(20).min() + 1e-10)
+    df['price_position'] = (close - close.rolling(63).min()) / (close.rolling(63).max() - close.rolling(63).min() + 1e-10)
+    
+    # 17-20. Relative features
+    df['relative_strength'] = close / spy
+    df['relative_momentum'] = (close / spy).pct_change(21)
+    df['relative_vol'] = df['volatility_21d'] / (spy.pct_change().rolling(21).std() * np.sqrt(252) + 1e-10)
+    df['spread'] = close - spy
     
     # Target: 21-day forward relative return
-    etf_fwd = df['price'].pct_change(21).shift(-21)
-    spy_fwd = df['spy'].pct_change(21).shift(-21)
+    etf_fwd = close.pct_change(21).shift(-21)
+    spy_fwd = spy.pct_change(21).shift(-21)
     df['target'] = etf_fwd - spy_fwd
+    
+    # Clean up
+    df = df.replace([np.inf, -np.inf], np.nan)
     
     return df.dropna()
 
@@ -239,19 +279,31 @@ def main():
     print("   • This provides robust validation across different market conditions")
     print()
     
-    # Define rolling windows
-    windows = [
-        ('2020-01-01', '2021-12-31', '2022-01-01', '2022-03-31', 'Q1 2022'),
-        ('2020-04-01', '2022-03-31', '2022-04-01', '2022-06-30', 'Q2 2022'),
-        ('2020-07-01', '2022-06-30', '2022-07-01', '2022-09-30', 'Q3 2022'),
-        ('2020-10-01', '2022-09-30', '2022-10-01', '2022-12-31', 'Q4 2022'),
-        ('2021-01-01', '2022-12-31', '2023-01-01', '2023-03-31', 'Q1 2023'),
-        ('2021-04-01', '2023-03-31', '2023-04-01', '2023-06-30', 'Q2 2023'),
-        ('2021-07-01', '2023-06-30', '2023-07-01', '2023-09-30', 'Q3 2023'),
-        ('2021-10-01', '2023-09-30', '2023-10-01', '2023-12-31', 'Q4 2023'),
-        ('2022-01-01', '2023-12-31', '2024-01-01', '2024-03-31', 'Q1 2024'),
-        ('2022-04-01', '2024-03-31', '2024-04-01', '2024-06-30', 'Q2 2024'),
-    ]
+    # Define rolling windows dynamically based on current date
+    from dateutil.relativedelta import relativedelta
+    current_date = datetime.now()
+    windows = []
+    
+    # Create windows for last 12 months, with 2-year training and 3-month validation
+    for months_back in range(12, 0, -3):  # Go back 12 months in 3-month steps
+        val_end = current_date - relativedelta(months=months_back)
+        val_start = val_end - relativedelta(months=2)  # 3-month validation window
+        train_end = val_start - relativedelta(days=1)
+        train_start = train_end - relativedelta(years=2)  # 2-year training window
+        
+        window_name = f"Q{((val_end.month-1)//3)+1} {val_end.year}"
+        windows.append((
+            train_start.strftime('%Y-%m-%d'),
+            train_end.strftime('%Y-%m-%d'),
+            val_start.strftime('%Y-%m-%d'),
+            val_end.strftime('%Y-%m-%d'),
+            window_name
+        ))
+    
+    # Show the windows being used
+    print(f"   • Using {len(windows)} rolling windows")
+    print(f"   • Latest window: {windows[-1][4]}")
+    print(f"   • Earliest window: {windows[0][4]}")
     
     # Store results for each window
     rolling_results = {model: {'r2': [], 'direction': [], 'mae': []} 
