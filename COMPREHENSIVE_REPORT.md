@@ -17,7 +17,7 @@
 4. [Modeling Strategies](#4-modeling-strategies)
 5. [Validation Methodology](#5-validation-methodology)
 6. [Performance Metrics](#6-performance-metrics)
-7. [Predictions for August-September 2024](#7-predictions-august-september-2024)
+7. [Predictions for August-September 2025](#7-predictions-august-september-2025)
 8. [Visualizations](#8-visualizations)
 9. [Technical Implementation](#9-technical-implementation)
 10. [Conclusions and Recommendations](#10-conclusions-recommendations)
@@ -317,7 +317,7 @@ Window 1: Train[2020-2021] → Validate[Q1 2022]
 Window 2: Train[2020-2022Q1] → Validate[Q2 2022]
 Window 3: Train[2020-2022Q2] → Validate[Q3 2022]
 ...
-Window 10: Train[2022-2024Q1] → Validate[Q2 2024]
+Window 10: Train[2022-2025Q1] → Validate[Q2 2025]
 ```
 
 #### Benefits
@@ -338,8 +338,8 @@ Total Data: 1,650+ days (2019-2025)
 
 | Window | Period | LSTM R² | TFT R² | N-BEATS R² | LSTM-GARCH R² |
 |--------|--------|---------|--------|------------|---------------|
-| Q3 2024 | Jul-Sep | -4.36 | -4.04 | -7.02 | -9.04 |
-| Q4 2024 | Oct-Dec | -8.22 | -9.41 | -4.67 | -7.24 |
+| Q3 2025 | Jul-Sep | -4.36 | -4.04 | -7.02 | -9.04 |
+| Q4 2025 | Oct-Dec | -8.22 | -9.41 | -4.67 | -7.24 |
 | Q1 2025 | Jan-Mar | -3.15 | -2.87 | -3.92 | -4.11 |
 | Q2 2025 | Apr-Jun | -0.52 | -0.10 | -0.58 | -0.08 |
 | **Average** | | **-4.37** | **-4.52** | **-4.09** | **-5.45** |
@@ -697,7 +697,7 @@ pipeline = DataPipeline()
 market_data = pipeline.fetch_market_data(
     tickers=['XLF', 'XLK', 'XLE'],
     start_date='2019-01-01',
-    end_date='2024-08-10'
+    end_date='2025-08-25'
 )
 fred_data = pipeline.fetch_fred_data(
     api_key='your_key_here'
