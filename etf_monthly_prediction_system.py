@@ -611,7 +611,7 @@ class MonthlyPredictionPipeline:
 
 # Main execution
 def main():
-    """Run complete monthly prediction system"""
+    """Run complete monthly prediction system with August 2025 evaluation"""
     
     # Initialize pipeline
     pipeline = MonthlyPredictionPipeline()
@@ -631,18 +631,57 @@ def main():
     # Create validation report
     pipeline.create_validation_report(results)
     
+    # Run August 2025 evaluation if we're past August
+    august_evaluation_results = None
+    if TODAY >= datetime(2025, 9, 1):  # Only run if we're in September or later
+        print("\n" + "="*60)
+        print("RUNNING AUGUST 2025 EVALUATION")
+        print("="*60)
+        try:
+            from august_evaluation import run_august_evaluation
+            
+            # Save current model predictions for August
+            august_predictions = {}
+            for etf, res in results.items():
+                if 'predictions' in res and len(res['predictions']) > 0:
+                    # Use the most recent prediction as August prediction
+                    august_predictions[etf] = float(res['predictions'][-1])
+            
+            # Save predictions to file for evaluation
+            import json
+            pred_file = '/home/aojie_ju/etf-trading-intelligence/august_2025_predictions.json'
+            with open(pred_file, 'w') as f:
+                json.dump(august_predictions, f)
+            
+            # Run evaluation
+            eval_results, eval_report = run_august_evaluation()
+            august_evaluation_results = eval_results
+            
+        except Exception as e:
+            print(f"⚠ August evaluation skipped: {e}")
+    
     # Summary
     print("\n" + "="*60)
     print("EXECUTION COMPLETE")
     print("="*60)
-    print("\n✅ Models trained on data through June 2024")
-    print("✅ Validated on July 2024 actual returns")
-    print("✅ Generated predictions for August-September 2024")
+    print(f"\n✅ Models trained on data through {TRAIN_END.strftime('%B %Y')}")
+    print(f"✅ Validated on {VALIDATION_START.strftime('%B %Y')} actual returns")
+    print(f"✅ Generated predictions for {PREDICTION_START.strftime('%B-%Y')} onwards")
+    
+    if august_evaluation_results:
+        print("\n📊 August 2025 Evaluation Results:")
+        metrics = august_evaluation_results['overall_metrics']
+        print(f"  • Direction Accuracy: {metrics['direction_accuracy']:.1%}")
+        print(f"  • Correlation: {metrics['correlation']:.3f}")
+        print(f"  • MAE: {metrics['mae']:.4f}")
+    
     print("\n📊 Key Outputs:")
     print("  • Validation metrics for all sectors")
     print("  • One-month forward return predictions")
     print("  • Portfolio allocation recommendations")
     print("  • Model performance comparison")
+    if august_evaluation_results:
+        print("  • August 2025 actual vs predicted evaluation")
     
     return results, allocations
 
