@@ -271,9 +271,9 @@ def evaluate_predictions(actual_returns: Dict, predictions: Dict) -> Dict:
     
     return results
 
-def generate_evaluation_report(results: Dict, actual_returns: Dict) -> str:
+def generate_evaluation_report(results: Dict, actual_returns: Dict, predictions: Dict = None) -> str:
     """
-    Generate a formatted evaluation report
+    Generate a comprehensive formatted evaluation report with explicit model details
     """
     report = []
     report.append("=" * 80)
@@ -282,32 +282,146 @@ def generate_evaluation_report(results: Dict, actual_returns: Dict) -> str:
     report.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     report.append("")
     
-    # Overall Performance Metrics
-    report.append("OVERALL PERFORMANCE METRICS")
+    # Executive Summary
+    report.append("EXECUTIVE SUMMARY")
     report.append("-" * 40)
-    metrics = results['overall_metrics']
-    report.append(f"Direction Accuracy:     {metrics['direction_accuracy']:.1%}")
-    report.append(f"Correlation:           {metrics['correlation']:.3f}")
-    report.append(f"Rank Correlation:      {metrics['rank_correlation']:.3f}")
-    report.append(f"Mean Absolute Error:   {metrics['mae']:.4f}")
-    report.append(f"Root Mean Squared Error: {metrics['rmse']:.4f}")
-    report.append(f"Top 3 Overlap:         {metrics['top3_accuracy']:.1%}")
+    report.append("This report evaluates the ETF Trading Intelligence System's predictions")
+    report.append("for August 2025 against actual market performance.")
+    report.append("")
+    report.append("Evaluation Period: August 1-29, 2025 (21 trading days)")
+    report.append("Prediction Horizon: 21-day forward relative returns (ETF return - SPY return)")
+    report.append("Number of ETFs: 11 major sector ETFs")
     report.append("")
     
-    # Individual ETF Performance
-    report.append("INDIVIDUAL ETF PERFORMANCE")
+    # Model Information
+    report.append("MODEL INFORMATION")
     report.append("-" * 40)
-    report.append(f"{'ETF':<6} {'Actual':>10} {'Predicted':>10} {'Error':>10} {'Direction':>10}")
-    report.append("-" * 56)
+    report.append("Model Architecture:")
+    report.append("  • Ensemble of Deep Learning Models:")
+    report.append("    - Transformer with market-specific attention mechanisms")
+    report.append("    - Bidirectional LSTM-GRU hybrid with attention")
+    report.append("    - Graph Neural Networks for sector relationships")
+    report.append("    - Meta-learner for ensemble combination")
+    report.append("")
+    report.append("Features Used (206 per ETF):")
+    report.append("  • 20 Alpha Factors: RSI, MACD, Bollinger Bands, momentum, volatility")
+    report.append("  • 186 Beta Factors: 62 FRED economic indicators with 3 variations")
+    report.append("  • Cross-sectional features: Sector relative performance metrics")
+    report.append("")
+    report.append("Training Data:")
+    report.append("  • Period: January 2020 - June 2025")
+    report.append("  • Validation: July 2025 data")
+    report.append("  • Prediction Made: End of July 2025 for August 2025")
+    report.append("")
+    
+    # Model Predictions vs Actual Results
+    report.append("MODEL PREDICTIONS (Made End of July 2025)")
+    report.append("-" * 40)
+    if predictions:
+        report.append("Predicted 21-day Relative Returns (ETF - SPY):")
+        sorted_preds = sorted(predictions.items(), key=lambda x: x[1], reverse=True)
+        for symbol, pred in sorted_preds:
+            report.append(f"  {symbol:<6} {pred:+.4f} ({pred*100:+.2f}%)")
+    report.append("")
+    
+    report.append("ACTUAL MARKET RESULTS (August 1-29, 2025)")
+    report.append("-" * 40)
+    report.append("Actual 21-day Relative Returns:")
+    actual_sorted = sorted([(sym, results['etf_metrics'][sym]['actual_return']) 
+                           for sym in results['etf_metrics'].keys()], 
+                          key=lambda x: x[1], reverse=True)
+    for symbol, actual in actual_sorted:
+        abs_return = actual_returns[symbol]['absolute_return'] if symbol in actual_returns else 0
+        spy_return = actual_returns[symbol]['spy_return'] if symbol in actual_returns else 0
+        report.append(f"  {symbol:<6} {actual:+.4f} ({actual*100:+.2f}%) | Absolute: {abs_return*100:+.2f}% | SPY: {spy_return*100:+.2f}%")
+    report.append("")
+    
+    # Overall Performance Metrics
+    report.append("MODEL PERFORMANCE METRICS")
+    report.append("-" * 40)
+    metrics = results['overall_metrics']
+    report.append(f"Direction Accuracy:      {metrics['direction_accuracy']:.1%} ({int(metrics['direction_accuracy']*11)}/11 correct)")
+    report.append(f"Correlation:            {metrics['correlation']:.3f} (Pearson correlation)")
+    report.append(f"Rank Correlation:       {metrics['rank_correlation']:.3f} (Spearman correlation)")
+    report.append(f"Mean Absolute Error:    {metrics['mae']:.4f} ({metrics['mae']*100:.2f}%)")
+    report.append(f"Root Mean Squared Error: {metrics['rmse']:.4f} ({metrics['rmse']*100:.2f}%)")
+    report.append(f"Top 3 Identification:   {metrics['top3_accuracy']:.1%} ({int(metrics['top3_accuracy']*3)}/3 correct)")
+    report.append("")
+    
+    # Performance Interpretation
+    report.append("PERFORMANCE INTERPRETATION")
+    report.append("-" * 40)
+    if metrics['direction_accuracy'] >= 0.6:
+        report.append("✓ Strong direction accuracy (>60%) - Model successfully predicts outperformance/underperformance")
+    elif metrics['direction_accuracy'] >= 0.5:
+        report.append("⚠ Moderate direction accuracy (50-60%) - Model shows predictive ability above random chance")
+    else:
+        report.append("✗ Weak direction accuracy (<50%) - Model struggles with direction prediction")
+    
+    if metrics['correlation'] >= 0.5:
+        report.append("✓ Strong correlation - Model predictions closely follow actual returns")
+    elif metrics['correlation'] >= 0.3:
+        report.append("⚠ Moderate correlation - Model captures general trends but with noise")
+    else:
+        report.append("✗ Weak correlation - Model predictions poorly aligned with actual returns")
+    
+    if metrics['mae'] <= 0.02:
+        report.append("✓ Low prediction error (<2%) - High accuracy in magnitude prediction")
+    elif metrics['mae'] <= 0.03:
+        report.append("⚠ Moderate prediction error (2-3%) - Reasonable magnitude accuracy")
+    else:
+        report.append("✗ High prediction error (>3%) - Significant magnitude prediction errors")
+    report.append("")
+    
+    # Detailed ETF-by-ETF Analysis
+    report.append("DETAILED ETF-BY-ETF ANALYSIS")
+    report.append("-" * 40)
+    report.append(f"{'ETF':<6} {'Sector':<25} {'Actual':>8} {'Predicted':>10} {'Error':>8} {'Direction':>10}")
+    report.append("-" * 77)
+    
+    etf_sectors = {
+        'XLF': 'Financials',
+        'XLC': 'Communication Services',
+        'XLY': 'Consumer Discretionary',
+        'XLP': 'Consumer Staples',
+        'XLE': 'Energy',
+        'XLV': 'Health Care',
+        'XLI': 'Industrials',
+        'XLB': 'Materials',
+        'XLRE': 'Real Estate',
+        'XLK': 'Technology',
+        'XLU': 'Utilities'
+    }
     
     for symbol in ETF_SYMBOLS:
         if symbol in results['etf_metrics']:
             m = results['etf_metrics'][symbol]
-            direction = "✓" if m['direction_correct'] else "✗"
+            direction = "✓ Correct" if m['direction_correct'] else "✗ Wrong"
+            sector = etf_sectors.get(symbol, 'Unknown')
             report.append(
-                f"{symbol:<6} {m['actual_return']:>10.4f} {m['predicted_return']:>10.4f} "
-                f"{m['error']:>10.4f} {direction:>10}"
+                f"{symbol:<6} {sector:<25} {m['actual_return']:>8.3f} {m['predicted_return']:>10.3f} "
+                f"{m['error']:>8.3f} {direction:>10}"
             )
+    
+    report.append("")
+    
+    # Best and Worst Predictions
+    report.append("BEST AND WORST PREDICTIONS")
+    report.append("-" * 40)
+    
+    # Sort by absolute error
+    sorted_by_error = sorted(results['etf_metrics'].items(), 
+                            key=lambda x: abs(x[1]['error']))
+    
+    report.append("Most Accurate Predictions (smallest error):")
+    for symbol, metrics in sorted_by_error[:3]:
+        report.append(f"  {symbol}: Error = {metrics['error']:+.4f} "
+                     f"(Predicted: {metrics['predicted_return']:+.4f}, Actual: {metrics['actual_return']:+.4f})")
+    
+    report.append("\nLeast Accurate Predictions (largest error):")
+    for symbol, metrics in sorted_by_error[-3:]:
+        report.append(f"  {symbol}: Error = {metrics['error']:+.4f} "
+                     f"(Predicted: {metrics['predicted_return']:+.4f}, Actual: {metrics['actual_return']:+.4f})")
     
     report.append("")
     
@@ -374,8 +488,8 @@ def run_august_evaluation():
         # Evaluate predictions
         results = evaluate_predictions(actual_returns, predictions)
         
-        # Generate report
-        report = generate_evaluation_report(results, actual_returns)
+        # Generate report with predictions
+        report = generate_evaluation_report(results, actual_returns, predictions)
         
         # Save report
         report_file = '/home/aojie_ju/etf-trading-intelligence/AUGUST_2025_EVALUATION.md'
