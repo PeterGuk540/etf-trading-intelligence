@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 import yfinance as yf
 import requests
+import time
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import warnings
@@ -196,52 +197,121 @@ class ComprehensiveFeatureEngine:
         return data
     
     def fetch_fred_data(self, start_date='2019-01-01', end_date=None):
-        """Fetch all 62 FRED indicators"""
+        """Fetch all 62 FRED indicators with robust retry logic and alternatives"""
         if end_date is None:
             end_date = datetime.now().strftime('%Y-%m-%d')
-        
+
         print("📊 Fetching FRED economic indicators (62 total)...")
         fred_data = pd.DataFrame()
-        
+
+        # Alternative indicators for failed ones
+        alternative_indicators = {
+            'CAPACITY': ['TCU', 'CAPUTLG02USM'],  # Total Capacity Utilization alternatives
+            'RETAILSL': ['RSXFS', 'MRTSSM44000USS'],  # Retail sales alternatives
+            'AUTOSOLD': ['ALTSALES', 'TOTALSA'],  # Auto sales alternatives
+            'DEXPORT': ['EXPGSC1', 'BOPGEXP'],  # Export alternatives
+            'DIMPORT': ['IMPGSC1', 'BOPGIMP'],  # Import alternatives
+            'GOLDAMGBD228NLBM': ['GOLDPMGBD228NLBM', 'GOLDAMPM', 'DCOILWTICO', 'DCOILBRENTEU'],  # Gold/commodity alternatives
+            'DXY': ['DTWEXBGS', 'DTWEXAFEGS'],  # Dollar index alternatives
+            'CBCCI': ['CONCCONF', 'CSCICP03USM665S'],  # Consumer confidence alternatives
+            'USCCCI': ['USCCILEADINDXM', 'USALOLITONOSTSAM'],  # Coincident index alternatives
+            'OEMV': ['BSCICP02USM665S', 'BSCICP03USM665S'],  # Business optimism alternatives
+            'PPIFGS': ['PPIACO', 'CPIAUCSL', 'CPILFESL']  # PPI finished goods alternatives (use overall PPI or CPI)
+        }
+
         successful = 0
         failed = []
-        
+
         for fred_code, name in self.fred_indicators.items():
-            try:
-                url = f"https://api.stlouisfed.org/fred/series/observations"
-                params = {
-                    'series_id': fred_code,
-                    'api_key': self.fred_api_key,
-                    'file_type': 'json',
-                    'observation_start': start_date,
-                    'observation_end': end_date
-                }
-                
-                response = requests.get(url, params=params, timeout=10)
-                if response.status_code == 200:
-                    fred_json = response.json()
-                    if 'observations' in fred_json and fred_json['observations']:
-                        df = pd.DataFrame(fred_json['observations'])
-                        df['date'] = pd.to_datetime(df['date'])
-                        df = df.set_index('date')
-                        df[name] = pd.to_numeric(df['value'], errors='coerce')
-                        
-                        if fred_data.empty:
-                            fred_data = df[[name]]
-                        else:
-                            fred_data = fred_data.join(df[[name]], how='outer')
-                        
-                        successful += 1
-                        if successful % 10 == 0:
-                            print(f"  Progress: {successful}/{len(self.fred_indicators)} indicators fetched")
-                else:
-                    failed.append(fred_code)
-            except Exception as e:
+            success = False
+
+            # Try main indicator first
+            indicators_to_try = [fred_code]
+
+            # Add alternatives if available
+            if fred_code in alternative_indicators:
+                indicators_to_try.extend(alternative_indicators[fred_code])
+
+            for attempt, indicator_code in enumerate(indicators_to_try):
+                try:
+                    url = f"https://api.stlouisfed.org/fred/series/observations"
+                    params = {
+                        'series_id': indicator_code,
+                        'api_key': self.fred_api_key,
+                        'file_type': 'json',
+                        'observation_start': start_date,
+                        'observation_end': end_date
+                    }
+
+                    # Retry logic with backoff
+                    for retry in range(3):
+                        try:
+                            response = requests.get(url, params=params, timeout=15)
+
+                            if response.status_code == 200:
+                                fred_json = response.json()
+                                if 'observations' in fred_json and fred_json['observations']:
+                                    observations = fred_json['observations']
+
+                                    if len(observations) > 10:  # Require at least 10 observations
+                                        df = pd.DataFrame(observations)
+                                        df['date'] = pd.to_datetime(df['date'])
+                                        df = df.set_index('date')
+                                        df[name] = pd.to_numeric(df['value'], errors='coerce')
+
+                                        # Remove rows with missing values
+                                        df = df.dropna()
+
+                                        if len(df) > 5:  # Require at least 5 valid observations
+                                            if fred_data.empty:
+                                                fred_data = df[[name]]
+                                            else:
+                                                fred_data = fred_data.join(df[[name]], how='outer')
+
+                                            successful += 1
+                                            if attempt > 0:
+                                                print(f"  ✓ {name}: Used alternative {indicator_code} (attempt {attempt+1})")
+                                            else:
+                                                print(f"  ✓ {name}")
+
+                                            if successful % 10 == 0:
+                                                print(f"  Progress: {successful}/{len(self.fred_indicators)} indicators fetched")
+
+                                            success = True
+                                            break
+
+                            elif response.status_code == 429:  # Rate limit
+                                import time
+                                time.sleep(2 ** retry)  # Exponential backoff
+                                continue
+                            else:
+                                break  # Try next alternative
+
+                        except requests.exceptions.Timeout:
+                            if retry < 2:
+                                import time
+                                time.sleep(1)  # Wait before retry
+                                continue
+                            else:
+                                break
+                        except Exception:
+                            break
+
+                    if success:
+                        break
+
+                except Exception as e:
+                    continue
+
+            if not success:
                 failed.append(fred_code)
         
         print(f"✓ Successfully fetched {successful}/{len(self.fred_indicators)} indicators")
         if failed:
-            print(f"⚠️  Failed indicators: {', '.join(failed[:5])}{'...' if len(failed) > 5 else ''}")
+            print(f"⚠️  Failed indicators: {', '.join(failed)}")
+            print(f"   Complete list of {len(failed)} failed indicators:")
+            for i, indicator in enumerate(failed, 1):
+                print(f"   {i}. {indicator}")
         
         # Forward fill and backward fill missing values
         fred_data = fred_data.ffill().bfill()
@@ -326,20 +396,92 @@ class ComprehensiveFeatureEngine:
         
         return df
     
-    def create_beta_factors(self, fred_data, etf_prefix=""):
-        """Create all 62 beta factors with proper naming"""
+    def classify_vix_regime(self, vix_value):
+        """Classify VIX regime for market environment detection"""
+        if pd.isna(vix_value):
+            return 'MEDIUM_VOL'
+        elif vix_value < 20:
+            return 'LOW_VOL'    # Risk-on environment
+        elif vix_value < 30:
+            return 'MEDIUM_VOL' # Mixed environment
+        else:
+            return 'HIGH_VOL'   # Risk-off environment
+
+    def create_vix_regime_features(self, fred_data, etf_prefix=""):
+        """Create VIX regime detection features with 21-day lag to prevent data leakage"""
         df = pd.DataFrame(index=fred_data.index)
-        
+
+        # Get VIX data
+        vix_col = 'vix' if 'vix' in fred_data.columns else None
+        if vix_col is None:
+            # Fallback: create dummy VIX regime
+            print("  ⚠️  VIX data not found, creating default regime features")
+            df[f'{etf_prefix}vix_regime_low_vol_lag21'] = 0.33
+            df[f'{etf_prefix}vix_regime_medium_vol_lag21'] = 0.34
+            df[f'{etf_prefix}vix_regime_high_vol_lag21'] = 0.33
+            return df
+
+        vix_data = fred_data[vix_col]
+
+        # CRITICAL FIX: Use 21-day lagged VIX regime to prevent data leakage
+        # This ensures we only use information available 21 days before the prediction period
+
+        # Calculate regime using current VIX, then lag it
+        regime = vix_data.apply(self.classify_vix_regime)
+        regime_lagged = regime.shift(21)  # 21-day lag to match prediction horizon
+
+        # Lagged VIX regime features (one-hot encoded)
+        df[f'{etf_prefix}vix_regime_low_vol_lag21'] = (regime_lagged == 'LOW_VOL').astype(int)
+        df[f'{etf_prefix}vix_regime_medium_vol_lag21'] = (regime_lagged == 'MEDIUM_VOL').astype(int)
+        df[f'{etf_prefix}vix_regime_high_vol_lag21'] = (regime_lagged == 'HIGH_VOL').astype(int)
+
+        # Lagged VIX level features
+        vix_lagged = vix_data.shift(21)
+        df[f'{etf_prefix}vix_level_lag21'] = vix_lagged
+        df[f'{etf_prefix}vix_ma_20_lag21'] = vix_data.rolling(20).mean().shift(21)
+        df[f'{etf_prefix}vix_vs_ma_lag21'] = (vix_lagged / df[f'{etf_prefix}vix_ma_20_lag21'] - 1)
+
+        # Lagged VIX percentile (1-year rolling)
+        df[f'{etf_prefix}vix_percentile_1y_lag21'] = vix_data.rolling(252).rank(pct=True).shift(21)
+
+        # Lagged VIX changes (calculated from lagged data)
+        df[f'{etf_prefix}vix_change_1d_lag21'] = vix_data.pct_change(1).shift(21)
+        df[f'{etf_prefix}vix_change_5d_lag21'] = vix_data.pct_change(5).shift(21)
+        df[f'{etf_prefix}vix_change_21d_lag21'] = vix_data.pct_change(21).shift(21)
+
+        # Lagged regime persistence
+        regime_changes = (regime != regime.shift(1)).cumsum()
+        regime_days = regime_changes.groupby(regime_changes).cumcount() + 1
+        df[f'{etf_prefix}regime_days_lag21'] = regime_days.shift(21)
+
+        if etf_prefix == "":  # Only print once
+            print(f"  ✓ VIX Regime Distribution (21-day lagged to prevent data leakage):")
+            regime_dist = regime_lagged.value_counts(normalize=True)
+            for reg, pct in regime_dist.items():
+                if pd.notna(reg):  # Skip NaN values from lagging
+                    print(f"    {reg}: {pct:.1%}")
+            print(f"    ⚠️  Note: {regime_lagged.isna().sum()} samples lost due to 21-day lag")
+
+        return df
+
+    def create_beta_factors(self, fred_data, etf_prefix=""):
+        """Create all 62 beta factors with VIX regime detection"""
+        df = pd.DataFrame(index=fred_data.index)
+
+        # Add VIX regime features first (11 new features)
+        vix_regime_df = self.create_vix_regime_features(fred_data, etf_prefix)
+        df = pd.concat([df, vix_regime_df], axis=1)
+
         for col in fred_data.columns:
             # Add raw value
             df[f'{etf_prefix}fred_{col}'] = fred_data[col]
-            
+
             # Add 1-month change
             df[f'{etf_prefix}fred_{col}_chg_1m'] = fred_data[col].pct_change(21)
-            
+
             # Add 3-month change
             df[f'{etf_prefix}fred_{col}_chg_3m'] = fred_data[col].pct_change(63)
-        
+
         return df
     
     def create_complete_features(self, market_data, fred_data):

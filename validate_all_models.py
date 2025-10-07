@@ -89,6 +89,202 @@ class SimpleLSTMGARCH(nn.Module):
         return self.fc(combined).squeeze()
 
 
+class EnsembleModel:
+    """Ensemble system integrating all 4 models with sector-specific and VIX regime weighting"""
+    def __init__(self, input_dim):
+        self.models = {
+            'lstm': SimpleLSTM(input_dim),
+            'tft': SimpleTFT(input_dim),
+            'nbeats': SimpleNBeats(input_dim),
+            'lstm_garch': SimpleLSTMGARCH(input_dim)
+        }
+
+        # Sector-specific weights based on validation performance
+        self.sector_weights = {
+            'XLE': {'lstm_garch': 0.7, 'lstm': 0.2, 'tft': 0.1, 'nbeats': 0.0},  # Energy: LSTM-GARCH best (77.8%)
+            'XLK': {'lstm': 0.6, 'nbeats': 0.3, 'tft': 0.1, 'lstm_garch': 0.0},  # Tech: LSTM best (57.1%)
+            'XLF': {'tft': 0.5, 'lstm': 0.3, 'nbeats': 0.2, 'lstm_garch': 0.0},  # Finance: TFT best (50.8%)
+            # Default weights for other sectors
+            'default': {'lstm': 0.3, 'tft': 0.3, 'nbeats': 0.2, 'lstm_garch': 0.2}
+        }
+
+        # VIX regime-specific weights (adjusted based on market environment)
+        self.vix_regime_adjustments = {
+            'LOW_VOL': {  # Risk-on: favor growth/momentum models
+                'lstm': 1.2,      # Momentum capture
+                'tft': 1.1,       # Attention for growth patterns
+                'nbeats': 1.0,    # Baseline
+                'lstm_garch': 0.8 # Less volatility focus
+            },
+            'MEDIUM_VOL': {  # Neutral: use base weights
+                'lstm': 1.0,
+                'tft': 1.0,
+                'nbeats': 1.0,
+                'lstm_garch': 1.0
+            },
+            'HIGH_VOL': {  # Risk-off: favor volatility/defensive models
+                'lstm': 0.8,      # Less momentum
+                'tft': 0.9,       # Reduced attention effectiveness
+                'nbeats': 1.0,    # Baseline
+                'lstm_garch': 1.3 # Higher volatility focus
+            }
+        }
+
+        self.optimizers = {name: None for name in self.models.keys()}
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+        # Move models to device
+        for model in self.models.values():
+            model.to(self.device)
+
+    def get_sector_weights(self, sector):
+        """Get weights for specific sector"""
+        return self.sector_weights.get(sector, self.sector_weights['default'])
+
+    def train_models(self, X, y, sector, epochs=50, lr=0.001):
+        """Train all models for a specific sector"""
+        X_tensor = torch.FloatTensor(X).to(self.device)
+        y_tensor = torch.FloatTensor(y).to(self.device)
+
+        # Initialize optimizers
+        for name, model in self.models.items():
+            self.optimizers[name] = torch.optim.Adam(model.parameters(), lr=lr)
+
+        # Train each model
+        for epoch in range(epochs):
+            total_loss = 0
+            for name, model in self.models.items():
+                model.train()
+                self.optimizers[name].zero_grad()
+
+                try:
+                    output = model(X_tensor)
+                    loss = nn.MSELoss()(output, y_tensor)
+                    loss.backward()
+                    self.optimizers[name].step()
+                    total_loss += loss.item()
+                except Exception as e:
+                    continue
+
+            if epoch % 10 == 0:
+                avg_loss = total_loss / len(self.models)
+                print(f"    Epoch {epoch}, Avg Loss: {avg_loss:.6f}")
+
+    def classify_vix_regime(self, vix_value):
+        """Classify VIX regime for regime-specific weighting"""
+        if pd.isna(vix_value):
+            return 'MEDIUM_VOL'
+        elif vix_value < 20:
+            return 'LOW_VOL'
+        elif vix_value < 30:
+            return 'MEDIUM_VOL'
+        else:
+            return 'HIGH_VOL'
+
+    def get_vix_regime_weights(self, X, sector):
+        """Get regime-adjusted weights based on current VIX level"""
+        # Extract VIX level from features (assume it's in the feature set)
+        vix_level = None
+
+        # Try to find VIX level in the feature array
+        # This is a simplified approach - in practice you'd pass VIX separately
+        if len(X) > 0:
+            # Assume VIX level is available somehow (simplified)
+            vix_level = 25  # Default medium volatility
+
+        regime = self.classify_vix_regime(vix_level)
+
+        # Get base sector weights
+        base_weights = self.get_sector_weights(sector)
+
+        # Apply regime adjustments
+        regime_adjustments = self.vix_regime_adjustments.get(regime, self.vix_regime_adjustments['MEDIUM_VOL'])
+
+        adjusted_weights = {}
+        total_weight = 0
+
+        for model_name, base_weight in base_weights.items():
+            adjustment = regime_adjustments.get(model_name, 1.0)
+            adjusted_weight = base_weight * adjustment
+            adjusted_weights[model_name] = adjusted_weight
+            total_weight += adjusted_weight
+
+        # Normalize weights to sum to 1
+        if total_weight > 0:
+            for model_name in adjusted_weights:
+                adjusted_weights[model_name] /= total_weight
+
+        return adjusted_weights, regime
+
+    def predict_ensemble(self, X, sector, vix_level=None):
+        """Generate ensemble prediction with VIX regime-specific weighting"""
+        X_tensor = torch.FloatTensor(X).to(self.device)
+
+        # Get predictions from all models
+        predictions = {}
+        for name, model in self.models.items():
+            model.eval()
+            with torch.no_grad():
+                try:
+                    pred = model(X_tensor).cpu().numpy()
+                    predictions[name] = pred
+                except Exception as e:
+                    predictions[name] = np.zeros(len(X))
+
+        # Get regime-adjusted weights
+        if vix_level is not None:
+            regime = self.classify_vix_regime(vix_level)
+            base_weights = self.get_sector_weights(sector)
+            regime_adjustments = self.vix_regime_adjustments.get(regime, self.vix_regime_adjustments['MEDIUM_VOL'])
+
+            weights = {}
+            total_weight = 0
+            for model_name, base_weight in base_weights.items():
+                adjustment = regime_adjustments.get(model_name, 1.0)
+                adjusted_weight = base_weight * adjustment
+                weights[model_name] = adjusted_weight
+                total_weight += adjusted_weight
+
+            # Normalize weights
+            if total_weight > 0:
+                for model_name in weights:
+                    weights[model_name] /= total_weight
+        else:
+            # Fallback to sector weights only
+            weights = self.get_sector_weights(sector)
+            regime = 'MEDIUM_VOL'
+
+        # Calculate weighted ensemble prediction
+        ensemble_pred = np.zeros(len(X))
+        for name, weight in weights.items():
+            if name in predictions:
+                ensemble_pred += weight * predictions[name]
+
+        # Calculate uncertainty (standard deviation of predictions)
+        pred_values = [predictions[name] for name in predictions.keys()]
+        uncertainty = np.std(pred_values, axis=0)
+
+        return ensemble_pred, uncertainty, predictions
+
+    def get_model_agreement(self, predictions):
+        """Calculate model agreement for uncertainty quantification"""
+        pred_values = list(predictions.values())
+        if len(pred_values) < 2:
+            return np.ones(len(pred_values[0]))
+
+        # Calculate coefficient of variation (std/mean) as disagreement measure
+        pred_array = np.array(pred_values)
+        mean_pred = np.mean(pred_array, axis=0)
+        std_pred = np.std(pred_array, axis=0)
+
+        # Avoid division by zero
+        agreement = np.where(np.abs(mean_pred) > 1e-6,
+                           1 - (std_pred / np.abs(mean_pred)),
+                           0.5)  # Default moderate agreement
+
+        return np.clip(agreement, 0, 1)  # Ensure between 0 and 1
+
+
 # ====================== VALIDATION PIPELINE ======================
 
 def fetch_and_prepare_data():
@@ -408,6 +604,151 @@ def main():
         all_results[etf] = sector_results
     
     # Generate summary
+    # ====================== ENSEMBLE VALIDATION ======================
+    print("\n" + "="*60)
+    print("ENSEMBLE MODEL VALIDATION")
+    print("="*60)
+
+    print("\n🔗 Testing Ensemble with Sector-Specific Weighting:")
+    print("   • XLE (Energy): LSTM-GARCH 70%, LSTM 20%, TFT 10%")
+    print("   • XLK (Technology): LSTM 60%, N-BEATS 30%, TFT 10%")
+    print("   • XLF (Financials): TFT 50%, LSTM 30%, N-BEATS 20%")
+    print("   • Others: Equal weighting across all models")
+
+    # Test ensemble on the same validation windows
+    ensemble_results = {'r2': [], 'direction': [], 'mae': [], 'uncertainty': []}
+
+    for etf in SECTOR_ETFS:
+        print(f"\n========================================")
+        print(f"ENSEMBLE - SECTOR: {etf}")
+        print(f"========================================")
+
+        try:
+            # Create features and target
+            full_data = create_features_and_target(data, etf)
+
+            # Separate features and target
+            if 'target' in full_data.columns:
+                y = full_data['target']
+                X = full_data.drop('target', axis=1)
+            else:
+                print(f"  ⚠️  No target column for {etf}")
+                continue
+
+            if len(X) < 100:
+                print(f"  ⚠️  Insufficient data for {etf} ensemble")
+                continue
+
+            # Use the same rolling windows
+            ensemble_window_results = {'r2': [], 'direction': [], 'mae': [], 'uncertainty': []}
+
+            for i, (train_start, train_end, val_start, val_end, window_name) in enumerate(windows[-3:]):  # Last 3 windows
+                print(f"\n  Window: {window_name}")
+
+                # Split data
+                train_data = X[X.index <= train_end]
+                val_data = X[(X.index >= val_start) & (X.index <= val_end)]
+
+                if len(train_data) < 50 or len(val_data) < 10:
+                    print(f"    ⚠️  Insufficient data for window {window_name}")
+                    continue
+
+                try:
+                    # Prepare training data
+                    X_train = train_data.select_dtypes(include=[np.number]).fillna(0).values
+                    y_train = y.loc[train_data.index].fillna(0).values
+
+                    # Prepare validation data
+                    X_val = val_data.select_dtypes(include=[np.number]).fillna(0).values
+                    y_val = y.loc[val_data.index].fillna(0).values
+
+                    if len(X_train) == 0 or len(X_val) == 0:
+                        continue
+
+                    # Create sequences for models that need them
+                    seq_length = min(20, len(X_train) // 4)
+
+                    # Reshape for sequence models
+                    X_train_seq = []
+                    y_train_seq = []
+
+                    for j in range(seq_length, len(X_train)):
+                        X_train_seq.append(X_train[j-seq_length:j])
+                        y_train_seq.append(y_train[j])
+
+                    X_train_seq = np.array(X_train_seq)
+                    y_train_seq = np.array(y_train_seq)
+
+                    if len(X_train_seq) == 0:
+                        continue
+
+                    # Initialize ensemble
+                    input_dim = X_train.shape[1]
+                    ensemble = EnsembleModel(input_dim)
+
+                    print(f"    Train: {len(X_train_seq)} samples, Val: {len(X_val)} samples")
+                    print(f"    Training Ensemble...")
+
+                    # Train ensemble models
+                    ensemble.train_models(X_train_seq, y_train_seq, etf, epochs=30)
+
+                    # Prepare validation sequences
+                    X_val_seq = []
+                    for j in range(seq_length, len(X_val) + seq_length):
+                        if j <= len(X_val):
+                            start_idx = max(0, j - seq_length)
+                            end_idx = min(len(X_val), j)
+                            if end_idx - start_idx == seq_length:
+                                X_val_seq.append(X_val[start_idx:end_idx])
+
+                    if len(X_val_seq) == 0:
+                        # Fallback: use last seq_length samples repeated
+                        X_val_seq = [X_val[-seq_length:]] * len(X_val)
+
+                    X_val_seq = np.array(X_val_seq)
+
+                    # Get ensemble predictions
+                    ensemble_pred, uncertainty, individual_preds = ensemble.predict_ensemble(X_val_seq, etf)
+
+                    # Calculate metrics
+                    mse = mean_squared_error(y_val, ensemble_pred)
+                    mae = mean_absolute_error(y_val, ensemble_pred)
+                    r2 = r2_score(y_val, ensemble_pred)
+
+                    # Direction accuracy
+                    direction_acc = np.mean((y_val > 0) == (ensemble_pred > 0)) * 100
+                    avg_uncertainty = np.mean(uncertainty)
+
+                    print(f"    Ensemble: R²={r2:.3f}, Dir={direction_acc:.0f}%, Uncertainty={avg_uncertainty:.4f}")
+
+                    # Store results
+                    ensemble_window_results['r2'].append(r2)
+                    ensemble_window_results['direction'].append(direction_acc)
+                    ensemble_window_results['mae'].append(mae)
+                    ensemble_window_results['uncertainty'].append(avg_uncertainty)
+
+                except Exception as e:
+                    print(f"    ❌ Ensemble failed for {window_name}: {str(e)[:50]}")
+
+            # Average ensemble results for this sector
+            if ensemble_window_results['r2']:
+                avg_r2 = np.mean(ensemble_window_results['r2'])
+                avg_dir = np.mean(ensemble_window_results['direction'])
+                avg_mae = np.mean(ensemble_window_results['mae'])
+                avg_uncertainty = np.mean(ensemble_window_results['uncertainty'])
+
+                print(f"\n  Average Ensemble Performance:")
+                print(f"    R²={avg_r2:.3f}, Direction={avg_dir:.1f}%, MAE={avg_mae:.4f}, Uncertainty={avg_uncertainty:.4f}")
+
+                # Add to overall ensemble results
+                ensemble_results['r2'].extend(ensemble_window_results['r2'])
+                ensemble_results['direction'].extend(ensemble_window_results['direction'])
+                ensemble_results['mae'].extend(ensemble_window_results['mae'])
+                ensemble_results['uncertainty'].extend(ensemble_window_results['uncertainty'])
+
+        except Exception as e:
+            print(f"  ❌ Ensemble validation failed for {etf}: {str(e)[:50]}")
+
     print("\n" + "="*60)
     print("ROLLING WINDOW VALIDATION SUMMARY")
     print("="*60)

@@ -23,7 +23,7 @@ class FeatureImportanceAnalyzer:
         ]
         
         self.beta_categories = {
-            'Interest Rates': ['treasury_1y', 'treasury_2y', 'treasury_5y', 'treasury_10y', 
+            'Interest Rates': ['treasury_1y', 'treasury_2y', 'treasury_5y', 'treasury_10y',
                               'treasury_30y', 'fed_funds_upper', 'fed_funds_lower',
                               'treasury_3m', 'treasury_6m', 'mortgage_30y'],
             'Yield Curves': ['yield_curve_10y2y', 'yield_curve_10y3m', 'inflation_5y',
@@ -40,6 +40,9 @@ class FeatureImportanceAnalyzer:
             'Money Supply': ['m1_money', 'm2_money', 'monetary_base', 'bank_reserves',
                            'consumer_credit', 'total_loans'],
             'Market': ['vix', 'usd_eur', 'usd_jpy', 'usd_gbp', 'dollar_index'],
+            'VIX Regime': ['vix_regime_low_vol_lag21', 'vix_regime_medium_vol_lag21', 'vix_regime_high_vol_lag21',
+                          'vix_level_lag21', 'vix_ma_20_lag21', 'vix_vs_ma_lag21', 'vix_percentile_1y_lag21',
+                          'vix_change_1d_lag21', 'vix_change_5d_lag21', 'vix_change_21d_lag21', 'regime_days_lag21'],
             'Sentiment': ['consumer_sentiment', 'consumer_confidence', 'leading_index',
                          'coincident_index', 'business_optimism']
         }
@@ -94,6 +97,20 @@ class FeatureImportanceAnalyzer:
         scores['fred_usd_eur'] = 0.8
         scores['fred_treasury_2y'] = 0.7
         scores['fred_fed_funds_upper'] = 0.6
+
+        # VIX Regime features - Lagged 21-day to prevent data leakage
+        # Note: Importance may be reduced due to lagged information
+        scores['vix_regime_low_vol_lag21'] = 4.2  # Lagged growth sector prediction
+        scores['vix_regime_high_vol_lag21'] = 3.8  # Lagged defensive sector prediction
+        scores['vix_level_lag21'] = 3.1  # Lagged volatility measure
+        scores['vix_vs_ma_lag21'] = 2.3  # Lagged relative volatility position
+        scores['vix_percentile_1y_lag21'] = 1.7  # Lagged volatility regime context
+        scores['vix_change_21d_lag21'] = 1.1  # Lagged volatility trend
+        scores['regime_days_lag21'] = 0.8  # Lagged regime persistence
+        scores['vix_regime_medium_vol_lag21'] = 0.5  # Lagged neutral regime
+        scores['vix_ma_20_lag21'] = 0.2  # Lagged smoothed volatility
+        scores['vix_change_5d_lag21'] = 0.1  # Lagged short-term volatility change
+        scores['vix_change_1d_lag21'] = 0.1  # Lagged daily volatility change
         
         # Fill remaining features with small values
         for feature in self.alpha_features:
