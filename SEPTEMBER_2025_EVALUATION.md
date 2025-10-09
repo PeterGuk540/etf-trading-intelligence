@@ -16,13 +16,28 @@ Model Used: 4-Model Ensemble with Sector-Specific Weighting
 ENSEMBLE MODEL INFORMATION
 ----------------------------------------
 🔗 ENSEMBLE Model Architecture:
-  • 4 Neural Network Models with Sector-Specific Weighting:
+  • 4 Neural Network Models with Adaptive Weighted Averaging:
     - LSTM (Baseline): Best for XLK (Technology) - 57.1% validation accuracy
     - TFT (Temporal Fusion Transformer): Best for XLF (Financials) - 50.8% validation accuracy
     - N-BEATS (Neural Basis Expansion): General purpose forecasting
     - LSTM-GARCH (Hybrid): Best for XLE (Energy) - 77.8% validation accuracy
-  • Ensemble Strategy: Weighted combination based on sector validation performance
-  • Uncertainty Quantification: Model disagreement analysis
+
+  • Ensemble Methodology: Multi-Level Weighted Averaging
+    Level 1 - Sector-Specific Base Weights:
+      XLE: LSTM-GARCH 70%, LSTM 20%, TFT 10%, N-BEATS 0%
+      XLK: LSTM 60%, N-BEATS 30%, TFT 10%, LSTM-GARCH 0%
+      XLF: TFT 50%, LSTM 30%, N-BEATS 20%, LSTM-GARCH 0%
+      Others: LSTM 30%, TFT 30%, N-BEATS 20%, LSTM-GARCH 20%
+
+    Level 2 - VIX Regime Adjustments (21-day lagged):
+      LOW_VOL: LSTM ×1.2, TFT ×1.1, N-BEATS ×1.0, LSTM-GARCH ×0.8
+      MEDIUM_VOL: All models ×1.0 (no adjustment)
+      HIGH_VOL: LSTM ×0.8, TFT ×0.9, N-BEATS ×1.0, LSTM-GARCH ×1.3
+
+    Level 3 - Final Weighted Average:
+      ensemble_pred = Σ(normalized_weight[i] × model_pred[i])
+
+  • Uncertainty Quantification: Standard deviation of model predictions
 
 Features Used (206 per ETF):
   • 20 Alpha Factors: RSI, MACD, Bollinger Bands, momentum, volatility

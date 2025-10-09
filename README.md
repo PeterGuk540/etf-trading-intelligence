@@ -57,13 +57,39 @@ The system implements an ensemble of 4 neural network architectures with sector-
    - Direction Accuracy: 47.6%
    - Best for: XLE (Energy) - 77.8% accuracy
 
-**🔗 Ensemble Strategy**: Weighted combination based on sector validation performance with VIX regime-specific adjustments and uncertainty quantification from model disagreement.
+### 🔗 Ensemble Methodology: Adaptive Weighted Averaging
 
-**🎯 VIX Regime Detection (CORRECTED)**: Dynamic model weighting based on **21-day lagged** market volatility environment:
-- **LOW_VOL (VIX < 20)**: Risk-on, favor growth models (LSTM +20%, TFT +10%)
-- **MEDIUM_VOL (20-30)**: Neutral weighting
-- **HIGH_VOL (VIX > 30)**: Risk-off, favor volatility models (LSTM-GARCH +30%)
-- **🔧 CRITICAL**: Uses 21-day lagged VIX regime to prevent data leakage in real trading
+The system uses a **sophisticated multi-level weighted averaging approach** (not simple averaging or bagging):
+
+#### **Level 1: Sector-Specific Base Weights**
+Each sector has optimized weights based on validation performance:
+```
+XLE (Energy):     LSTM-GARCH: 70%, LSTM: 20%, TFT: 10%, N-BEATS: 0%
+XLK (Technology): LSTM: 60%, N-BEATS: 30%, TFT: 10%, LSTM-GARCH: 0%
+XLF (Financials): TFT: 50%, LSTM: 30%, N-BEATS: 20%, LSTM-GARCH: 0%
+Other Sectors:    LSTM: 30%, TFT: 30%, N-BEATS: 20%, LSTM-GARCH: 20%
+```
+
+#### **Level 2: VIX Regime Adjustments (21-day lagged)**
+Base weights are multiplied by regime-specific factors:
+- **LOW_VOL (VIX < 20)**: LSTM ×1.2, TFT ×1.1, N-BEATS ×1.0, LSTM-GARCH ×0.8
+- **MEDIUM_VOL (20-30)**: All models ×1.0 (no adjustment)
+- **HIGH_VOL (VIX > 30)**: LSTM ×0.8, TFT ×0.9, N-BEATS ×1.0, LSTM-GARCH ×1.3
+
+#### **Level 3: Final Ensemble Calculation**
+```python
+adjusted_weight = base_weight × vix_adjustment
+normalized_weight = adjusted_weight / sum(all_adjusted_weights)
+ensemble_prediction = Σ(normalized_weight[i] × model_prediction[i])
+uncertainty = std_deviation(all_model_predictions)
+```
+
+#### **Key Advantages**
+- **Not simple averaging**: Dynamic weights based on performance and market conditions
+- **Not bagging**: All models see full data, no bootstrap sampling
+- **Sector-adaptive**: Optimized for each sector's characteristics
+- **Regime-adaptive**: Adjusts to market volatility environment
+- **Uncertainty quantification**: Model disagreement provides confidence intervals
 
 ### ETF Coverage
 11 Major Sector ETFs:

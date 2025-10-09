@@ -44,11 +44,22 @@ Recent Validation Results (CORRECTED METHODOLOGY):
   • Prevents data leakage and ensures realistic trading performance
 
 Ensemble Model Configuration (Corrected):
-  • Uses 21-day lagged VIX regime features to prevent look-ahead bias
-  • LSTM (Enhanced +20% in lagged LOW_VOL): Momentum and trend capture
-  • TFT (Enhanced +10% in lagged LOW_VOL): Attention-based pattern recognition
-  • N-BEATS: Neural basis expansion forecasting
-  • LSTM-GARCH (Reduced -20% in lagged LOW_VOL): Volatility modeling
+  • Adaptive Weighted Averaging with Multi-Level Adjustments:
+
+    Base Sector Weights (September validation-based):
+      - XLE: LSTM-GARCH 70%, LSTM 20%, TFT 10%, N-BEATS 0%
+      - XLK: LSTM 60%, N-BEATS 30%, TFT 10%, LSTM-GARCH 0%
+      - XLF: TFT 50%, LSTM 30%, N-BEATS 20%, LSTM-GARCH 0%
+      - Others: LSTM 30%, TFT 30%, N-BEATS 20%, LSTM-GARCH 20%
+
+    Current VIX Regime Adjustments (LOW_VOL based on 21-day lag):
+      - LSTM: ×1.2 (+20% enhancement for momentum)
+      - TFT: ×1.1 (+10% enhancement for attention patterns)
+      - N-BEATS: ×1.0 (baseline, no adjustment)
+      - LSTM-GARCH: ×0.8 (-20% reduction in low volatility)
+
+    Final Prediction: Weighted average of normalized adjusted weights
+    Uncertainty: Standard deviation across model predictions
 
 OCTOBER 2025 SECTOR PREDICTIONS
 ----------------------------------------
