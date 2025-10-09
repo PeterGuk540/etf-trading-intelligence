@@ -44,10 +44,12 @@ Features Used (206 per ETF):
   • 186 Beta Factors: 62 FRED economic indicators with 3 variations
   • Cross-sectional features: Sector relative performance metrics
 
-Training Data:
-  • Period: January 2020 - July 2025
-  • Validation: August 2025 data (45.5% direction accuracy)
+Model Training Methodology:
+  • Training Period: January 2020 - July 2025 (single continuous period)
+  • Validation Period: August 2025 (single month, 45.5% direction accuracy)
   • Prediction Made: End of August 2025 for September 2025
+  • Note: Rolling window validation used for model selection, but final predictions
+    used single training period for consistency
 
 ENSEMBLE PREDICTIONS (Made End of August 2025)
 ----------------------------------------

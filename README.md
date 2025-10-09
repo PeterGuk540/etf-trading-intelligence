@@ -189,11 +189,21 @@ python calculate_feature_importance.py
 
 ## 📊 Validation Methodology
 
-The system uses rolling window validation:
+The system employs two distinct approaches:
+
+### Model Validation (Rolling Windows)
+Used in `validate_all_models.py` for robust model selection:
 - **Training Window**: 2 years (500+ samples)
 - **Validation Window**: 3 months (60+ samples)
 - **Step Size**: 3 months
 - **Coverage**: Multiple market conditions from 2024-2025
+
+### Production Predictions (Single Split)
+Used in `etf_monthly_prediction_system.py` for actual predictions:
+- **Training Period**: Jan 2020 to (current month - 2)
+- **Validation Period**: (current month - 2) single month
+- **Prediction Period**: Current month onwards
+- **Note**: September 2025 predictions used Jan 2020 - July 2025 training
 
 ## 🔍 Key Insights
 

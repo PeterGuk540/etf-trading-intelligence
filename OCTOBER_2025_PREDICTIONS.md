@@ -12,6 +12,7 @@ accuracy in September 2025 validation after fixing data leakage issues.
 
 Prediction Period: October 1-31, 2025 (21 trading days)
 Model: 4-Neural Network Ensemble with 21-day Lagged VIX Regime Detection
+Training Approach: Single continuous period (Jan 2020 - Aug 2025)
 Market Regime: LOW_VOL (Risk-On Environment - based on lagged data)
 Prediction Confidence: High (based on corrected September 2025 methodology)
 
