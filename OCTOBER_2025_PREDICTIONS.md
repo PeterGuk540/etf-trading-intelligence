@@ -2,7 +2,7 @@
 OCTOBER 2025 ETF SECTOR PREDICTIONS
 VIX Regime-Aware Ensemble Model
 ================================================================================
-Generated: 2025-10-06 19:24:40
+Generated: 2025-10-21 16:42:58
 
 EXECUTIVE SUMMARY
 ----------------------------------------
@@ -12,28 +12,27 @@ accuracy in September 2025 validation after fixing data leakage issues.
 
 Prediction Period: October 1-31, 2025 (21 trading days)
 Model: 4-Neural Network Ensemble with 21-day Lagged VIX Regime Detection
-Training Approach: Single continuous period (Jan 2020 - Aug 2025)
 Market Regime: LOW_VOL (Risk-On Environment - based on lagged data)
 Prediction Confidence: High (based on corrected September 2025 methodology)
 
 MARKET ENVIRONMENT ANALYSIS
 ----------------------------------------
-VIX Level (Current): 18.2 (LOW_VOL Regime)
-VIX Level (Model Input): 19.8 (21-day lag)
+VIX Level (Current): 17.8700008392334 (LOW_VOL Regime)
+VIX Level (Model Input): 16.100000381469727 (21-day lag)
 Market Outlook: Growth sectors favored
 
 Key Market Indicators:
-  • VIX Level (Current): 18.2
-  • VIX Level (21-day lag): 19.8
-  • S&P 500 YTD: +21.3%
-  • Fed Policy: Neutral (5.25%)
-  • Q3 GDP Growth: +2.8%
-  • Unemployment: 4.1%
-  • CPI (Sep): +2.4%
-  • Yield Curve (10Y-2Y): +0.35%
-  • Credit Spreads: Narrow
-  • Dollar Index: 103.5
-  • Oil (WTI): $89/barrel
+  • VIX Level (Current): 17.87
+  • VIX Level (21-day lag): 16.10
+  • S&P 500 YTD: +15.83%
+  • Fed Policy: Data-dependent (check FRED)
+  • Economic Growth: Positive (check FRED GDP)
+  • Unemployment: Low (check FRED UNRATE)
+  • Inflation: Moderating (check FRED CPI)
+  • Yield Curve: Check FRED T10Y2Y
+  • Credit Spreads: Check FRED spreads
+  • Dollar Index: Check FRED DTWEXBGS
+  • Oil (WTI): Check FRED DCOILWTICO
 
 MODEL PERFORMANCE CONTEXT
 ----------------------------------------
@@ -45,22 +44,11 @@ Recent Validation Results (CORRECTED METHODOLOGY):
   • Prevents data leakage and ensures realistic trading performance
 
 Ensemble Model Configuration (Corrected):
-  • Adaptive Weighted Averaging with Multi-Level Adjustments:
-
-    Base Sector Weights (September validation-based):
-      - XLE: LSTM-GARCH 70%, LSTM 20%, TFT 10%, N-BEATS 0%
-      - XLK: LSTM 60%, N-BEATS 30%, TFT 10%, LSTM-GARCH 0%
-      - XLF: TFT 50%, LSTM 30%, N-BEATS 20%, LSTM-GARCH 0%
-      - Others: LSTM 30%, TFT 30%, N-BEATS 20%, LSTM-GARCH 20%
-
-    Current VIX Regime Adjustments (LOW_VOL based on 21-day lag):
-      - LSTM: ×1.2 (+20% enhancement for momentum)
-      - TFT: ×1.1 (+10% enhancement for attention patterns)
-      - N-BEATS: ×1.0 (baseline, no adjustment)
-      - LSTM-GARCH: ×0.8 (-20% reduction in low volatility)
-
-    Final Prediction: Weighted average of normalized adjusted weights
-    Uncertainty: Standard deviation across model predictions
+  • Uses 21-day lagged VIX regime features to prevent look-ahead bias
+  • LSTM (Enhanced +20% in lagged LOW_VOL): Momentum and trend capture
+  • TFT (Enhanced +10% in lagged LOW_VOL): Attention-based pattern recognition
+  • N-BEATS: Neural basis expansion forecasting
+  • LSTM-GARCH (Reduced -20% in lagged LOW_VOL): Volatility modeling
 
 OCTOBER 2025 SECTOR PREDICTIONS
 ----------------------------------------

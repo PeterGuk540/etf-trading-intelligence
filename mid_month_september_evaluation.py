@@ -449,26 +449,97 @@ def generate_evaluation_report(results: Dict, actual_returns: Dict, predictions:
     report.append("")
 
     # Performance Comparison with Other Evaluations
+    # Load actual comparison metrics from September and August evaluation results
     report.append("PERFORMANCE COMPARISON")
     report.append("-" * 40)
-    report.append("September Month-End (Sept 1-30) Ensemble Results:")
-    report.append("  • Direction Accuracy: 72.7% (8/11 correct)")
-    report.append("  • Correlation: 0.628")
-    report.append("  • MAE: 2.92%")
-    report.append("  • Trading Return: +4.58%")
+
+    # Try to load actual September month-end results
+    try:
+        september_report_path = '/home/aojie_ju/etf-trading-intelligence/SEPTEMBER_2025_EVALUATION.md'
+        with open(september_report_path, 'r') as f:
+            sep_content = f.read()
+
+        # Extract actual metrics from September report
+        import re
+        sep_dir_match = re.search(r'Direction Accuracy:\s+(\d+\.\d+)%\s+\((\d+)/11', sep_content)
+        sep_corr_match = re.search(r'Correlation:\s+(-?\d+\.\d+)\s+\(Pearson', sep_content)
+        sep_mae_match = re.search(r'Mean Absolute Error:\s+(\d+\.\d+)\s+\((\d+\.\d+)%\)', sep_content)
+
+        if sep_dir_match and sep_corr_match and sep_mae_match:
+            sep_month_direction = float(sep_dir_match.group(1)) / 100
+            sep_month_correct = int(sep_dir_match.group(2))
+            sep_month_correlation = float(sep_corr_match.group(1))
+            sep_month_mae = float(sep_mae_match.group(1))
+            sep_month_mae_pct = float(sep_mae_match.group(2))
+
+            report.append("September Month-End (Sept 1-30) Ensemble Results:")
+            report.append(f"  • Direction Accuracy: {sep_month_direction:.1%} ({sep_month_correct}/11 correct)")
+            report.append(f"  • Correlation: {sep_month_correlation:.3f}")
+            report.append(f"  • MAE: {sep_month_mae_pct:.2f}%")
+        else:
+            raise ValueError("Could not extract metrics from September report")
+
+    except Exception as e:
+        print(f"Warning: Could not load September results: {e}")
+        # Fallback to actual values from SEPTEMBER_2025_EVALUATION.md (as of Oct 20, 2025)
+        sep_month_direction = 0.545  # 54.5% (6/11 correct)
+        sep_month_correct = 6
+        sep_month_correlation = 0.180
+        sep_month_mae = 0.0284
+        sep_month_mae_pct = 2.84
+
+        report.append("September Month-End (Sept 1-30) Ensemble Results:")
+        report.append(f"  • Direction Accuracy: {sep_month_direction:.1%} ({sep_month_correct}/11 correct)")
+        report.append(f"  • Correlation: {sep_month_correlation:.3f}")
+        report.append(f"  • MAE: {sep_month_mae_pct:.2f}%")
+
     report.append("")
-    report.append("August 2025 Ensemble Results:")
-    report.append("  • Direction Accuracy: 45.5% (5/11 correct)")
-    report.append("  • Correlation: -0.022")
-    report.append("  • MAE: 2.39%")
+
+    # Try to load actual August results
+    try:
+        august_report_path = '/home/aojie_ju/etf-trading-intelligence/AUGUST_2025_EVALUATION.md'
+        with open(august_report_path, 'r') as f:
+            aug_content = f.read()
+
+        # Extract actual metrics from August report
+        aug_dir_match = re.search(r'Direction Accuracy:\s+(\d+\.\d+)%\s+\((\d+)/11', aug_content)
+        aug_corr_match = re.search(r'Correlation:\s+(-?\d+\.\d+)\s+\(Pearson', aug_content)
+        aug_mae_match = re.search(r'Mean Absolute Error:\s+(\d+\.\d+)\s+\((\d+\.\d+)%\)', aug_content)
+
+        if aug_dir_match and aug_corr_match and aug_mae_match:
+            aug_direction = float(aug_dir_match.group(1)) / 100
+            aug_correct = int(aug_dir_match.group(2))
+            aug_correlation = float(aug_corr_match.group(1))
+            aug_mae = float(aug_mae_match.group(1))
+            aug_mae_pct = float(aug_mae_match.group(2))
+
+            report.append("August 2025 Ensemble Results:")
+            report.append(f"  • Direction Accuracy: {aug_direction:.1%} ({aug_correct}/11 correct)")
+            report.append(f"  • Correlation: {aug_correlation:.3f}")
+            report.append(f"  • MAE: {aug_mae_pct:.2f}%")
+        else:
+            raise ValueError("Could not extract metrics from August report")
+
+    except Exception as e:
+        print(f"Warning: Could not load August results: {e}")
+        # Fallback to actual values from AUGUST_2025_EVALUATION.md (as of Oct 20, 2025)
+        aug_direction = 0.636  # 63.6% (7/11 correct)
+        aug_correct = 7
+        aug_correlation = 0.413
+        aug_mae = 0.0208
+        aug_mae_pct = 2.08
+
+        report.append("August 2025 Ensemble Results:")
+        report.append(f"  • Direction Accuracy: {aug_direction:.1%} ({aug_correct}/11 correct)")
+        report.append(f"  • Correlation: {aug_correlation:.3f}")
+        report.append(f"  • MAE: {aug_mae_pct:.2f}%")
+
     report.append("")
     report.append(f"Mid-Month September vs Month-End September:")
-    sep_month_direction = 0.727
     mid_month_direction = metrics['direction_accuracy']
     direction_diff = mid_month_direction - sep_month_direction
     report.append(f"  • Direction Accuracy: {direction_diff:+.1%} difference ({mid_month_direction:.1%} vs {sep_month_direction:.1%})")
 
-    sep_month_mae = 0.0292
     mid_month_mae = metrics['mae']
     mae_diff = mid_month_mae - sep_month_mae
     report.append(f"  • MAE: {mae_diff:+.4f} difference ({mid_month_mae:.4f} vs {sep_month_mae:.4f})")

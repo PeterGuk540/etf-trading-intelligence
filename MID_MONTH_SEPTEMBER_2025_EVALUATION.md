@@ -1,7 +1,7 @@
 ================================================================================
 MID-MONTH SEPTEMBER 2025 PREDICTION EVALUATION REPORT
 ================================================================================
-Generated: 2025-10-20 20:41:20
+Generated: 2025-10-21 16:41:56
 
 EXECUTIVE SUMMARY
 ----------------------------------------
@@ -60,36 +60,34 @@ Actual 21-day Relative Returns:
   XLI    -0.0073 (-0.73%) | Absolute: -0.13% | SPY: +0.60%
   XLP    -0.0189 (-1.89%) | Absolute: -1.29% | SPY: +0.60%
   XLE    -0.0194 (-1.94%) | Absolute: -1.34% | SPY: +0.60%
-  XLF    -0.0218 (-2.18%) | Absolute: -1.58% | SPY: +0.60%
   XLB    -0.0312 (-3.12%) | Absolute: -2.52% | SPY: +0.60%
   XLRE   -0.0315 (-3.15%) | Absolute: -2.55% | SPY: +0.60%
   XLY    -0.0327 (-3.27%) | Absolute: -2.67% | SPY: +0.60%
 
 ENSEMBLE PERFORMANCE METRICS
 ----------------------------------------
-Direction Accuracy:      80.0% (8/11 correct)
-Correlation:            0.293 (Pearson correlation)
-Rank Correlation:       -0.067 (Spearman correlation)
-Mean Absolute Error:    0.0252 (2.52%)
-Root Mean Squared Error: 0.0328 (3.28%)
+Direction Accuracy:      77.8% (8/11 correct)
+Correlation:            0.287 (Pearson correlation)
+Rank Correlation:       -0.083 (Spearman correlation)
+Mean Absolute Error:    0.0270 (2.70%)
+Root Mean Squared Error: 0.0344 (3.44%)
 Top 3 Identification:   33.3% (1/3 correct)
 
 PERFORMANCE COMPARISON
 ----------------------------------------
 September Month-End (Sept 1-30) Ensemble Results:
-  • Direction Accuracy: 72.7% (8/11 correct)
-  • Correlation: 0.628
-  • MAE: 2.92%
-  • Trading Return: +4.58%
+  • Direction Accuracy: 54.5% (6/11 correct)
+  • Correlation: 0.180
+  • MAE: 2.84%
 
 August 2025 Ensemble Results:
-  • Direction Accuracy: 45.5% (5/11 correct)
-  • Correlation: -0.022
-  • MAE: 2.39%
+  • Direction Accuracy: 63.6% (7/11 correct)
+  • Correlation: 0.413
+  • MAE: 2.08%
 
 Mid-Month September vs Month-End September:
-  • Direction Accuracy: +7.3% difference (80.0% vs 72.7%)
-  • MAE: -0.0040 difference (0.0252 vs 0.0292)
+  • Direction Accuracy: +23.3% difference (77.8% vs 54.5%)
+  • MAE: -0.0014 difference (0.0270 vs 0.0284)
 
 PERFORMANCE INTERPRETATION
 ----------------------------------------
@@ -101,7 +99,6 @@ DETAILED ETF-BY-ETF ANALYSIS
 ----------------------------------------
 ETF    Sector                      Actual  Predicted    Error  Direction
 -----------------------------------------------------------------------------
-XLF    Financials                  -0.022     -0.013    0.009  ✓ Correct
 XLY    Consumer Discretionary      -0.033     -0.001    0.032  ✓ Correct
 XLP    Consumer Staples            -0.019     -0.017    0.002  ✓ Correct
 XLE    Energy                      -0.019     -0.000    0.019  ✓ Correct
@@ -117,7 +114,7 @@ BEST AND WORST PREDICTIONS
 Most Accurate Predictions (smallest error):
   XLP: Error = +0.0023 (Predicted: -0.0167, Actual: -0.0189)
   XLI: Error = -0.0078 (Predicted: -0.0151, Actual: -0.0073)
-  XLF: Error = +0.0087 (Predicted: -0.0130, Actual: -0.0218)
+  XLB: Error = -0.0155 (Predicted: -0.0467, Actual: -0.0312)
 
 Least Accurate Predictions (largest error):
   XLY: Error = +0.0317 (Predicted: -0.0010, Actual: -0.0327)

@@ -15,6 +15,7 @@ warnings.filterwarnings('ignore')
 def analyze_october_market_environment():
     """
     Analyze current market environment for October 2025 predictions
+    Fetches actual market data instead of using hard-coded values
     """
     print("=" * 80)
     print("OCTOBER 2025 MARKET ENVIRONMENT ANALYSIS")
@@ -22,24 +23,66 @@ def analyze_october_market_environment():
     print(f"Analysis Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
 
+    # Fetch actual VIX and SPY data
+    print("📊 FETCHING ACTUAL MARKET DATA:")
+    print("-" * 50)
+
+    try:
+        # Fetch current VIX
+        vix = yf.Ticker("^VIX")
+        vix_hist = vix.history(period="2mo")  # Last 2 months for lagged calculation
+
+        if not vix_hist.empty:
+            vix_level_current = vix_hist['Close'].iloc[-1]
+
+            # Calculate 21-day lagged VIX (21 trading days ago)
+            if len(vix_hist) >= 22:
+                vix_level_lagged = vix_hist['Close'].iloc[-22]
+            else:
+                vix_level_lagged = vix_level_current
+                print(f"  ⚠ Warning: Less than 22 days of VIX data, using current VIX for lag")
+        else:
+            print(f"  ⚠ Warning: Could not fetch VIX data, using default estimates")
+            vix_level_current = 18.2
+            vix_level_lagged = 19.8
+
+        # Fetch SPY for market return
+        spy = yf.Ticker("SPY")
+        spy_hist = spy.history(period="ytd")
+        if not spy_hist.empty:
+            spy_ytd_return = (spy_hist['Close'].iloc[-1] / spy_hist['Close'].iloc[0] - 1) * 100
+        else:
+            spy_ytd_return = None
+
+        print(f"  ✓ Fetched VIX data: Current = {vix_level_current:.2f}, Lagged (21d) = {vix_level_lagged:.2f}")
+        if spy_ytd_return is not None:
+            print(f"  ✓ Fetched SPY YTD return: {spy_ytd_return:+.2f}%")
+
+    except Exception as e:
+        print(f"  ✗ Error fetching market data: {e}")
+        print(f"  ⚠ Using fallback estimates")
+        vix_level_current = 18.2
+        vix_level_lagged = 19.8
+        spy_ytd_return = None
+
     # Market environment assessment for October 2025
-    print("📊 MARKET ENVIRONMENT INDICATORS:")
+    print("\n📊 MARKET ENVIRONMENT INDICATORS:")
     print("-" * 50)
 
     # Key indicators for October 2025
     # NOTE: VIX regime features use 21-day lagged data to prevent data leakage
     indicators = {
-        'VIX Level (Current)': 18.2,  # Current estimated volatility
-        'VIX Level (21-day lag)': 19.8,  # What model actually uses (early Sep)
-        'S&P 500 YTD': '+21.3%',  # Strong bull market year
-        'Fed Policy': 'Neutral (5.25%)',  # Rate pause cycle
-        'Q3 GDP Growth': '+2.8%',  # Solid economic growth
-        'Unemployment': '4.1%',  # Low unemployment
-        'CPI (Sep)': '+2.4%',  # Moderating inflation
-        'Yield Curve (10Y-2Y)': '+0.35%',  # Positive but flat
-        'Credit Spreads': 'Narrow',  # Low credit risk
-        'Dollar Index': '103.5',  # Moderately strong USD
-        'Oil (WTI)': '$89/barrel'  # Elevated energy prices
+        'VIX Level (Current)': f'{vix_level_current:.2f}',
+        'VIX Level (21-day lag)': f'{vix_level_lagged:.2f}',
+        'S&P 500 YTD': f'+{spy_ytd_return:.2f}%' if spy_ytd_return is not None else 'N/A',
+        'Fed Policy': 'Data-dependent (check FRED)',
+        'Economic Growth': 'Positive (check FRED GDP)',
+        'Unemployment': 'Low (check FRED UNRATE)',
+        'Inflation': 'Moderating (check FRED CPI)',
+        'Yield Curve': 'Check FRED T10Y2Y',
+        'Credit Spreads': 'Check FRED spreads',
+        'Dollar Index': 'Check FRED DTWEXBGS',
+        'Oil (WTI)': 'Check FRED DCOILWTICO'
     }
 
     for indicator, value in indicators.items():
@@ -47,8 +90,6 @@ def analyze_october_market_environment():
 
     print("\n🎯 VIX REGIME CLASSIFICATION:")
     print("-" * 50)
-    vix_level_current = 18.2  # Current VIX level
-    vix_level_lagged = 19.8   # 21-day lagged VIX (what model uses)
 
     # Model uses lagged VIX for regime classification
     if vix_level_lagged < 20:
@@ -64,8 +105,8 @@ def analyze_october_market_environment():
         regime_desc = 'Risk-Off Environment'
         market_outlook = 'Defensive sectors favored'
 
-    print(f"  VIX Level (Current): {vix_level_current}")
-    print(f"  VIX Level (Model Input - 21-day lag): {vix_level_lagged}")
+    print(f"  VIX Level (Current): {vix_level_current:.2f}")
+    print(f"  VIX Level (Model Input - 21-day lag): {vix_level_lagged:.2f}")
     print(f"  Regime: {regime} ({regime_desc})")
     print(f"  Market Outlook: {market_outlook}")
     print("  NOTE: Model uses lagged VIX to prevent data leakage")
@@ -98,6 +139,7 @@ def analyze_october_market_environment():
 def generate_october_vix_regime_predictions(market_env: dict) -> Dict[str, float]:
     """
     Generate VIX regime-aware ensemble predictions for October 2025
+    First tries to load actual model predictions from JSON, then falls back to regime-based estimates
     """
     print("\n" + "=" * 80)
     print("OCTOBER 2025 VIX REGIME-AWARE PREDICTIONS")
@@ -107,98 +149,141 @@ def generate_october_vix_regime_predictions(market_env: dict) -> Dict[str, float
     vix_level_lagged = market_env['vix_level_lagged']
     regime = market_env['regime']
 
-    print(f"\n🔗 ENSEMBLE MODEL CONFIGURATION:")
-    print("-" * 50)
-    print("  Base Models:")
-    print("    • LSTM (Baseline): Best for XLK (Technology)")
-    print("    • TFT (Temporal Fusion Transformer): Best for XLF (Financials)")
-    print("    • N-BEATS (Neural Basis Expansion): General purpose")
-    print("    • LSTM-GARCH (Hybrid): Best for XLE (Energy)")
-    print(f"\n  🔧 CORRECTED: VIX Regime Features (21-day lagged to prevent data leakage):")
-    print("    • Uses VIX regime from 21 days ago for predictions")
-    print("    • Prevents look-ahead bias in real trading scenarios")
-    print("    • Based on corrected methodology achieving 72.7% accuracy")
-    print(f"\n  VIX Regime Adjustments ({regime} - based on lagged data):")
-    if regime == 'LOW_VOL':
-        print("    • LSTM weight: +20% (momentum enhancement)")
-        print("    • TFT weight: +10% (attention for growth patterns)")
-        print("    • LSTM-GARCH weight: -20% (reduced volatility focus)")
-    else:
-        print("    • Standard weighting applied")
+    # Try to load actual model predictions from JSON file
+    prediction_file = '/home/aojie_ju/etf-trading-intelligence/october_2025_predictions.json'
+    use_model_predictions = False
 
-    print(f"\n📊 OCTOBER 2025 SECTOR ANALYSIS:")
-    print("-" * 50)
+    try:
+        with open(prediction_file, 'r') as f:
+            model_predictions = json.load(f)
 
-    # Sector-specific analysis for October 2025
-    # CORRECTED: More conservative predictions due to 21-day lagged VIX regime
-    sector_analysis = {
-        'XLK': {
-            'outlook': 'Bullish',
-            'rationale': 'Q3 earnings strength, AI innovation, lagged LOW_VOL regime favors growth',
-            'key_factors': ['Earnings beats', 'AI developments', 'Lagged low volatility signal'],
-            'prediction': +0.020  # Reduced from +0.028 due to information lag
-        },
-        'XLY': {
-            'outlook': 'Bullish',
-            'rationale': 'Holiday season prep, consumer strength, lagged risk-on signal',
-            'key_factors': ['Holiday spending', 'Consumer confidence', 'Low unemployment'],
-            'prediction': +0.015  # Reduced from +0.022 due to lagged regime detection
-        },
-        'XLC': {
-            'outlook': 'Moderate Bullish',
-            'rationale': 'Digital transformation, 5G deployment, moderate growth bias',
-            'key_factors': ['5G rollout', 'Digital ads', 'Cloud growth'],
-            'prediction': +0.012  # Unchanged - less sensitive to regime
-        },
-        'XLF': {
-            'outlook': 'Moderate Bullish',
-            'rationale': 'Stable rate environment, credit quality, moderate earnings growth',
-            'key_factors': ['Net interest margins', 'Credit normalization', 'Loan growth'],
-            'prediction': +0.008  # Reduced from +0.018 due to lagged information
-        },
-        'XLI': {
-            'outlook': 'Moderate Bullish',
-            'rationale': 'Infrastructure spending, reshoring trends, cyclical recovery',
-            'key_factors': ['Infrastructure bill', 'Manufacturing revival', 'Trade flows'],
-            'prediction': +0.005  # Reduced from +0.008
-        },
-        'XLV': {
-            'outlook': 'Neutral',
-            'rationale': 'Defensive characteristics, stable but limited upside in lagged LOW_VOL',
-            'key_factors': ['Drug approvals', 'Demographics', 'Healthcare innovation'],
-            'prediction': +0.000  # Reduced from +0.002 to neutral
-        },
-        'XLB': {
-            'outlook': 'Neutral to Slightly Bearish',
-            'rationale': 'Mixed commodity outlook, China demand uncertainty, no regime boost',
-            'key_factors': ['China recovery', 'Input costs', 'Global demand'],
-            'prediction': -0.003  # Slightly more bearish from 0.000
-        },
-        'XLRE': {
-            'outlook': 'Slightly Bearish',
-            'rationale': 'Interest rate sensitivity, commercial real estate concerns',
-            'key_factors': ['Rate sensitivity', 'Office demand', 'REIT valuations'],
-            'prediction': -0.008  # Slightly more bearish from -0.005
-        },
-        'XLE': {
-            'outlook': 'Bearish',
-            'rationale': 'Winter demand offset by production, lagged regime less supportive',
-            'key_factors': ['Winter demand', 'Production levels', 'Geopolitical risk'],
-            'prediction': -0.012  # More bearish from -0.008
-        },
-        'XLP': {
-            'outlook': 'Bearish',
-            'rationale': 'Defensive penalty in lagged LOW_VOL, margin pressure from costs',
-            'key_factors': ['Defensive discount', 'Margin pressure', 'Volume growth'],
-            'prediction': -0.015  # More bearish from -0.012
-        },
-        'XLU': {
-            'outlook': 'Most Bearish',
-            'rationale': 'Most defensive sector penalized in lagged risk-on environment',
-            'key_factors': ['Rate sensitivity', 'Regulatory environment', 'Renewable transition'],
-            'prediction': -0.020  # More bearish from -0.018
+        if model_predictions and len(model_predictions) >= 11:
+            print(f"\n✅ LOADING ACTUAL MODEL PREDICTIONS")
+            print(f"   Source: {prediction_file}")
+            print(f"   Using predictions from trained ensemble model")
+            use_model_predictions = True
+
+            # Create sector analysis from model predictions
+            sector_analysis = {}
+            for symbol, pred in model_predictions.items():
+                sector_analysis[symbol] = {
+                    'outlook': 'Bullish' if pred > 0.01 else 'Bearish' if pred < -0.01 else 'Neutral',
+                    'rationale': 'Prediction from VIX regime-aware ensemble model',
+                    'key_factors': ['Model-based forecast'],
+                    'prediction': pred
+                }
+
+            print(f"   ✓ Loaded {len(model_predictions)} predictions from trained model\n")
+
+        else:
+            print(f"\n⚠️  Model prediction file found but empty or incomplete")
+            print(f"   Falling back to regime-based prediction estimates")
+            use_model_predictions = False
+
+    except FileNotFoundError:
+        print(f"\n⚠️  Model prediction file not found: {prediction_file}")
+        print(f"   Falling back to regime-based prediction estimates")
+        use_model_predictions = False
+    except Exception as e:
+        print(f"\n⚠️  Error loading model predictions: {e}")
+        print(f"   Falling back to regime-based prediction estimates")
+        use_model_predictions = False
+
+    # If no model predictions available, use regime-based estimates
+    if not use_model_predictions:
+        print(f"\n🔗 ENSEMBLE MODEL CONFIGURATION:")
+        print("-" * 50)
+        print("  Base Models:")
+        print("    • LSTM (Baseline): Best for XLK (Technology)")
+        print("    • TFT (Temporal Fusion Transformer): Best for XLF (Financials)")
+        print("    • N-BEATS (Neural Basis Expansion): General purpose")
+        print("    • LSTM-GARCH (Hybrid): Best for XLE (Energy)")
+        print(f"\n  🔧 VIX Regime Features (21-day lagged to prevent data leakage):")
+        print("    • Uses VIX regime from 21 days ago for predictions")
+        print("    • Prevents look-ahead bias in real trading scenarios")
+        print(f"\n  VIX Regime Adjustments ({regime} - based on lagged data):")
+        if regime == 'LOW_VOL':
+            print("    • LSTM weight: +20% (momentum enhancement)")
+            print("    • TFT weight: +10% (attention for growth patterns)")
+            print("    • LSTM-GARCH weight: -20% (reduced volatility focus)")
+        else:
+            print("    • Standard weighting applied")
+
+        print(f"\n📊 OCTOBER 2025 SECTOR ANALYSIS:")
+        print("-" * 50)
+        print("   NOTE: Using regime-based estimates (no trained model predictions available)")
+        print()
+
+        # Sector-specific analysis for October 2025
+        # These are regime-based estimates, not actual model predictions
+        sector_analysis = {
+            'XLK': {
+                'outlook': 'Bullish',
+                'rationale': 'Q3 earnings strength, AI innovation, lagged LOW_VOL regime favors growth',
+                'key_factors': ['Earnings beats', 'AI developments', 'Lagged low volatility signal'],
+                'prediction': +0.020  # Reduced from +0.028 due to information lag
+            },
+            'XLY': {
+                'outlook': 'Bullish',
+                'rationale': 'Holiday season prep, consumer strength, lagged risk-on signal',
+                'key_factors': ['Holiday spending', 'Consumer confidence', 'Low unemployment'],
+                'prediction': +0.015  # Reduced from +0.022 due to lagged regime detection
+            },
+            'XLC': {
+                'outlook': 'Moderate Bullish',
+                'rationale': 'Digital transformation, 5G deployment, moderate growth bias',
+                'key_factors': ['5G rollout', 'Digital ads', 'Cloud growth'],
+                'prediction': +0.012  # Unchanged - less sensitive to regime
+            },
+            'XLF': {
+                'outlook': 'Moderate Bullish',
+                'rationale': 'Stable rate environment, credit quality, moderate earnings growth',
+                'key_factors': ['Net interest margins', 'Credit normalization', 'Loan growth'],
+                'prediction': +0.008  # Reduced from +0.018 due to lagged information
+            },
+            'XLI': {
+                'outlook': 'Moderate Bullish',
+                'rationale': 'Infrastructure spending, reshoring trends, cyclical recovery',
+                'key_factors': ['Infrastructure bill', 'Manufacturing revival', 'Trade flows'],
+                'prediction': +0.005  # Reduced from +0.008
+            },
+            'XLV': {
+                'outlook': 'Neutral',
+                'rationale': 'Defensive characteristics, stable but limited upside in lagged LOW_VOL',
+                'key_factors': ['Drug approvals', 'Demographics', 'Healthcare innovation'],
+                'prediction': +0.000  # Reduced from +0.002 to neutral
+            },
+            'XLB': {
+                'outlook': 'Neutral to Slightly Bearish',
+                'rationale': 'Mixed commodity outlook, China demand uncertainty, no regime boost',
+                'key_factors': ['China recovery', 'Input costs', 'Global demand'],
+                'prediction': -0.003  # Slightly more bearish from 0.000
+            },
+            'XLRE': {
+                'outlook': 'Slightly Bearish',
+                'rationale': 'Interest rate sensitivity, commercial real estate concerns',
+                'key_factors': ['Rate sensitivity', 'Office demand', 'REIT valuations'],
+                'prediction': -0.008  # Slightly more bearish from -0.005
+            },
+            'XLE': {
+                'outlook': 'Bearish',
+                'rationale': 'Winter demand offset by production, lagged regime less supportive',
+                'key_factors': ['Winter demand', 'Production levels', 'Geopolitical risk'],
+                'prediction': -0.012  # More bearish from -0.008
+            },
+            'XLP': {
+                'outlook': 'Bearish',
+                'rationale': 'Defensive penalty in lagged LOW_VOL, margin pressure from costs',
+                'key_factors': ['Defensive discount', 'Margin pressure', 'Volume growth'],
+                'prediction': -0.015  # More bearish from -0.012
+            },
+            'XLU': {
+                'outlook': 'Most Bearish',
+                'rationale': 'Most defensive sector penalized in lagged risk-on environment',
+                'key_factors': ['Rate sensitivity', 'Regulatory environment', 'Renewable transition'],
+                'prediction': -0.020  # More bearish from -0.018
+            }
         }
-    }
 
     print("Detailed Sector Outlook:")
     for sector, analysis in sector_analysis.items():
