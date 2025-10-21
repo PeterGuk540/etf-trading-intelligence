@@ -1,7 +1,7 @@
 ================================================================================
 AUGUST 2025 PREDICTION EVALUATION REPORT
 ================================================================================
-Generated: 2025-10-20 19:26:22
+Generated: 2025-10-20 20:41:11
 
 EXECUTIVE SUMMARY
 ----------------------------------------
@@ -35,17 +35,17 @@ Training Data:
 MODEL PREDICTIONS (Made End of July 2025)
 ----------------------------------------
 Predicted 21-day Relative Returns (ETF - SPY):
-  XLE    +0.0324 (+3.24%)
-  XLC    +0.0258 (+2.58%)
-  XLF    +0.0181 (+1.81%)
-  XLI    +0.0152 (+1.52%)
-  XLK    +0.0127 (+1.27%)
-  XLP    +0.0086 (+0.86%)
-  XLRE   -0.0089 (-0.89%)
-  XLU    -0.0101 (-1.01%)
-  XLB    -0.0115 (-1.15%)
-  XLV    -0.0122 (-1.22%)
-  XLY    -0.0125 (-1.25%)
+  XLC    +0.0439 (+4.39%)
+  XLY    +0.0291 (+2.91%)
+  XLE    +0.0133 (+1.33%)
+  XLK    +0.0034 (+0.34%)
+  XLI    -0.0048 (-0.48%)
+  XLRE   -0.0119 (-1.19%)
+  XLF    -0.0131 (-1.31%)
+  XLU    -0.0149 (-1.49%)
+  XLV    -0.0188 (-1.88%)
+  XLB    -0.0256 (-2.56%)
+  XLP    -0.0301 (-3.01%)
 
 ACTUAL MARKET RESULTS (August 1-29, 2025)
 ----------------------------------------
@@ -64,63 +64,63 @@ Actual 21-day Relative Returns:
 
 MODEL PERFORMANCE METRICS
 ----------------------------------------
-Direction Accuracy:      45.5% (5/11 correct)
-Correlation:            0.053 (Pearson correlation)
-Rank Correlation:       -0.082 (Spearman correlation)
-Mean Absolute Error:    0.0268 (2.68%)
-Root Mean Squared Error: 0.0307 (3.07%)
-Top 3 Identification:   33.3% (1/3 correct)
+Direction Accuracy:      63.6% (7/11 correct)
+Correlation:            0.413 (Pearson correlation)
+Rank Correlation:       0.355 (Spearman correlation)
+Mean Absolute Error:    0.0208 (2.08%)
+Root Mean Squared Error: 0.0263 (2.63%)
+Top 3 Identification:   66.7% (2/3 correct)
 
 PERFORMANCE INTERPRETATION
 ----------------------------------------
-✗ Weak direction accuracy (<50%) - Model struggles with direction prediction
-✗ Weak correlation - Model predictions poorly aligned with actual returns
+✓ Strong direction accuracy (>60%) - Model successfully predicts outperformance/underperformance
+⚠ Moderate correlation - Model captures general trends but with noise
 ⚠ Moderate prediction error (2-3%) - Reasonable magnitude accuracy
 
 DETAILED ETF-BY-ETF ANALYSIS
 ----------------------------------------
 ETF    Sector                      Actual  Predicted    Error  Direction
 -----------------------------------------------------------------------------
-XLF    Financials                   0.013      0.018    0.005  ✓ Correct
-XLC    Communication Services       0.012      0.026    0.014  ✓ Correct
-XLY    Consumer Discretionary       0.035     -0.012   -0.047    ✗ Wrong
-XLP    Consumer Staples            -0.030      0.009    0.038    ✗ Wrong
-XLE    Energy                       0.019      0.032    0.014  ✓ Correct
-XLV    Health Care                  0.011     -0.012   -0.023    ✗ Wrong
-XLI    Industrials                 -0.022      0.015    0.038    ✗ Wrong
-XLB    Materials                    0.027     -0.012   -0.038    ✗ Wrong
-XLRE   Real Estate                 -0.013     -0.009    0.004  ✓ Correct
-XLK    Technology                  -0.017      0.013    0.029    ✗ Wrong
-XLU    Utilities                   -0.055     -0.010    0.045  ✓ Correct
+XLF    Financials                   0.013     -0.013   -0.026    ✗ Wrong
+XLC    Communication Services       0.012      0.044    0.032  ✓ Correct
+XLY    Consumer Discretionary       0.035      0.029   -0.006  ✓ Correct
+XLP    Consumer Staples            -0.030     -0.030   -0.000  ✓ Correct
+XLE    Energy                       0.019      0.013   -0.005  ✓ Correct
+XLV    Health Care                  0.011     -0.019   -0.029    ✗ Wrong
+XLI    Industrials                 -0.022     -0.005    0.018  ✓ Correct
+XLB    Materials                    0.027     -0.026   -0.052    ✗ Wrong
+XLRE   Real Estate                 -0.013     -0.012    0.001  ✓ Correct
+XLK    Technology                  -0.017      0.003    0.020    ✗ Wrong
+XLU    Utilities                   -0.055     -0.015    0.040  ✓ Correct
 
 BEST AND WORST PREDICTIONS
 ----------------------------------------
 Most Accurate Predictions (smallest error):
-  XLRE: Error = +0.0039 (Predicted: -0.0089, Actual: -0.0128)
-  XLF: Error = +0.0053 (Predicted: +0.0181, Actual: +0.0129)
-  XLC: Error = +0.0137 (Predicted: +0.0258, Actual: +0.0121)
+  XLP: Error = -0.0003 (Predicted: -0.0301, Actual: -0.0298)
+  XLRE: Error = +0.0009 (Predicted: -0.0119, Actual: -0.0128)
+  XLE: Error = -0.0053 (Predicted: +0.0133, Actual: +0.0186)
 
 Least Accurate Predictions (largest error):
-  XLP: Error = +0.0384 (Predicted: +0.0086, Actual: -0.0298)
-  XLU: Error = +0.0447 (Predicted: -0.0101, Actual: -0.0548)
-  XLY: Error = -0.0474 (Predicted: -0.0125, Actual: +0.0349)
+  XLC: Error = +0.0318 (Predicted: +0.0439, Actual: +0.0121)
+  XLU: Error = +0.0399 (Predicted: -0.0149, Actual: -0.0548)
+  XLB: Error = -0.0521 (Predicted: -0.0256, Actual: +0.0266)
 
 RANKING COMPARISON
 ----------------------------------------
 Rank       Actual Best  Predicted Best
 ------------------------------------
-1           XLY (+0.035)      XLE (+0.032) 
-2           XLB (+0.027)      XLC (+0.026) 
-3           XLE (+0.019)      XLF (+0.018) 
-4           XLF (+0.013)      XLI (+0.015) 
-5           XLC (+0.012)      XLK (+0.013) 
+1           XLY (+0.035)      XLC (+0.044) 
+2           XLB (+0.027)      XLY (+0.029) 
+3           XLE (+0.019)      XLE (+0.013) ✓
+4           XLF (+0.013)      XLK (+0.003) 
+5           XLC (+0.012)      XLI (-0.005) 
 
 TRADING STRATEGY PERFORMANCE
 ----------------------------------------
-Long Top 3 ETFs:    XLE, XLC, XLF
-Short Bottom 3 ETFs: XLB, XLV, XLY
-Long Return:        +0.0145
-Short Return:       +0.0240
-Strategy Return:    -0.0095
+Long Top 3 ETFs:    XLC, XLY, XLE
+Short Bottom 3 ETFs: XLV, XLB, XLP
+Long Return:        +0.0219
+Short Return:       +0.0024
+Strategy Return:    +0.0194
 
 ================================================================================

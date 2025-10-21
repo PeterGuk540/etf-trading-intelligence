@@ -1,7 +1,7 @@
 ================================================================================
 SEPTEMBER 2025 PREDICTION EVALUATION REPORT
 ================================================================================
-Generated: 2025-10-20 19:26:39
+Generated: 2025-10-20 20:41:15
 
 EXECUTIVE SUMMARY
 ----------------------------------------
@@ -37,17 +37,17 @@ Training Data:
 ENSEMBLE PREDICTIONS (Made End of August 2025)
 ----------------------------------------
 Predicted 21-day Relative Returns (ETF - SPY):
-  XLF    +0.0108 (+1.08%) - BUY
-  XLP    +0.0099 (+0.99%) - BUY
-  XLU    +0.0061 (+0.61%) - BUY
-  XLC    +0.0032 (+0.32%) - HOLD
-  XLI    -0.0063 (-0.63%) - SELL
-  XLK    -0.0106 (-1.06%) - SELL
-  XLRE   -0.0147 (-1.47%) - SELL
-  XLY    -0.0156 (-1.56%) - SELL
-  XLB    -0.0167 (-1.67%) - SELL
-  XLV    -0.0168 (-1.68%) - SELL
-  XLE    -0.0656 (-6.56%) - SELL
+  XLP    +0.0303 (+3.03%) - BUY
+  XLU    +0.0138 (+1.38%) - BUY
+  XLC    +0.0040 (+0.40%) - HOLD
+  XLI    +0.0025 (+0.25%) - HOLD
+  XLV    +0.0004 (+0.04%) - HOLD
+  XLY    -0.0000 (-0.00%) - HOLD
+  XLK    -0.0006 (-0.06%) - HOLD
+  XLRE   -0.0026 (-0.26%) - HOLD
+  XLF    -0.0132 (-1.32%) - SELL
+  XLB    -0.0175 (-1.75%) - SELL
+  XLE    -0.0364 (-3.64%) - SELL
 
 ACTUAL MARKET RESULTS (September 1-30, 2025)
 ----------------------------------------
@@ -66,12 +66,12 @@ Actual 21-day Relative Returns:
 
 ENSEMBLE PERFORMANCE METRICS
 ----------------------------------------
-Direction Accuracy:      63.6% (7/11 correct)
-Correlation:            0.208 (Pearson correlation)
-Rank Correlation:       0.136 (Spearman correlation)
-Mean Absolute Error:    0.0277 (2.77%)
-Root Mean Squared Error: 0.0353 (3.53%)
-Top 3 Identification:   33.3% (1/3 correct)
+Direction Accuracy:      54.5% (6/11 correct)
+Correlation:            0.180 (Pearson correlation)
+Rank Correlation:       0.291 (Spearman correlation)
+Mean Absolute Error:    0.0284 (2.84%)
+Root Mean Squared Error: 0.0374 (3.74%)
+Top 3 Identification:   66.7% (2/3 correct)
 
 PERFORMANCE COMPARISON
 ----------------------------------------
@@ -82,12 +82,12 @@ August 2025 Ensemble Results (for comparison):
   • RMSE: 2.85%
 
 September 2025 vs August 2025:
-  • Direction Accuracy: +18.1% change (63.6% vs 45.5%)
-  • MAE: +0.0038 change (0.0277 vs 0.0239)
+  • Direction Accuracy: +9.0% change (54.5% vs 45.5%)
+  • MAE: +0.0045 change (0.0284 vs 0.0239)
 
 PERFORMANCE INTERPRETATION
 ----------------------------------------
-✓ Strong direction accuracy (>60%) - Ensemble successfully predicts outperformance/underperformance
+⚠ Moderate direction accuracy (50-60%) - Ensemble shows predictive ability above random chance
 ✗ Weak correlation - Ensemble predictions poorly aligned with actual returns
 ⚠ Moderate prediction error (2-3%) - Reasonable magnitude accuracy
 
@@ -95,46 +95,46 @@ DETAILED ETF-BY-ETF ANALYSIS
 ----------------------------------------
 ETF    Sector                      Actual  Predicted    Error  Direction
 -----------------------------------------------------------------------------
-XLF    Financials                  -0.035      0.011    0.046    ✗ Wrong
-XLC    Communication Services       0.025      0.003   -0.022  ✓ Correct
-XLY    Consumer Discretionary       0.000     -0.016   -0.016    ✗ Wrong
-XLP    Consumer Staples            -0.065      0.010    0.075    ✗ Wrong
-XLE    Energy                      -0.048     -0.066   -0.018  ✓ Correct
-XLV    Health Care                 -0.027     -0.017    0.010  ✓ Correct
-XLI    Industrials                 -0.015     -0.006    0.008  ✓ Correct
-XLB    Materials                   -0.060     -0.017    0.044  ✓ Correct
-XLRE   Real Estate                 -0.023     -0.015    0.008  ✓ Correct
-XLK    Technology                   0.043     -0.011   -0.054    ✗ Wrong
-XLU    Utilities                    0.001      0.006    0.005  ✓ Correct
+XLF    Financials                  -0.035     -0.013    0.022  ✓ Correct
+XLC    Communication Services       0.025      0.004   -0.021  ✓ Correct
+XLY    Consumer Discretionary       0.000     -0.000   -0.000    ✗ Wrong
+XLP    Consumer Staples            -0.065      0.030    0.095    ✗ Wrong
+XLE    Energy                      -0.048     -0.036    0.012  ✓ Correct
+XLV    Health Care                 -0.027      0.000    0.027    ✗ Wrong
+XLI    Industrials                 -0.015      0.003    0.017    ✗ Wrong
+XLB    Materials                   -0.060     -0.018    0.043  ✓ Correct
+XLRE   Real Estate                 -0.023     -0.003    0.020  ✓ Correct
+XLK    Technology                   0.043     -0.001   -0.044    ✗ Wrong
+XLU    Utilities                    0.001      0.014    0.012  ✓ Correct
 
 BEST AND WORST PREDICTIONS
 ----------------------------------------
 Most Accurate Predictions (smallest error):
-  XLU: Error = +0.0048 (Predicted: +0.0061, Actual: +0.0014)
-  XLRE: Error = +0.0079 (Predicted: -0.0147, Actual: -0.0226)
-  XLI: Error = +0.0085 (Predicted: -0.0063, Actual: -0.0147)
+  XLY: Error = -0.0004 (Predicted: -0.0000, Actual: +0.0004)
+  XLE: Error = +0.0115 (Predicted: -0.0364, Actual: -0.0480)
+  XLU: Error = +0.0124 (Predicted: +0.0138, Actual: +0.0014)
 
 Least Accurate Predictions (largest error):
-  XLF: Error = +0.0456 (Predicted: +0.0108, Actual: -0.0348)
-  XLK: Error = -0.0535 (Predicted: -0.0106, Actual: +0.0430)
-  XLP: Error = +0.0748 (Predicted: +0.0099, Actual: -0.0650)
+  XLB: Error = +0.0427 (Predicted: -0.0175, Actual: -0.0602)
+  XLK: Error = -0.0435 (Predicted: -0.0006, Actual: +0.0430)
+  XLP: Error = +0.0952 (Predicted: +0.0303, Actual: -0.0650)
 
 RANKING COMPARISON
 ----------------------------------------
 Rank       Actual Best  Predicted Best
 ------------------------------------
-1           XLK (+0.043)      XLF (+0.011) 
-2           XLC (+0.025)      XLP (+0.010) 
-3           XLU (+0.001)      XLU (+0.006) ✓
-4           XLY (+0.000)      XLC (+0.003) 
-5           XLI (-0.015)      XLI (-0.006) ✓
+1           XLK (+0.043)      XLP (+0.030) 
+2           XLC (+0.025)      XLU (+0.014) 
+3           XLU (+0.001)      XLC (+0.004) 
+4           XLY (+0.000)      XLI (+0.003) 
+5           XLI (-0.015)      XLV (+0.000) 
 
 TRADING STRATEGY PERFORMANCE
 ----------------------------------------
-Long Top 3 ETFs:    XLF, XLP, XLU
-Short Bottom 3 ETFs: XLB, XLV, XLE
-Long Return:        -0.0328
-Short Return:       -0.0451
-Strategy Return:    +0.0123
+Long Top 3 ETFs:    XLP, XLU, XLC
+Short Bottom 3 ETFs: XLF, XLB, XLE
+Long Return:        -0.0129
+Short Return:       -0.0477
+Strategy Return:    +0.0347
 
 ================================================================================

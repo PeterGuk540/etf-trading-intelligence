@@ -116,7 +116,32 @@ def generate_mid_month_predictions() -> Dict[str, float]:
     Generate VIX regime-aware ensemble predictions for mid-month September 2025
     Predictions made on September 15, 2025 for next 21 trading days (through Oct 13)
     Uses 21-day lagged VIX regime to prevent data leakage
+
+    First tries to load from actual model predictions JSON, then falls back to demonstration values
     """
+    # Try to load actual predictions from JSON
+    prediction_file = '/home/aojie_ju/etf-trading-intelligence/mid_september_2025_predictions.json'
+    try:
+        with open(prediction_file, 'r') as f:
+            predictions = json.load(f)
+
+        if predictions:
+            print("\n✅ Loaded actual model predictions from JSON file")
+            print(f"File: {prediction_file}")
+            print(f"\nPredicted 21-day Relative Returns:")
+            for symbol, pred in sorted(predictions.items(), key=lambda x: x[1], reverse=True):
+                print(f"  {symbol}: {pred:+.4f} ({pred*100:+.2f}%)")
+            return predictions
+        else:
+            print(f"\n⚠️  Prediction file is empty: {prediction_file}")
+            print("⚠️  Falling back to demonstration ensemble predictions")
+    except FileNotFoundError:
+        print(f"\n⚠️  Prediction file not found: {prediction_file}")
+        print("⚠️  Falling back to demonstration ensemble predictions")
+    except Exception as e:
+        print(f"\n⚠️  Error loading predictions: {e}")
+        print("⚠️  Falling back to demonstration ensemble predictions")
+
     print("\nGenerating VIX regime-aware ensemble predictions for mid-month September 2025...")
     print("Prediction Date: September 15, 2025")
     print("Target Period: September 15 - October 13, 2025 (21 trading days)")

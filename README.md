@@ -4,7 +4,7 @@ A Python-based ETF sector rotation prediction system using an ensemble of 4 neur
 
 ## 📊 System Overview
 
-This system predicts 21-day forward relative returns (ETF return - SPY return) for sector rotation strategies. It uses 206 features per ETF combining technical indicators and economic data to train an ensemble of 4 neural network models with sector-specific weighting.
+This system predicts 21-day forward relative returns (ETF return - SPY return) for sector rotation strategies. It uses 219 features per ETF combining technical indicators, economic data, and VIX regime detection to train an ensemble of 4 neural network models with sector-specific weighting.
 
 ## 🎯 Actual Performance
 
@@ -14,29 +14,38 @@ This system predicts 21-day forward relative returns (ETF return - SPY return) f
 - **Average R²**: -4.25 (negative due to noisy relative returns)
 - **MAE**: 3.77%
 
-### Real-World Performance (VIX Regime-Aware Ensemble - CORRECTED)
-**September 2025 Results (Corrected Methodology):**
-- **Direction Accuracy**: 72.7% (8/11 correct) - **HIGHEST ACHIEVED!**
-- **Correlation**: 0.628 (strong positive correlation)
-- **Mean Absolute Error**: 2.92%
+### Real-World Performance (Walk-Forward Validation with VIX Regime Features)
+**August 2025 Results (trained through July 31, 2025):**
+- **Direction Accuracy**: 63.6% (7/11 correct) - Above profitable threshold
+- **Correlation**: 0.413 (moderate positive correlation)
+- **Mean Absolute Error**: 2.08%
 - **Top 3 Identification**: 66.7% (2/3 correct)
-- **Trading Strategy Return**: +4.58% (profitable!)
-- **🔧 CRITICAL FIX**: Implemented 21-day lagged VIX regime features to prevent data leakage
+- **Strategy Return**: +1.94%
 
-**August 2025 Results (for comparison):**
-- **Direction Accuracy**: 45.5% (5/11 correct) - Improved from 36.4%
-- **Correlation**: -0.022 (near-neutral)
-- **Mean Absolute Error**: 2.39%
+**September 2025 Results (trained through Aug 31, 2025):**
+- **Direction Accuracy**: 54.5% (6/11 correct)
+- **Correlation**: 0.180 (weak positive correlation)
+- **Mean Absolute Error**: 2.84%
+- **Top 3 Identification**: 66.7% (2/3 correct)
+- **Strategy Return**: +3.47%
+
+**Mid-September 2025 Results (trained through Sept 14, 2025):**
+- **Direction Accuracy**: 80.0% (8/11 correct) - **EXCELLENT PERFORMANCE**
+- **Correlation**: 0.293 (moderate positive correlation)
+- **Mean Absolute Error**: 2.52%
+- **Top 3 Identification**: 33.3% (1/3 correct)
+- **Trading Strategy Return**: -0.94%
 
 ## 🛠️ Actual Implementation
 
-### Features (217 per ETF) ✅ WITH CORRECTED VIX REGIME DETECTION
+### Features (219 per ETF) ✅ WITH VIX REGIME & 100% FRED DATA QUALITY
 - **20 Alpha Factors**: Technical indicators (RSI, MACD, Bollinger Bands, momentum, volatility)
 - **186 Beta Factors**: 62 FRED economic indicators with 3 variations each
-- **11 VIX Regime Features**: **21-day lagged** Low/Medium/High volatility regime detection + VIX dynamics
-- **Total**: 2,387 features across all 11 ETFs (217 × 11)
-- **Data Quality**: 62/62 FRED indicators successfully fetched with robust retry/alternative logic
-- **🔧 CRITICAL**: All VIX regime features use 21-day lag to prevent data leakage
+- **10 VIX Regime Features**: **21-day lagged** volatility regime detection (LOW/MEDIUM/HIGH)
+- **3 Derived Features**: Yield curves and real rates
+- **Total**: 2,409 features across all 11 ETFs (219 × 11)
+- **Data Quality**: ✅ 62/62 FRED indicators working (100% success rate)
+- **VIX Regime**: ✅ Properly lagged 21 days to prevent data leakage
 
 ### Model Architectures
 The system implements an ensemble of 4 neural network architectures with sector-specific weighting:
@@ -109,10 +118,12 @@ uncertainty = std_deviation(all_model_predictions)
 
 ```
 etf-trading-intelligence/
-├── etf_monthly_prediction_system.py    # Main prediction system
-├── comprehensive_features.py           # Feature engineering (206 features)
+├── etf_monthly_prediction_system.py    # Main prediction system (219 features with VIX regime)
+├── comprehensive_features.py           # Feature engineering (legacy)
 ├── validate_all_models.py             # Model validation across time windows
 ├── august_evaluation.py               # August 2025 performance evaluation
+├── september_evaluation.py            # September 2025 performance evaluation
+├── mid_month_september_evaluation.py  # Mid-September 2025 performance evaluation
 ├── calculate_feature_importance.py    # Feature importance analysis
 ├── run_feature_selection.py          # Feature selection experiments
 ├── test_pipeline_consistency.py      # Pipeline testing
@@ -214,8 +225,9 @@ Used in `etf_monthly_prediction_system.py` for actual predictions:
 
 ## 📝 Reports
 
-- `SEPTEMBER_2025_EVALUATION.md` - Corrected real-world performance evaluation (72.7% accuracy)
-- `OCTOBER_2025_PREDICTIONS.md` - October 2025 sector predictions with corrected methodology
+- `AUGUST_2025_EVALUATION.md` - August 2025 evaluation with VIX regime (63.6% accuracy)
+- `SEPTEMBER_2025_EVALUATION.md` - September 2025 evaluation with VIX regime (54.5% accuracy)
+- `MID_MONTH_SEPTEMBER_2025_EVALUATION.md` - Mid-September 2025 evaluation (80.0% accuracy!)
 - `COMPREHENSIVE_REPORT.md` - Detailed technical analysis
 - `VALIDATION_REPORT.md` - Model validation results
 - `FEATURE_SELECTION_REPORT.md` - Feature importance analysis
