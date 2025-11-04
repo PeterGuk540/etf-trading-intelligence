@@ -1,0 +1,35 @@
+{
+  "validation_date": "2025-11-03T20:52:10.741309",
+  "ensemble_type": "TRUE_4_MODEL_ENSEMBLE",
+  "months_validated": [
+    "August",
+    "September",
+    "October"
+  ],
+  "summary_metrics": {
+    "avg_direction_accuracy": 69.6969696969697,
+    "avg_correlation": 0.5945716913781821,
+    "avg_mae": 0.022729551653720908,
+    "total_strategy_return": 0.13260689137465925
+  },
+  "monthly_results": {
+    "August": {
+      "direction_accuracy": 72.72727272727273,
+      "correlation": 0.7764076959974234,
+      "mae": 0.01667743694017828,
+      "strategy_return": 0.04627511508066648
+    },
+    "September": {
+      "direction_accuracy": 72.72727272727273,
+      "correlation": 0.7392596688308504,
+      "mae": 0.018650246297207768,
+      "strategy_return": 0.05586678559134685
+    },
+    "October": {
+      "direction_accuracy": 63.63636363636363,
+      "correlation": 0.2680477093062723,
+      "mae": 0.032860971723776666,
+      "strategy_return": 0.03046499070264593
+    }
+  }
+}
