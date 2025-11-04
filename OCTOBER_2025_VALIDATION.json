@@ -1,0 +1,115 @@
+{
+  "validation_date": "2025-11-03T19:40:21.658690",
+  "period": "2025-09-30 to 2025-10-31",
+  "prediction_source": "/home/aojie_ju/etf-trading-intelligence/october_2025_predictions.json",
+  "metrics": {
+    "direction_accuracy": 81.81818181818183,
+    "correct_predictions": 9,
+    "total_predictions": 11,
+    "correlation": 0.4806192437347664,
+    "correlation_pvalue": 0.13454411475588185,
+    "mae": 0.03125871329458372,
+    "rmse": 0.036533209087322036,
+    "r2": -0.2748923106458301
+  },
+  "top3_analysis": {
+    "predicted": [
+      "XLC",
+      "XLU",
+      "XLK"
+    ],
+    "actual": [
+      "XLK",
+      "XLV",
+      "XLU"
+    ],
+    "overlap": 2
+  },
+  "bottom3_analysis": {
+    "predicted": [
+      "XLB",
+      "XLI",
+      "XLRE"
+    ],
+    "actual": [
+      "XLRE",
+      "XLC",
+      "XLB"
+    ],
+    "overlap": 2
+  },
+  "trading_strategy": {
+    "predicted_return": 0.04793105460703373,
+    "actual_return": 0.04208537985847956,
+    "error": -0.005845674748554172
+  },
+  "sector_details": {
+    "XLB": {
+      "predicted": -0.024691954255104065,
+      "actual": -0.06791244188478962,
+      "error": 0.043220487629685556,
+      "direction_correct": true
+    },
+    "XLC": {
+      "predicted": 0.02232680842280388,
+      "actual": -0.053912639995249534,
+      "error": 0.07623944841805341,
+      "direction_correct": false
+    },
+    "XLE": {
+      "predicted": -0.007914885878562927,
+      "actual": -0.03738116459273233,
+      "error": 0.029466278714169403,
+      "direction_correct": true
+    },
+    "XLF": {
+      "predicted": -0.006200917065143585,
+      "actual": -0.05168222103013609,
+      "error": 0.0454813039649925,
+      "direction_correct": true
+    },
+    "XLI": {
+      "predicted": -0.030883699655532837,
+      "actual": -0.018455823897856716,
+      "error": -0.012427875757676121,
+      "direction_correct": true
+    },
+    "XLK": {
+      "predicted": 0.013978036120533943,
+      "actual": 0.042933357806268724,
+      "error": -0.02895532168573478,
+      "direction_correct": true
+    },
+    "XLP": {
+      "predicted": -0.0077050477266311646,
+      "actual": -0.05050582658042313,
+      "error": 0.042800778853791965,
+      "direction_correct": true
+    },
+    "XLRE": {
+      "predicted": -0.033975839614868164,
+      "actual": -0.053032745022115635,
+      "error": 0.01905690540724747,
+      "direction_correct": true
+    },
+    "XLU": {
+      "predicted": 0.0179368257522583,
+      "actual": -0.002165589040342475,
+      "error": 0.020102414792600776,
+      "direction_correct": false
+    },
+    "XLV": {
+      "predicted": 0.007730066776275635,
+      "actual": 0.012664724452331466,
+      "error": -0.004934657676055831,
+      "direction_correct": true
+    },
+    "XLY": {
+      "predicted": -0.0014669150114059448,
+      "actual": -0.02262728835181904,
+      "error": 0.021160373340413097,
+      "direction_correct": true
+    }
+  },
+  "assessment": "EXCELLENT"
+}

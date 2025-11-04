@@ -211,79 +211,36 @@ def generate_october_vix_regime_predictions(market_env: dict) -> Dict[str, float
 
         print(f"\n📊 OCTOBER 2025 SECTOR ANALYSIS:")
         print("-" * 50)
-        print("   NOTE: Using regime-based estimates (no trained model predictions available)")
+        print("   ✅ Using ACTUAL trained model predictions from LSTM neural network")
         print()
 
-        # Sector-specific analysis for October 2025
-        # These are regime-based estimates, not actual model predictions
-        sector_analysis = {
-            'XLK': {
-                'outlook': 'Bullish',
-                'rationale': 'Q3 earnings strength, AI innovation, lagged LOW_VOL regime favors growth',
-                'key_factors': ['Earnings beats', 'AI developments', 'Lagged low volatility signal'],
-                'prediction': +0.020  # Reduced from +0.028 due to information lag
-            },
-            'XLY': {
-                'outlook': 'Bullish',
-                'rationale': 'Holiday season prep, consumer strength, lagged risk-on signal',
-                'key_factors': ['Holiday spending', 'Consumer confidence', 'Low unemployment'],
-                'prediction': +0.015  # Reduced from +0.022 due to lagged regime detection
-            },
-            'XLC': {
-                'outlook': 'Moderate Bullish',
-                'rationale': 'Digital transformation, 5G deployment, moderate growth bias',
-                'key_factors': ['5G rollout', 'Digital ads', 'Cloud growth'],
-                'prediction': +0.012  # Unchanged - less sensitive to regime
-            },
-            'XLF': {
-                'outlook': 'Moderate Bullish',
-                'rationale': 'Stable rate environment, credit quality, moderate earnings growth',
-                'key_factors': ['Net interest margins', 'Credit normalization', 'Loan growth'],
-                'prediction': +0.008  # Reduced from +0.018 due to lagged information
-            },
-            'XLI': {
-                'outlook': 'Moderate Bullish',
-                'rationale': 'Infrastructure spending, reshoring trends, cyclical recovery',
-                'key_factors': ['Infrastructure bill', 'Manufacturing revival', 'Trade flows'],
-                'prediction': +0.005  # Reduced from +0.008
-            },
-            'XLV': {
-                'outlook': 'Neutral',
-                'rationale': 'Defensive characteristics, stable but limited upside in lagged LOW_VOL',
-                'key_factors': ['Drug approvals', 'Demographics', 'Healthcare innovation'],
-                'prediction': +0.000  # Reduced from +0.002 to neutral
-            },
-            'XLB': {
-                'outlook': 'Neutral to Slightly Bearish',
-                'rationale': 'Mixed commodity outlook, China demand uncertainty, no regime boost',
-                'key_factors': ['China recovery', 'Input costs', 'Global demand'],
-                'prediction': -0.003  # Slightly more bearish from 0.000
-            },
-            'XLRE': {
-                'outlook': 'Slightly Bearish',
-                'rationale': 'Interest rate sensitivity, commercial real estate concerns',
-                'key_factors': ['Rate sensitivity', 'Office demand', 'REIT valuations'],
-                'prediction': -0.008  # Slightly more bearish from -0.005
-            },
-            'XLE': {
-                'outlook': 'Bearish',
-                'rationale': 'Winter demand offset by production, lagged regime less supportive',
-                'key_factors': ['Winter demand', 'Production levels', 'Geopolitical risk'],
-                'prediction': -0.012  # More bearish from -0.008
-            },
-            'XLP': {
-                'outlook': 'Bearish',
-                'rationale': 'Defensive penalty in lagged LOW_VOL, margin pressure from costs',
-                'key_factors': ['Defensive discount', 'Margin pressure', 'Volume growth'],
-                'prediction': -0.015  # More bearish from -0.012
-            },
-            'XLU': {
-                'outlook': 'Most Bearish',
-                'rationale': 'Most defensive sector penalized in lagged risk-on environment',
-                'key_factors': ['Rate sensitivity', 'Regulatory environment', 'Renewable transition'],
-                'prediction': -0.020  # More bearish from -0.018
+        # Use actual model predictions (now available from trained neural network)
+        # These are the REAL predictions from LSTM model trained through August 2025
+        sector_analysis = {}
+        for symbol, pred in model_predictions.items():
+            # Classify outlook based on prediction magnitude
+            if pred > 0.015:
+                outlook = 'Bullish'
+            elif pred > 0.005:
+                outlook = 'Moderate Bullish'
+            elif pred > -0.005:
+                outlook = 'Neutral'
+            elif pred > -0.015:
+                outlook = 'Slightly Bearish'
+            elif pred > -0.025:
+                outlook = 'Bearish'
+            else:
+                outlook = 'Very Bearish'
+
+            # Generate rationale based on prediction
+            rationale = f'Model prediction from LSTM trained through August 2025 ({pred*100:+.2f}%)'
+
+            sector_analysis[symbol] = {
+                'outlook': outlook,
+                'rationale': rationale,
+                'key_factors': ['Neural network forecast based on 219 features'],
+                'prediction': pred
             }
-        }
 
     print("Detailed Sector Outlook:")
     for sector, analysis in sector_analysis.items():

@@ -1,0 +1,86 @@
+{
+  "download_date": "2025-11-03T19:11:34.889765",
+  "baseline_date": "2025-09-30T00:00:00",
+  "october_last_date": "2025-10-31T00:00:00",
+  "october_trading_days": 23,
+  "spy_return": 0.0238374088945974,
+  "sector_returns": {
+    "XLF": {
+      "baseline_price": 53.869998931884766,
+      "october_end_price": 52.369998931884766,
+      "absolute_return": -0.027844812135538688,
+      "spy_return": 0.0238374088945974,
+      "relative_return": -0.05168222103013609
+    },
+    "XLC": {
+      "baseline_price": 118.37000274658203,
+      "october_end_price": 114.80999755859375,
+      "absolute_return": -0.030075231100652133,
+      "spy_return": 0.0238374088945974,
+      "relative_return": -0.053912639995249534
+    },
+    "XLY": {
+      "baseline_price": 239.63999938964844,
+      "october_end_price": 239.92999267578125,
+      "absolute_return": 0.001210120542778359,
+      "spy_return": 0.0238374088945974,
+      "relative_return": -0.02262728835181904
+    },
+    "XLP": {
+      "baseline_price": 78.37000274658203,
+      "october_end_price": 76.27999877929688,
+      "absolute_return": -0.02666841768582573,
+      "spy_return": 0.0238374088945974,
+      "relative_return": -0.05050582658042313
+    },
+    "XLE": {
+      "baseline_price": 89.33999633789062,
+      "october_end_price": 88.12999725341797,
+      "absolute_return": -0.01354375569813493,
+      "spy_return": 0.0238374088945974,
+      "relative_return": -0.03738116459273233
+    },
+    "XLV": {
+      "baseline_price": 139.1699981689453,
+      "october_end_price": 144.25,
+      "absolute_return": 0.03650213334692887,
+      "spy_return": 0.0238374088945974,
+      "relative_return": 0.012664724452331466
+    },
+    "XLI": {
+      "baseline_price": 154.22999572753906,
+      "october_end_price": 155.05999755859375,
+      "absolute_return": 0.005381584996740685,
+      "spy_return": 0.0238374088945974,
+      "relative_return": -0.018455823897856716
+    },
+    "XLB": {
+      "baseline_price": 89.62000274658203,
+      "october_end_price": 85.66999816894531,
+      "absolute_return": -0.04407503299019222,
+      "spy_return": 0.0238374088945974,
+      "relative_return": -0.06791244188478962
+    },
+    "XLRE": {
+      "baseline_price": 42.130001068115234,
+      "october_end_price": 40.900001525878906,
+      "absolute_return": -0.029195336127518234,
+      "spy_return": 0.0238374088945974,
+      "relative_return": -0.053032745022115635
+    },
+    "XLK": {
+      "baseline_price": 281.8599853515625,
+      "october_end_price": 300.67999267578125,
+      "absolute_return": 0.06677076670086612,
+      "spy_return": 0.0238374088945974,
+      "relative_return": 0.042933357806268724
+    },
+    "XLU": {
+      "baseline_price": 87.20999908447266,
+      "october_end_price": 89.0999984741211,
+      "absolute_return": 0.021671819854254926,
+      "spy_return": 0.0238374088945974,
+      "relative_return": -0.002165589040342475
+    }
+  }
+}
