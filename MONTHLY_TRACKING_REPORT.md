@@ -1,7 +1,7 @@
 # ETF Trading Intelligence - Monthly Tracking Report
 *Living document tracking model performance, feature importance, and predictions*
 
-**Last Updated:** 2025-11-10 19:54 UTC
+**Last Updated:** 2025-11-10 21:46 UTC
 
 ---
 
@@ -41,17 +41,17 @@
 
 | Rank | ETF | Predicted Return | Recommendation |
 |------|-----|------------------|----------------|
-| 1 | XLV 🟢 | +3.74% | LONG |
-| 2 | XLU 🟢 | +2.78% | LONG |
-| 3 | XLK 🟢 | +1.48% | LONG |
-| 4 | XLP ⚪ | +0.46% | NEUTRAL |
-| 5 | XLC ⚪ | +0.33% | NEUTRAL |
-| 6 | XLY ⚪ | -0.49% | NEUTRAL |
-| 7 | XLRE ⚪ | -0.68% | NEUTRAL |
-| 8 | XLE ⚪ | -1.67% | NEUTRAL |
-| 9 | XLB 🔴 | -2.41% | SHORT |
-| 10 | XLF 🔴 | -3.47% | SHORT |
-| 11 | XLI 🔴 | -3.53% | SHORT |
+| 1 | XLV 🟢 | +2.54% | LONG |
+| 2 | XLU 🟢 | +1.04% | LONG |
+| 3 | XLY 🟢 | -0.47% | LONG |
+| 4 | XLF ⚪ | -1.43% | NEUTRAL |
+| 5 | XLK ⚪ | -1.97% | NEUTRAL |
+| 6 | XLP ⚪ | -2.26% | NEUTRAL |
+| 7 | XLI ⚪ | -2.60% | NEUTRAL |
+| 8 | XLE ⚪ | -3.56% | NEUTRAL |
+| 9 | XLRE 🔴 | -3.83% | SHORT |
+| 10 | XLC 🔴 | -3.86% | SHORT |
+| 11 | XLB 🔴 | -3.91% | SHORT |
 
 **Trading Strategy:** Long top 3, Short bottom 3
 
