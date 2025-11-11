@@ -129,60 +129,60 @@ uncertainty = std_deviation(all_model_predictions)
 
 ## 📁 Project Structure
 
+### Core Production Scripts
+
+| Script | Purpose |
+|--------|---------|
+| **`run_complete_cycle.py`** | 🎯 **Master workflow** - Orchestrates complete monthly cycle |
+| `generate_ensemble_predictions.py` | 4-model ensemble prediction engine |
+| `calculate_feature_importance_real.py` | Real permutation-based feature importance |
+| `update_monthly_tracking.py` | Auto-updates monthly tracking report |
+| `etf_monthly_prediction_system.py` | Data fetching & feature engineering pipeline |
+| `validate_ensemble_all_months.py` | Multi-month validation utility |
+| `regenerate_all_ensemble.py` | Batch regenerate multiple historical months |
+| `validate_all_models.py` | Model comparison & selection (research) |
+
+### Living Documentation
+
+| File | Description |
+|------|-------------|
+| **`MONTHLY_TRACKING_REPORT.md`** | 📊 **Auto-generated living report** with performance, feature importance, and predictions |
+| `README.md` | Project overview and quick start guide |
+
+### Data Files
+
 ```
-etf-trading-intelligence/
-├── Core Production Scripts (Ensemble System)
-│   ├── generate_ensemble_predictions.py      # ⭐ TRUE 4-model ensemble prediction system
-│   ├── regenerate_all_ensemble.py           # Batch regenerate all months with ensemble
-│   └── validate_ensemble_all_months.py      # Comprehensive ensemble validation
+├── Predictions
+│   ├── august_2025_predictions.json
+│   ├── september_2025_predictions.json
+│   ├── october_2025_predictions.json
+│   └── november_2025_predictions.json
 │
-├── Legacy Single-Model Scripts
-│   ├── etf_monthly_prediction_system.py     # LSTM-only prediction system (legacy)
-│   └── validate_all_models.py               # Model comparison and validation
+├── Actual Returns (Real Market Data)
+│   ├── august_2025_actual_returns.json
+│   ├── september_2025_actual_returns.json
+│   └── october_2025_actual_returns.json
 │
-├── Feature Engineering & Analysis
-│   ├── comprehensive_features.py            # Feature engineering pipeline
-│   ├── calculate_feature_importance.py      # Feature importance analysis
-│   ├── visualize_feature_importance.py      # Feature importance visualization
-│   ├── feature_selection_module.py          # Feature selection utilities
-│   └── run_feature_selection.py             # Feature selection experiments
+├── Feature Importance (Real Permutation Data)
+│   └── feature_importance_{month}_{year}.json
 │
-├── Testing & Utilities
-│   ├── test_pipeline_consistency.py         # Pipeline testing
-│   ├── system_status.py                     # System status utilities
-│   └── setup.py                             # Project setup
-│
-├── Prediction & Validation Data
-│   ├── august_2025_predictions.json         # Ensemble predictions for August
-│   ├── september_2025_predictions.json      # Ensemble predictions for September
-│   ├── october_2025_predictions.json        # Ensemble predictions for October
-│   ├── august_2025_actual_returns.json      # Actual market data for August
-│   ├── september_2025_actual_returns.json   # Actual market data for September
-│   ├── october_2025_actual_returns.json     # Actual market data for October
-│   ├── ensemble_validation_summary.json     # Ensemble validation results
-│   └── mid_september_2025_predictions.json  # Historical mid-month experiment
-│
-├── Documentation
-│   ├── README.md                            # Main documentation
-│   ├── ENSEMBLE_EVALUATION_REPORT.md        # ⭐ Primary ensemble results report
-│   ├── UPDATED_COMPREHENSIVE_REPORT.md      # Technical details
-│   ├── VALIDATION_REPORT.md                 # Model validation results
-│   ├── FEATURE_SELECTION_REPORT.md          # Feature analysis
-│   └── README_REPORTS_GUIDE.md              # Documentation guide
-│
-├── Archive (Historical LSTM-only Results)
-│   ├── lstm_only_evaluations/
-│   │   ├── AUGUST_2025_EVALUATION.md        # LSTM-only August results
-│   │   ├── SEPTEMBER_2025_EVALUATION.md     # LSTM-only September results
-│   │   ├── OCTOBER_2025_EVALUATION.md       # LSTM-only October results
-│   │   └── MID_MONTH_SEPTEMBER_2025_EVALUATION.md
-│   └── interim_summaries/
-│       ├── COMPREHENSIVE_REPORT.md          # Superseded by UPDATED version
-│       └── Various interim summary files
-│
-└── Environment
-    ├── requirements.txt                     # Python dependencies
-    └── venv/                                # Virtual environment
+└── Interactive Visualizations
+    └── plots/
+        ├── performance_timeline.html
+        ├── pred_vs_actual_{month}_{year}.html
+        ├── error_distribution_{month}_{year}.html
+        └── feature_importance_{sector}_{month}_{year}.html
+```
+
+### Archive
+
+```
+archive/
+├── deprecated_feature_importance/    # Old hardcoded feature importance (removed)
+├── single_month_scripts/             # One-off monthly generation scripts
+├── testing_utilities/                # Development & testing tools
+├── static_reports/                   # Superseded by MONTHLY_TRACKING_REPORT.md
+└── interim_summaries/                # Historical LSTM-only results
 ```
 
 ## 🚀 Quick Start
@@ -207,53 +207,75 @@ pip install -r requirements.txt
 
 ### Running the System
 
-#### Production Workflow (Ensemble System)
+#### 🎯 Complete Monthly Cycle (Recommended)
 
+**Generate new monthly prediction:**
 ```bash
-# 1. Generate ensemble predictions for all months
-python regenerate_all_ensemble.py
-
-# 2. Validate ensemble predictions against actual data
-python validate_ensemble_all_months.py
-
-# 3. Analyze feature importance
-python calculate_feature_importance.py
-
-# 4. View comprehensive results
-cat ENSEMBLE_EVALUATION_REPORT.md
+python run_complete_cycle.py --month december --year 2025 --train-end 2025-10-31
 ```
 
-#### Legacy Workflow (Single LSTM Model)
+This automatically:
+1. ✅ Generates 4-model ensemble predictions
+2. ✅ Calculates real feature importance (permutation-based)
+3. ✅ Updates `MONTHLY_TRACKING_REPORT.md`
+4. ✅ Creates interactive HTML plots
+
+**Add validation after month completes:**
+```bash
+# First: Collect actual returns and save to december_2025_actual_returns.json
+# Then run:
+python run_complete_cycle.py --validate --month december --year 2025
+```
+
+This automatically:
+1. ✅ Loads predictions and actual market data
+2. ✅ Calculates all validation metrics
+3. ✅ Updates `MONTHLY_TRACKING_REPORT.md` with validation results
+4. ✅ Creates validation visualizations
+
+#### 📊 View Results
 
 ```bash
-# 1. Generate features (if needed)
-python comprehensive_features.py
+# View the living tracking report (updated automatically)
+cat MONTHLY_TRACKING_REPORT.md
 
-# 2. Train LSTM and generate predictions
-python etf_monthly_prediction_system.py
+# Or open in browser to see interactive plots
+# plots/performance_timeline.html
+# plots/pred_vs_actual_december_2025.html
+```
 
-# 3. Validate model performance
-python validate_all_models.py
+#### 🔧 Advanced Usage
+
+**Regenerate all historical predictions:**
+```bash
+python regenerate_all_ensemble.py
+```
+
+**Manually update tracking report:**
+```bash
+python update_monthly_tracking.py
+```
+
+**Calculate feature importance separately:**
+```bash
+python calculate_feature_importance_real.py --month november --year 2025 --train-end 2025-09-30
 ```
 
 ## 📈 Feature Importance
 
-### Top 10 Most Important Features (Updated with Corrected VIX Regime):
-1. **volatility_21d** (Alpha) - 6.35%
-2. **fred_vix** (Beta) - 5.76%
-3. **momentum_1m** (Alpha) - 4.96%
-4. **fred_yield_curve_10y2y** (Beta) - 4.52%
-5. **ratio_momentum** (Alpha) - 4.30%
-6. **fred_high_yield_spread** (Beta) - 3.94%
-7. **vix_regime_low_vol_lag21** (Beta) - 3.79% ⭐ CORRECTED (21-day lag)
-8. **rsi_14d** (Alpha) - 3.50%
-9. **vix_regime_high_vol_lag21** (Beta) - 3.50% ⭐ CORRECTED (21-day lag)
-10. **fred_oil_wti_chg_1m** (Beta) - 3.28%
+**Method:** Real permutation-based importance on trained ensemble models (not hardcoded!)
 
-**Category Distribution**:
-- Alpha (Technical): 41.36%
-- Beta (Economic): 38.07%
-- VIX Regime (Lagged): 20.57% ⭐ CORRECTED
+Feature importance is calculated for each monthly cycle and saved to:
+- `feature_importance_{month}_{year}.json`
+- Interactive visualizations in `plots/`
+
+**Key characteristics:**
+- ✅ Calculated from actual model performance
+- ✅ Uses permutation importance (10 repeats)
+- ✅ Sector-specific and aggregate importance
+- ✅ Updated automatically with each new prediction cycle
+
+View the latest feature importance in **`MONTHLY_TRACKING_REPORT.md`**
 
 ## ⚠️ Known Issues & Limitations
 
@@ -289,23 +311,28 @@ Used in `etf_monthly_prediction_system.py` for actual predictions:
 3. **Sector Specificity**: Each sector responds differently to economic drivers
 4. **Direction > Magnitude**: Direction accuracy matters more than R² for trading profitability
 
-## 📝 Reports
+## 📝 Documentation & Reports
 
-### Production Ensemble Results ⭐
-- **`ENSEMBLE_EVALUATION_REPORT.md`** - **Complete TRUE 4-Model Ensemble validation (Aug-Oct 2025) - 69.7% avg accuracy, +13.26% return** 🏆
+### 📊 Primary Documentation (Living Document)
 
-### Historical Single-Model Results (LSTM-only)
-- `OCTOBER_2025_EVALUATION.md` - October 2025 LSTM-only evaluation (81.8% accuracy)
-- `SEPTEMBER_2025_EVALUATION.md` - September 2025 LSTM-only evaluation (54.5% accuracy)
-- `MID_MONTH_SEPTEMBER_2025_EVALUATION.md` - Mid-September 2025 LSTM-only evaluation (80.0% accuracy)
-- `AUGUST_2025_EVALUATION.md` - August 2025 LSTM-only evaluation (63.6% accuracy)
+**`MONTHLY_TRACKING_REPORT.md`** - 🎯 **Auto-generated tracking report**
+- ✅ Performance timeline across all months
+- ✅ Real feature importance per cycle (permutation-based)
+- ✅ Validation results with interactive plots
+- ✅ Latest predictions with model contributions
+- ✅ Updated automatically after each cycle
 
-### Technical Documentation
-- `COMPREHENSIVE_REPORT.md` - Detailed technical analysis
-- `VALIDATION_REPORT.md` - Model validation results
-- `FEATURE_SELECTION_REPORT.md` - Feature importance analysis
+This is the **single source of truth** for all model performance and predictions.
 
-**Note:** Historical evaluations used LSTM-only. The TRUE ensemble (current production system) demonstrates more consistent performance across all months.
+### 📁 Archive Documentation
+
+All static reports have been archived to `archive/static_reports/`:
+- Historical ensemble evaluation reports
+- Feature selection reports (based on old hardcoded data)
+- Validation snapshots
+- Technical documentation
+
+**View archived reports:** `archive/static_reports/` and `archive/interim_summaries/`
 
 ## ⚖️ License
 
