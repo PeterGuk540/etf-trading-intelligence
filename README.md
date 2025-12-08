@@ -42,12 +42,21 @@ This system predicts 21-day forward relative returns (ETF return - SPY return) f
 - **Bottom 3 Identification**: 33.3% (1/3 correct)
 - **Strategy Return**: +3.05% ✅ **PROFITABLE**
 
-**Overall Summary (3-Month Period):**
-- **Average Direction Accuracy**: 69.7% - Consistently above profitable threshold
-- **Average Correlation**: 0.595
-- **Average MAE**: 2.27%
-- **Total Strategy Return**: +13.26% - **ALL THREE MONTHS PROFITABLE!**
-- **Profitable Months**: 3/3 (100%)
+**November 2025 Results (trained through Sep 30, 2025):**
+- **Direction Accuracy**: 45.5% (5/11 correct) - ⚠️ **BELOW THRESHOLD**
+- **Correlation**: 0.333 (moderate positive correlation)
+- **Mean Absolute Error**: 4.15%
+- **Top 3 Identification**: 33.3% (1/3 correct)
+- **Bottom 3 Identification**: 0% (0/3 correct)
+- **Strategy Return**: +0.94% ✅ **PROFITABLE**
+- **Notable**: XLV prediction (+2.54%) performed well with actual +9.09%
+
+**Overall Summary (4-Month Period: Aug-Nov 2025):**
+- **Average Direction Accuracy**: 63.6%
+- **Average Correlation**: 0.529
+- **Average MAE**: 2.74%
+- **Total Strategy Return**: +14.20% - **ALL FOUR MONTHS PROFITABLE!**
+- **Profitable Months**: 4/4 (100%)
 
 ## 🛠️ Actual Implementation
 
@@ -156,12 +165,14 @@ uncertainty = std_deviation(all_model_predictions)
 │   ├── august_2025_predictions.json
 │   ├── september_2025_predictions.json
 │   ├── october_2025_predictions.json
-│   └── november_2025_predictions.json
+│   ├── november_2025_predictions.json
+│   └── december_2025_predictions.json    # Latest prediction
 │
 ├── Actual Returns (Real Market Data)
 │   ├── august_2025_actual_returns.json
 │   ├── september_2025_actual_returns.json
-│   └── october_2025_actual_returns.json
+│   ├── october_2025_actual_returns.json
+│   └── november_2025_actual_returns.json  # Latest validation
 │
 ├── Feature Importance (Real Permutation Data)
 │   └── feature_importance_{month}_{year}.json

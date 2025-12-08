@@ -1,0 +1,4421 @@
+{
+  "month": "november",
+  "year": 2025,
+  "train_end_date": "2025-09-30",
+  "calculation_timestamp": "2025-11-10T20:13:15.635148",
+  "method": "permutation_importance",
+  "n_repeats": 10,
+  "sector_importance": {
+    "XLF": {
+      "etf": "XLF",
+      "total_features": 219,
+      "top_n": 50,
+      "top_features": [
+        {
+          "feature": "fred_consumer_credit_chg_1m",
+          "importance_score": 0.005830671674196134,
+          "importance_std": 0.0006309504078823839,
+          "importance_pct": 9.522020620653342,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_usd_eur_chg_3m",
+          "importance_score": 0.00403583566237284,
+          "importance_std": 0.0004131385180407331,
+          "importance_pct": 6.590889102665949,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_ppi_metals_chg_3m",
+          "importance_score": 0.0031641789765164455,
+          "importance_std": 0.00038996002294105917,
+          "importance_pct": 5.167393937677218,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_ppi_metals_chg_1m",
+          "importance_score": 0.002685278594357863,
+          "importance_std": 0.00039350761084328256,
+          "importance_pct": 4.385305772031794,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "rsi_14d",
+          "importance_score": 0.002598156007555477,
+          "importance_std": 0.00026383543158324665,
+          "importance_pct": 4.243026612028953,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_consumer_credit_chg_3m",
+          "importance_score": 0.002587783662010585,
+          "importance_std": 0.00048445066731738883,
+          "importance_pct": 4.226087622203803,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "atr_14d",
+          "importance_score": 0.0024372543010898295,
+          "importance_std": 0.0003841013039625884,
+          "importance_pct": 3.980259395407134,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_consumer_sentiment_chg_1m",
+          "importance_score": 0.002134282078804137,
+          "importance_std": 0.00043449537354694914,
+          "importance_pct": 3.4854780204144715,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_usd_jpy_chg_3m",
+          "importance_score": 0.002014851877724398,
+          "importance_std": 0.0002054069793930867,
+          "importance_pct": 3.2904375686526537,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_consumer_sentiment_chg_3m",
+          "importance_score": 0.001681216409224276,
+          "importance_std": 0.00027403423813919113,
+          "importance_pct": 2.745580305483656,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_cpi_chg_3m",
+          "importance_score": 0.001288785660259333,
+          "importance_std": 8.456913216803731e-05,
+          "importance_pct": 2.104704966822472,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_core_cpi_chg_1m",
+          "importance_score": 0.0012059718157428475,
+          "importance_std": 0.00023562959119958416,
+          "importance_pct": 1.9694623774221227,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_core_cpi_chg_3m",
+          "importance_score": 0.0012044247144323515,
+          "importance_std": 9.248204272373651e-05,
+          "importance_pct": 1.96693581935061,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_dollar_index",
+          "importance_score": 0.0011700170488252986,
+          "importance_std": 0.0001658294631861153,
+          "importance_pct": 1.9107449515182044,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "vix_chg_1w_lag21",
+          "importance_score": 0.0010701155459204854,
+          "importance_std": 0.00014784603933657844,
+          "importance_pct": 1.7475966516570156,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_usd_eur_chg_1m",
+          "importance_score": 0.0010230176092948474,
+          "importance_std": 0.0002067530159519106,
+          "importance_pct": 1.67068140950331,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "volume_ratio",
+          "importance_score": 0.0010226550250984707,
+          "importance_std": 0.00013938290661183014,
+          "importance_pct": 1.6700892763173683,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_housing_starts_chg_1m",
+          "importance_score": 0.0010127258903573802,
+          "importance_std": 8.385366487251998e-05,
+          "importance_pct": 1.6538740903091549,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "macd_hist",
+          "importance_score": 0.0009987493985348815,
+          "importance_std": 0.00016279332059309856,
+          "importance_pct": 1.6310491996662475,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_vix",
+          "importance_score": 0.00099746986589137,
+          "importance_std": 0.00017673538616075232,
+          "importance_pct": 1.6289596057228541,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_usd_gbp",
+          "importance_score": 0.0009662476375143048,
+          "importance_std": 0.00011579738068451367,
+          "importance_pct": 1.5779708485021606,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "vix_above_sma20_lag21",
+          "importance_score": 0.0009614867503092081,
+          "importance_std": 0.00025087816981017065,
+          "importance_pct": 1.5701958838544063,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_dollar_index_chg_3m",
+          "importance_score": 0.0009467762289632855,
+          "importance_std": 0.00016403461329845843,
+          "importance_pct": 1.5461722558020263,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "vix_percentile_rank_lag21",
+          "importance_score": 0.0009361598240785014,
+          "importance_std": 0.00017682754822466825,
+          "importance_pct": 1.5288346947320908,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_cpi_chg_1m",
+          "importance_score": 0.0009185113297566777,
+          "importance_std": 9.982416655696302e-05,
+          "importance_pct": 1.5000130878493712,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "volatility_21d",
+          "importance_score": 0.0008340299811958749,
+          "importance_std": 0.0002168105337129863,
+          "importance_pct": 1.3620473116907483,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_dollar_index_chg_1m",
+          "importance_score": 0.0008243642914189997,
+          "importance_std": 0.00013168813708463854,
+          "importance_pct": 1.346262355426523,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "vix_regime_high_vol_lag21",
+          "importance_score": 0.0008230726588057998,
+          "importance_std": 0.000179144386302658,
+          "importance_pct": 1.3441530011249205,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "bb_pctb",
+          "importance_score": 0.0008068276974679409,
+          "importance_std": 0.00011158090565238745,
+          "importance_pct": 1.3176234920933327,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_vix_chg_1m",
+          "importance_score": 0.0007572400668612285,
+          "importance_std": 0.0001154571845597468,
+          "importance_pct": 1.2366423517461438,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_coincident_index_chg_1m",
+          "importance_score": 0.0007394616116386133,
+          "importance_std": 0.0001485714533026097,
+          "importance_pct": 1.207608506814986,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_high_yield_spread_chg_1m",
+          "importance_score": 0.0007326203381713312,
+          "importance_std": 0.0001390974080628847,
+          "importance_pct": 1.1964360809493213,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_m2_money_chg_1m",
+          "importance_score": 0.0007281996958571491,
+          "importance_std": 0.00031685522097768526,
+          "importance_pct": 1.1892167673566076,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_vix_chg_3m",
+          "importance_score": 0.0007087594478919323,
+          "importance_std": 7.445474934649042e-05,
+          "importance_pct": 1.1574690627457267,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_ppi_metals",
+          "importance_score": 0.0007034946785341417,
+          "importance_std": 0.00016917460856410115,
+          "importance_pct": 1.1488712124140532,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_consumer_sentiment",
+          "importance_score": 0.0006686697773116784,
+          "importance_std": 0.00014051323496716952,
+          "importance_pct": 1.091998960625287,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_yield_curve_10y2y_chg_3m",
+          "importance_score": 0.0006453917652202038,
+          "importance_std": 0.000174684064540256,
+          "importance_pct": 1.0539838358629416,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "vix_regime_low_vol_lag21",
+          "importance_score": 0.0006215400042049824,
+          "importance_std": 0.00017183804244623162,
+          "importance_pct": 1.0150317265834996,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "vix_chg_1m_lag21",
+          "importance_score": 0.0006197335903183393,
+          "importance_std": 0.000152902576077189,
+          "importance_pct": 1.0120816873360194,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_industrial_production_chg_3m",
+          "importance_score": 0.0006022530480195024,
+          "importance_std": 6.880716753711338e-05,
+          "importance_pct": 0.9835343614822316,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "kdj_d",
+          "importance_score": 0.0005939521713937473,
+          "importance_std": 0.00018585367973552612,
+          "importance_pct": 0.9699782700374434,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "low_20d",
+          "importance_score": 0.000587777165780326,
+          "importance_std": 0.00016291743239052627,
+          "importance_pct": 0.9598939205715211,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_investment_grade_spread",
+          "importance_score": 0.0005752641300136975,
+          "importance_std": 3.4492895669211413e-05,
+          "importance_pct": 0.9394589876419052,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_treasury_10y_chg_3m",
+          "importance_score": 0.0005512952668265989,
+          "importance_std": 4.935823769916622e-05,
+          "importance_pct": 0.900315639795512,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_business_loans",
+          "importance_score": 0.0005469787262166002,
+          "importance_std": 3.205809037320017e-05,
+          "importance_pct": 0.8932663338158606,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "vix_regime_persistence_lag21",
+          "importance_score": 0.0005429482914198617,
+          "importance_std": 7.464695614542458e-05,
+          "importance_pct": 0.8866842648212048,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_usd_gbp_chg_3m",
+          "importance_score": 0.0005350127974553641,
+          "importance_std": 0.0001560270334616953,
+          "importance_pct": 0.8737248767116979,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_business_loans_chg_1m",
+          "importance_score": 0.0005348650103822424,
+          "importance_std": 0.00010598115656496611,
+          "importance_pct": 0.8734835268919235,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_capacity_utilization_chg_3m",
+          "importance_score": 0.0005297340746648017,
+          "importance_std": 7.512308985514557e-05,
+          "importance_pct": 0.8651042391469225,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_avg_weekly_hours",
+          "importance_score": 0.0005274444975189226,
+          "importance_std": 8.933606021985964e-05,
+          "importance_pct": 0.8613651500652785,
+          "category": "Beta - Other"
+        }
+      ],
+      "category_breakdown": {
+        "Beta - Money Supply": 16.704074870921534,
+        "Beta - Market": 22.82995438899725,
+        "Beta - Inflation": 18.242687173567642,
+        "Alpha - Technical": 16.13396747781275,
+        "Beta - Sentiment": 7.323057286523414,
+        "VIX Regime": 9.104577910109157,
+        "Beta - Economic": 2.6374084517913863,
+        "Beta - Other": 3.873536883669092,
+        "Beta - Interest Rates": 3.150735556607775
+      }
+    },
+    "XLC": {
+      "etf": "XLC",
+      "total_features": 219,
+      "top_n": 50,
+      "top_features": [
+        {
+          "feature": "fred_consumer_sentiment_chg_1m",
+          "importance_score": 0.0058388602271873214,
+          "importance_std": 0.0004825288170315058,
+          "importance_pct": 8.28366912566182,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_ppi_metals",
+          "importance_score": 0.0028800983955586616,
+          "importance_std": 0.0004900023427215673,
+          "importance_pct": 4.086034128213775,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "macd_hist",
+          "importance_score": 0.002089347962034022,
+          "importance_std": 0.0004460597823038548,
+          "importance_pct": 2.9641859082835036,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "macd",
+          "importance_score": 0.001861443806436961,
+          "importance_std": 0.00040119264377872323,
+          "importance_pct": 2.6408552334817834,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_building_permits_chg_1m",
+          "importance_score": -0.0017870348868442216,
+          "importance_std": 0.00012072276615289346,
+          "importance_pct": 2.535290303697337,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_treasury_30y_chg_1m",
+          "importance_score": -0.0015578508152354657,
+          "importance_std": 0.00013778115616901762,
+          "importance_pct": 2.210143794925118,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_usd_eur_chg_1m",
+          "importance_score": 0.001530439521267743,
+          "importance_std": 0.0004222703508983,
+          "importance_pct": 2.1712550254221967,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_yield_curve_10y2y",
+          "importance_score": -0.0015131722442245292,
+          "importance_std": 5.789957966847262e-05,
+          "importance_pct": 2.1467577084525074,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_mortgage_30y_chg_1m",
+          "importance_score": -0.0014864766887665221,
+          "importance_std": 0.00010945138186051961,
+          "importance_pct": 2.108884366749582,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_bank_reserves_chg_1m",
+          "importance_score": -0.0014512733886151423,
+          "importance_std": 0.0001058736612141231,
+          "importance_pct": 2.0589409738203313,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_avg_hourly_earnings_chg_1m",
+          "importance_score": -0.0014441921715312809,
+          "importance_std": 7.07129314356302e-05,
+          "importance_pct": 2.048894756399924,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_industrial_production_chg_1m",
+          "importance_score": -0.0014038307068962226,
+          "importance_std": 5.347547659596409e-05,
+          "importance_pct": 1.9916334065037333,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_consumer_sentiment",
+          "importance_score": -0.0013530592755272063,
+          "importance_std": 0.00012675241742657193,
+          "importance_pct": 1.919603297521355,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "ratio_momentum",
+          "importance_score": -0.0013255952867668396,
+          "importance_std": 0.00014591201792669357,
+          "importance_pct": 1.8806397692110763,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_net_exports",
+          "importance_score": -0.001307258775608861,
+          "importance_std": 4.829770323236984e-05,
+          "importance_pct": 1.8546255154968938,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_nonfarm_payrolls_chg_1m",
+          "importance_score": -0.0012996882838630206,
+          "importance_std": 4.153438884200751e-05,
+          "importance_pct": 1.8438851575672595,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_investment_grade_spread",
+          "importance_score": -0.0012894639957510196,
+          "importance_std": 8.703594126093346e-05,
+          "importance_pct": 1.8293798232263396,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_capacity_utilization_chg_3m",
+          "importance_score": -0.0012647772671548424,
+          "importance_std": 6.59272852385601e-05,
+          "importance_pct": 1.7943564310695017,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_participation_rate_chg_3m",
+          "importance_score": -0.0012630478071965028,
+          "importance_std": 5.741199002929245e-05,
+          "importance_pct": 1.7919028230872005,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_building_permits_chg_3m",
+          "importance_score": -0.0012530840278679547,
+          "importance_std": 0.00012205949164874144,
+          "importance_pct": 1.7777670760428566,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_dollar_index",
+          "importance_score": -0.001251766366265197,
+          "importance_std": 0.0001569517949824162,
+          "importance_pct": 1.7758976918972984,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_unemployment_rate_chg_3m",
+          "importance_score": -0.0012510649980475984,
+          "importance_std": 4.038456594511452e-05,
+          "importance_pct": 1.7749026514229964,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_avg_hourly_earnings_chg_3m",
+          "importance_score": -0.0012358905405666,
+          "importance_std": 6.0149780249139295e-05,
+          "importance_pct": 1.7533744455672167,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_oil_wti",
+          "importance_score": -0.0012283661539636516,
+          "importance_std": 7.929877217377282e-05,
+          "importance_pct": 1.74269949762067,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "vix_regime_medium_vol_lag21",
+          "importance_score": -0.0012174929947191128,
+          "importance_std": 0.00015206236139435805,
+          "importance_pct": 1.7272736011224112,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_auto_sales",
+          "importance_score": -0.0012085538629455835,
+          "importance_std": 3.485411262605472e-05,
+          "importance_pct": 1.7145915352737007,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_business_loans",
+          "importance_score": -0.0012061013013078485,
+          "importance_std": 8.866638325724573e-05,
+          "importance_pct": 1.7111120532640627,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_net_exports_chg_3m",
+          "importance_score": -0.001205550534733668,
+          "importance_std": 6.097019278383004e-05,
+          "importance_pct": 1.7103306733562613,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_oil_brent",
+          "importance_score": -0.0012048911845997047,
+          "importance_std": 6.34020970163296e-05,
+          "importance_pct": 1.709395244499396,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_net_exports_chg_1m",
+          "importance_score": -0.001197831888385513,
+          "importance_std": 6.591802679276904e-05,
+          "importance_pct": 1.699380126510081,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_gas_price_chg_1m",
+          "importance_score": -0.0011860853632387823,
+          "importance_std": 7.023386559242477e-05,
+          "importance_pct": 1.6827151741211355,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_treasury_30y",
+          "importance_score": -0.0011721161817142298,
+          "importance_std": 1.8720810770726845e-05,
+          "importance_pct": 1.6628969093908215,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_mortgage_30y_chg_3m",
+          "importance_score": -0.0011715855653644518,
+          "importance_std": 0.0001230057260712746,
+          "importance_pct": 1.662144116875981,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_gas_price_chg_3m",
+          "importance_score": -0.0011714404136639518,
+          "importance_std": 3.451052712190691e-05,
+          "importance_pct": 1.6619381882164164,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_business_loans_chg_3m",
+          "importance_score": -0.0011704617839347863,
+          "importance_std": 0.0001520158069660027,
+          "importance_pct": 1.6605497931260187,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_capacity_utilization",
+          "importance_score": -0.00116634858849167,
+          "importance_std": 2.016878880767134e-05,
+          "importance_pct": 1.6547143477181454,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_ppi_chg_1m",
+          "importance_score": -0.001165588150522537,
+          "importance_std": 5.992497958945281e-05,
+          "importance_pct": 1.6536355041970148,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_treasury_10y",
+          "importance_score": -0.0011649417066869946,
+          "importance_std": 1.9205962242874807e-05,
+          "importance_pct": 1.6527183856783998,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_avg_weekly_hours_chg_1m",
+          "importance_score": -0.0011630705230264056,
+          "importance_std": 0.00013679511801431045,
+          "importance_pct": 1.6500637123835178,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_treasury_2y_chg_1m",
+          "importance_score": -0.0011614775819963129,
+          "importance_std": 4.156040863276854e-05,
+          "importance_pct": 1.6478037856312835,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_building_permits",
+          "importance_score": -0.0011583915729863423,
+          "importance_std": 0.00013305056347110382,
+          "importance_pct": 1.6434256233594111,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_usd_eur_chg_3m",
+          "importance_score": 0.0011566293133483635,
+          "importance_std": 0.0004601442623201727,
+          "importance_pct": 1.6409254820327606,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_m2_money_chg_3m",
+          "importance_score": -0.0011546469531353615,
+          "importance_std": 6.750752408182773e-05,
+          "importance_pct": 1.6381130810754774,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_inflation_10y",
+          "importance_score": -0.0011493139087431175,
+          "importance_std": 5.362278688869562e-05,
+          "importance_pct": 1.6305470196424408,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_imports_chg_1m",
+          "importance_score": -0.001132765921194202,
+          "importance_std": 7.4528937825138e-05,
+          "importance_pct": 1.6070701683020858,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_real_gdp",
+          "importance_score": -0.0011293595104397388,
+          "importance_std": 1.5022886137520203e-05,
+          "importance_pct": 1.6022374477884689,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_treasury_3m",
+          "importance_score": -0.0011285070333194485,
+          "importance_std": 7.321996019845614e-06,
+          "importance_pct": 1.6010280270921484,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_mortgage_30y",
+          "importance_score": -0.0011272279254271602,
+          "importance_std": 1.9419380150793966e-05,
+          "importance_pct": 1.5992133396114647,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_m2_money",
+          "importance_score": -0.0011269000140800424,
+          "importance_std": 5.8329094418763e-05,
+          "importance_pct": 1.598748127396001,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_usd_jpy",
+          "importance_score": -0.0011220375052022106,
+          "importance_std": 7.496104024411645e-05,
+          "importance_pct": 1.5918496209928161,
+          "category": "Beta - Market"
+        }
+      ],
+      "category_breakdown": {
+        "Beta - Sentiment": 10.203272423183176,
+        "Beta - Inflation": 14.166964756510847,
+        "Alpha - Technical": 7.485680910976364,
+        "Beta - Other": 30.96799349287807,
+        "Beta - Interest Rates": 16.291590434407308,
+        "Beta - Market": 7.179927820345072,
+        "Beta - Economic": 5.368773505715199,
+        "VIX Regime": 1.7272736011224112,
+        "Beta - Money Supply": 6.60852305486156
+      }
+    },
+    "XLY": {
+      "etf": "XLY",
+      "total_features": 219,
+      "top_n": 50,
+      "top_features": [
+        {
+          "feature": "fred_consumer_credit_chg_1m",
+          "importance_score": 0.00409512541788201,
+          "importance_std": 0.00048805925222567703,
+          "importance_pct": 6.228569065656353,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_usd_eur",
+          "importance_score": 0.002266713022307458,
+          "importance_std": 0.0005032934179386208,
+          "importance_pct": 3.447605914537935,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "atr_14d",
+          "importance_score": -0.0020048013611698194,
+          "importance_std": 0.00017543927219576113,
+          "importance_pct": 3.0492457413981615,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "high_20d",
+          "importance_score": -0.001733379968642122,
+          "importance_std": 0.0002523197813918848,
+          "importance_pct": 2.636421537803991,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "price_position",
+          "importance_score": -0.001653079433374248,
+          "importance_std": 0.0001022918832103391,
+          "importance_pct": 2.5142867119104757,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_high_yield_spread",
+          "importance_score": -0.0016101805125375284,
+          "importance_std": 8.940110873801476e-05,
+          "importance_pct": 2.449038675768074,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_usd_eur_chg_3m",
+          "importance_score": 0.0015831181156651393,
+          "importance_std": 0.0003012206704381651,
+          "importance_pct": 2.4078775412968727,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_participation_rate_chg_3m",
+          "importance_score": -0.0015304968607070541,
+          "importance_std": 0.00010012641285870044,
+          "importance_pct": 2.3278421120040966,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_avg_hourly_earnings_chg_3m",
+          "importance_score": -0.0014585146859658893,
+          "importance_std": 9.828333294910917e-05,
+          "importance_pct": 2.2183592754312005,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_business_loans_chg_1m",
+          "importance_score": -0.0014315104154196282,
+          "importance_std": 0.00018230695269158453,
+          "importance_pct": 2.177286549445668,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_industrial_production_chg_3m",
+          "importance_score": -0.001356278333349456,
+          "importance_std": 0.00012253955955584145,
+          "importance_pct": 2.0628606964349077,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_high_yield_spread_chg_1m",
+          "importance_score": -0.0013430779568557284,
+          "importance_std": 0.00019289894905987945,
+          "importance_pct": 2.042783299946677,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_yield_curve_10y3m_chg_1m",
+          "importance_score": -0.0013398779018215503,
+          "importance_std": 0.0002537216894471702,
+          "importance_pct": 2.0379161074286545,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "kdj_d",
+          "importance_score": -0.0013076584579456124,
+          "importance_std": 0.00019273548355992778,
+          "importance_pct": 1.988911251420579,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_vix_chg_3m",
+          "importance_score": -0.0012967545342090242,
+          "importance_std": 6.992340140737927e-05,
+          "importance_pct": 1.9723266941361002,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_ppi_chg_1m",
+          "importance_score": -0.0012756260920161735,
+          "importance_std": 9.311587395973128e-05,
+          "importance_pct": 1.940190935638144,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_inflation_5y_chg_3m",
+          "importance_score": -0.0012720689863949838,
+          "importance_std": 6.3833980871455e-05,
+          "importance_pct": 1.9347806793518119,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_unemployment_rate_chg_1m",
+          "importance_score": -0.001268563034138703,
+          "importance_std": 5.6922840499706084e-05,
+          "importance_pct": 1.9294482258758368,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "rsi_14d",
+          "importance_score": 0.0012292695285011379,
+          "importance_std": 0.0003015590716824559,
+          "importance_pct": 1.869683923511219,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_usd_jpy",
+          "importance_score": -0.001218204941616574,
+          "importance_std": 4.9996040213422063e-05,
+          "importance_pct": 1.8528550021569363,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_exports",
+          "importance_score": -0.0012174829372810594,
+          "importance_std": 3.213399373687054e-05,
+          "importance_pct": 1.8517568541368978,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_vix",
+          "importance_score": -0.0011938906031427146,
+          "importance_std": 0.0001971714574678958,
+          "importance_pct": 1.8158735862010593,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_m2_money",
+          "importance_score": -0.0011811350286452305,
+          "importance_std": 9.452548737646032e-05,
+          "importance_pct": 1.79647272087401,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_gas_price_chg_3m",
+          "importance_score": -0.0011799273529632193,
+          "importance_std": 5.245801726573562e-05,
+          "importance_pct": 1.7946358805756706,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_coincident_index_chg_3m",
+          "importance_score": -0.0011747813371422327,
+          "importance_std": 8.523366119314912e-05,
+          "importance_pct": 1.7868089371531288,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_oil_brent",
+          "importance_score": -0.0011707839742036547,
+          "importance_std": 2.541956411065723e-05,
+          "importance_pct": 1.7807290620326484,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_oil_wti_chg_3m",
+          "importance_score": -0.00116412064057428,
+          "importance_std": 4.388928882136849e-05,
+          "importance_pct": 1.7705943214611286,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "vix_regime_medium_vol_lag21",
+          "importance_score": -0.001161100059303183,
+          "importance_std": 0.00013889989331279963,
+          "importance_pct": 1.7660001034224568,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_inflation_5y",
+          "importance_score": -0.0011475674606104293,
+          "importance_std": 5.566954023599386e-05,
+          "importance_pct": 1.7454174064365315,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_yield_curve_10y3m_chg_3m",
+          "importance_score": -0.0011475018129851774,
+          "importance_std": 0.00011327982835608263,
+          "importance_pct": 1.745317558269222,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "kdj_j",
+          "importance_score": -0.0011350732820348446,
+          "importance_std": 0.00022811309579877766,
+          "importance_pct": 1.7264141168579372,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "volatility_21d",
+          "importance_score": -0.001129908079987677,
+          "importance_std": 0.00033112984297960365,
+          "importance_pct": 1.7185579917321063,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_investment_grade_spread_chg_3m",
+          "importance_score": -0.001127338505979538,
+          "importance_std": 0.00011259655907976408,
+          "importance_pct": 1.7146497428884633,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_treasury_10y_chg_3m",
+          "importance_score": -0.0011272487266998823,
+          "importance_std": 5.063437727164093e-05,
+          "importance_pct": 1.7145131911624627,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_cpi",
+          "importance_score": -0.001107632637620678,
+          "importance_std": 4.241366012229912e-05,
+          "importance_pct": 1.6846776786542565,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_nonfarm_payrolls_chg_1m",
+          "importance_score": -0.0011052860045024416,
+          "importance_std": 5.8350885111449034e-05,
+          "importance_pct": 1.6811085165512187,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_treasury_30y_chg_3m",
+          "importance_score": -0.0011033143133291914,
+          "importance_std": 7.586427187540812e-05,
+          "importance_pct": 1.6781096304621366,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_net_exports_chg_3m",
+          "importance_score": -0.0011032970832404335,
+          "importance_std": 4.914264268738435e-05,
+          "importance_pct": 1.6780834239881253,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_business_loans",
+          "importance_score": -0.0010970621333566842,
+          "importance_std": 8.864908451949073e-05,
+          "importance_pct": 1.6686002428864526,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_vix_chg_1m",
+          "importance_score": -0.0010968165248884162,
+          "importance_std": 0.00014494465539664414,
+          "importance_pct": 1.6682266794050906,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_housing_starts_chg_3m",
+          "importance_score": -0.0010747684351066166,
+          "importance_std": 6.163810484455485e-05,
+          "importance_pct": 1.6346921631306763,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_employment_ratio_chg_1m",
+          "importance_score": -0.0010708772737804042,
+          "importance_std": 4.280076609520426e-05,
+          "importance_pct": 1.6287738176362767,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_consumer_sentiment_chg_3m",
+          "importance_score": 0.0010655322509920584,
+          "importance_std": 0.0003063814448394213,
+          "importance_pct": 1.6206441902872963,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_unemployment_rate_chg_3m",
+          "importance_score": -0.0010644487409765166,
+          "importance_std": 2.2147486418552934e-05,
+          "importance_pct": 1.6189962024294242,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_treasury_30y",
+          "importance_score": -0.0010635781557290758,
+          "importance_std": 2.479187227748063e-05,
+          "importance_pct": 1.6176720670763165,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_inflation_5y_chg_1m",
+          "importance_score": -0.0010629481719845633,
+          "importance_std": 9.112121650363088e-05,
+          "importance_pct": 1.6167138797529683,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_bank_reserves",
+          "importance_score": -0.0010549205781819732,
+          "importance_std": 2.1662118597527937e-05,
+          "importance_pct": 1.6045041383340282,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_avg_weekly_hours",
+          "importance_score": -0.001054377292617804,
+          "importance_std": 3.42435440976372e-05,
+          "importance_pct": 1.6036778164724252,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_capacity_utilization_chg_3m",
+          "importance_score": -0.0010468254842126953,
+          "importance_std": 0.00013445735156895054,
+          "importance_pct": 1.592191731085045,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_fed_funds_lower_chg_3m",
+          "importance_score": -0.0010436069337128933,
+          "importance_std": 1.414868746229938e-05,
+          "importance_pct": 1.5872964074908564,
+          "category": "Beta - Interest Rates"
+        }
+      ],
+      "category_breakdown": {
+        "Beta - Money Supply": 11.870928578862483,
+        "Beta - Market": 13.164765417733994,
+        "Alpha - Technical": 15.50352127463447,
+        "Beta - Interest Rates": 14.8726469376044,
+        "Beta - Other": 18.05898254804463,
+        "Beta - Economic": 8.874771105507122,
+        "Beta - Inflation": 14.267739843903161,
+        "VIX Regime": 1.7660001034224568,
+        "Beta - Sentiment": 1.6206441902872963
+      }
+    },
+    "XLP": {
+      "etf": "XLP",
+      "total_features": 219,
+      "top_n": 50,
+      "top_features": [
+        {
+          "feature": "fred_investment_grade_spread_chg_1m",
+          "importance_score": -0.0034517454154238806,
+          "importance_std": 0.00013683550427922474,
+          "importance_pct": 2.176881180650456,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_treasury_5y_chg_3m",
+          "importance_score": -0.003370085835346427,
+          "importance_std": 7.943960121078349e-05,
+          "importance_pct": 2.125381669042183,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_capacity_utilization_chg_1m",
+          "importance_score": -0.003333296416271008,
+          "importance_std": 7.658801575089361e-05,
+          "importance_pct": 2.102180017589418,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_gas_price_chg_3m",
+          "importance_score": -0.003323042338972012,
+          "importance_std": 0.00011522514537508446,
+          "importance_pct": 2.095713171049295,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "vix_above_sma20_lag21",
+          "importance_score": -0.0033176499992720585,
+          "importance_std": 0.00018849087276715844,
+          "importance_pct": 2.092312432756126,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_yield_curve_10y3m_chg_3m",
+          "importance_score": -0.003277682085481337,
+          "importance_std": 0.00010941893822743585,
+          "importance_pct": 2.0671062286797466,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_real_gdp_chg_1m",
+          "importance_score": -0.0032737942689891066,
+          "importance_std": 6.199747924997609e-05,
+          "importance_pct": 2.064654334482121,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_industrial_production_chg_1m",
+          "importance_score": -0.0032710121362703693,
+          "importance_std": 0.00011617053340808805,
+          "importance_pct": 2.0628997519076275,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "vwap",
+          "importance_score": -0.00321089945287219,
+          "importance_std": 4.9169131916784364e-05,
+          "importance_pct": 2.024989027488855,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_participation_rate",
+          "importance_score": -0.003195320215216189,
+          "importance_std": 6.632854236491477e-05,
+          "importance_pct": 2.015163810046489,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_oil_brent_chg_3m",
+          "importance_score": -0.003194178921065942,
+          "importance_std": 9.910092160703301e-05,
+          "importance_pct": 2.0144440403479016,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_core_cpi",
+          "importance_score": -0.0031916746358190027,
+          "importance_std": 1.881723014952217e-05,
+          "importance_pct": 2.0128646853350194,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_retail_sales_chg_3m",
+          "importance_score": -0.0031887023076876873,
+          "importance_std": 2.8865925448614093e-05,
+          "importance_pct": 2.010990153933351,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_treasury_30y",
+          "importance_score": -0.003182800685269201,
+          "importance_std": 6.115118035059216e-05,
+          "importance_pct": 2.0072682308967615,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_treasury_1y",
+          "importance_score": -0.0031747293169121006,
+          "importance_std": 2.215755532763339e-05,
+          "importance_pct": 2.002177933738646,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_retail_sales_chg_1m",
+          "importance_score": -0.0031733839611003483,
+          "importance_std": 5.453122833204743e-05,
+          "importance_pct": 2.0013294703106093,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_ppi_chg_3m",
+          "importance_score": -0.003171797940948855,
+          "importance_std": 0.00011764236753632148,
+          "importance_pct": 2.0003292292718315,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_fed_funds_lower",
+          "importance_score": -0.0031649911412509196,
+          "importance_std": 1.601955223592453e-05,
+          "importance_pct": 1.99603644623613,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "real_rate_10y",
+          "importance_score": -0.003162469871743604,
+          "importance_std": 4.16037062538682e-05,
+          "importance_pct": 1.994446379912786,
+          "category": "Derived"
+        },
+        {
+          "feature": "fred_ppi",
+          "importance_score": -0.0031597495763604653,
+          "importance_std": 3.2914590329412805e-05,
+          "importance_pct": 1.9927307957335751,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_treasury_10y_chg_1m",
+          "importance_score": -0.003155500720972483,
+          "importance_std": 0.00011168849053722666,
+          "importance_pct": 1.990051208388554,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_m2_money_chg_1m",
+          "importance_score": -0.0031476294367695536,
+          "importance_std": 7.97855703808858e-05,
+          "importance_pct": 1.9850870965011762,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_imports",
+          "importance_score": -0.003142387169513652,
+          "importance_std": 1.3168718637488342e-05,
+          "importance_pct": 1.9817810030441327,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_employment_ratio_chg_1m",
+          "importance_score": -0.0031421581456377843,
+          "importance_std": 0.00011389165710082948,
+          "importance_pct": 1.9816365666198623,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_treasury_1y_chg_3m",
+          "importance_score": -0.0031421543254789063,
+          "importance_std": 1.129080883303099e-05,
+          "importance_pct": 1.9816341573946825,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "yield_curve_10y3m",
+          "importance_score": -0.003136409646626649,
+          "importance_std": 5.733250388475628e-05,
+          "importance_pct": 1.9780112125429332,
+          "category": "Derived"
+        },
+        {
+          "feature": "fred_financial_conditions_chg_1m",
+          "importance_score": -0.003133315078343089,
+          "importance_std": 3.5963375849994134e-05,
+          "importance_pct": 1.9760595890458417,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_treasury_3m_chg_1m",
+          "importance_score": -0.003129256880345102,
+          "importance_std": 5.743041594782359e-06,
+          "importance_pct": 1.973500241879131,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_exports",
+          "importance_score": -0.0031290730078814095,
+          "importance_std": 3.361414970973025e-05,
+          "importance_pct": 1.9733842806891593,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_total_loans",
+          "importance_score": -0.00312808369108072,
+          "importance_std": 3.9131270170351924e-06,
+          "importance_pct": 1.9727603571762897,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_fed_funds_upper_chg_1m",
+          "importance_score": -0.003127303286989988,
+          "importance_std": 1.2802627664019215e-05,
+          "importance_pct": 1.9722681867598895,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_m1_money_chg_3m",
+          "importance_score": -0.003122463506931548,
+          "importance_std": 4.902694317854063e-06,
+          "importance_pct": 1.9692159262772284,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_treasury_2y",
+          "importance_score": -0.0031220950662402933,
+          "importance_std": 1.947349125543054e-05,
+          "importance_pct": 1.9689835651061538,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_bank_reserves_chg_3m",
+          "importance_score": -0.003119193624880127,
+          "importance_std": 4.849532844203762e-05,
+          "importance_pct": 1.9671537392257503,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_ted_spread",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_ted_spread_chg_1m",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_ted_spread_chg_3m",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_initial_claims",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_initial_claims_chg_1m",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_initial_claims_chg_3m",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_gold",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_gold_chg_1m",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_gold_chg_3m",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_consumer_confidence",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_consumer_confidence_chg_1m",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_consumer_confidence_chg_3m",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_leading_index",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_leading_index_chg_1m",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_leading_index_chg_3m",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_business_optimism",
+          "importance_score": -0.003118610313504664,
+          "importance_std": 0.0,
+          "importance_pct": 1.966785867496268,
+          "category": "Beta - Sentiment"
+        }
+      ],
+      "category_breakdown": {
+        "Beta - Other": 37.79403403024646,
+        "Beta - Interest Rates": 20.08440786812188,
+        "Beta - Inflation": 10.116081921737623,
+        "VIX Regime": 2.092312432756126,
+        "Beta - Economic": 10.12151027725357,
+        "Alpha - Technical": 2.024989027488855,
+        "Derived": 3.9724575924557195,
+        "Beta - Money Supply": 5.927063379954694,
+        "Beta - Sentiment": 7.867143469985072
+      }
+    },
+    "XLE": {
+      "etf": "XLE",
+      "total_features": 219,
+      "top_n": 50,
+      "top_features": [
+        {
+          "feature": "fred_ppi_metals",
+          "importance_score": 0.006713354013851825,
+          "importance_std": 0.0012563451576843305,
+          "importance_pct": 6.0452232072659315,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "momentum_1w",
+          "importance_score": 0.0059460795446071215,
+          "importance_std": 0.002237103706036075,
+          "importance_pct": 5.354309929305271,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_consumer_sentiment_chg_3m",
+          "importance_score": 0.005927092263631669,
+          "importance_std": 0.0007259747056014774,
+          "importance_pct": 5.3372123129187585,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_usd_eur_chg_1m",
+          "importance_score": 0.004898188269973508,
+          "importance_std": 0.0005907608717101065,
+          "importance_pct": 4.410707575096631,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_consumer_credit_chg_3m",
+          "importance_score": 0.004835756863847957,
+          "importance_std": 0.0005762709246003957,
+          "importance_pct": 4.354489508181985,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_dollar_index",
+          "importance_score": 0.00407102488253502,
+          "importance_std": 0.0007727373204412554,
+          "importance_pct": 3.6658656830071585,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "atr_14d",
+          "importance_score": 0.003998755057555809,
+          "importance_std": 0.0007445466689688799,
+          "importance_pct": 3.600788342791234,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_consumer_credit_chg_1m",
+          "importance_score": 0.003624836324510665,
+          "importance_std": 0.0004871173705525765,
+          "importance_pct": 3.2640829943213054,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_usd_jpy_chg_3m",
+          "importance_score": 0.003282448857986933,
+          "importance_std": 0.0005188489322344426,
+          "importance_pct": 2.955770837054525,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "vix_chg_1m_lag21",
+          "importance_score": 0.0032347124476578013,
+          "importance_std": 0.0003995345030369939,
+          "importance_pct": 2.912785280958748,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_vix_chg_1m",
+          "importance_score": 0.0029259338777875045,
+          "importance_std": 0.0005671350953178429,
+          "importance_pct": 2.634737173763026,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_ppi_metals_chg_3m",
+          "importance_score": 0.0028357491370380743,
+          "importance_std": 0.0005470913546227629,
+          "importance_pct": 2.55352785773488,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_core_cpi_chg_3m",
+          "importance_score": 0.0027893446082691564,
+          "importance_std": 0.0005604731244914739,
+          "importance_pct": 2.51174163081205,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "vix_percentile_rank_lag21",
+          "importance_score": 0.0027316986905323573,
+          "importance_std": 0.000970880161894454,
+          "importance_pct": 2.4598327877825286,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_exports_chg_1m",
+          "importance_score": 0.0024398292297785557,
+          "importance_std": 0.000571778491387646,
+          "importance_pct": 2.197010950292578,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "macd_hist",
+          "importance_score": 0.0023835748216188665,
+          "importance_std": 0.0005541772729494253,
+          "importance_pct": 2.1463551301144244,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_consumer_sentiment_chg_1m",
+          "importance_score": 0.0023256858151754515,
+          "importance_std": 0.0006176416799265389,
+          "importance_pct": 2.094227391211451,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_cpi_chg_1m",
+          "importance_score": 0.002176123461008982,
+          "importance_std": 0.0006000716021043929,
+          "importance_pct": 1.9595498794230153,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_building_permits",
+          "importance_score": 0.002130528964316901,
+          "importance_std": 0.000431310936996217,
+          "importance_pct": 1.9184930680351657,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_treasury_10y_chg_1m",
+          "importance_score": 0.0020271400497227808,
+          "importance_std": 0.0003732765782348757,
+          "importance_pct": 1.825393692583072,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "sharpe_10d",
+          "importance_score": 0.001998160395137868,
+          "importance_std": 0.0002552448961745643,
+          "importance_pct": 1.7992981701253266,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_high_yield_spread_chg_1m",
+          "importance_score": 0.0019264985687634044,
+          "importance_std": 0.00036939426840370523,
+          "importance_pct": 1.7347683188795686,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_dollar_index_chg_1m",
+          "importance_score": 0.0018896824470081377,
+          "importance_std": 0.0004652867028730717,
+          "importance_pct": 1.701616235259779,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "kdj_k",
+          "importance_score": 0.0018830843177915315,
+          "importance_std": 0.00044821759373776733,
+          "importance_pct": 1.6956747693721665,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "price_position",
+          "importance_score": 0.0018163774476648222,
+          "importance_std": 0.0003262488949131325,
+          "importance_pct": 1.6356067439794932,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "macd",
+          "importance_score": 0.0018109196254971487,
+          "importance_std": 0.00038294236400985784,
+          "importance_pct": 1.6306920987572877,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_usd_gbp_chg_3m",
+          "importance_score": 0.0018084089971787502,
+          "importance_std": 0.0002598339306942889,
+          "importance_pct": 1.6284313348315531,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "volatility_21d",
+          "importance_score": 0.0017220802560692857,
+          "importance_std": 0.00046047266825468213,
+          "importance_pct": 1.5506942591265944,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_m2_money_chg_1m",
+          "importance_score": 0.001545037488408145,
+          "importance_std": 0.00041411152144911543,
+          "importance_pct": 1.391271257518841,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_housing_starts_chg_3m",
+          "importance_score": 0.0014818140988232128,
+          "importance_std": 0.00015423077478765086,
+          "importance_pct": 1.3343400274403667,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_housing_starts_chg_1m",
+          "importance_score": 0.001436978280359302,
+          "importance_std": 0.0004574066792710964,
+          "importance_pct": 1.2939663886101265,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_cpi_chg_3m",
+          "importance_score": 0.001404247306764074,
+          "importance_std": 0.0003021060097579368,
+          "importance_pct": 1.264492888364792,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_ppi_metals_chg_1m",
+          "importance_score": 0.0013909103415007025,
+          "importance_std": 0.0007449198210525435,
+          "importance_pct": 1.2524832532765369,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "vix_chg_1w_lag21",
+          "importance_score": 0.0013192932138033793,
+          "importance_std": 0.000742029751021316,
+          "importance_pct": 1.187993652176954,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_business_loans_chg_3m",
+          "importance_score": 0.0013106929629992776,
+          "importance_std": 0.0005522594647563479,
+          "importance_pct": 1.1802493211552338,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_yield_curve_10y2y",
+          "importance_score": 0.0012492199138527365,
+          "importance_std": 0.00022306816140639643,
+          "importance_pct": 1.1248942329898697,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_usd_gbp_chg_1m",
+          "importance_score": 0.001241950754331852,
+          "importance_std": 0.0005509916015192716,
+          "importance_pct": 1.1183485195145637,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_consumer_sentiment",
+          "importance_score": 0.0011818495601590789,
+          "importance_std": 0.00025577646652120663,
+          "importance_pct": 1.064228755675507,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "volume_ratio",
+          "importance_score": 0.0011276585143612378,
+          "importance_std": 0.0006560074760170842,
+          "importance_pct": 1.0154309465614364,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "rsi_14d",
+          "importance_score": 0.0010455404877090305,
+          "importance_std": 0.0003391742732868626,
+          "importance_pct": 0.9414855238370388,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "momentum_1m",
+          "importance_score": 0.0010256300522767231,
+          "importance_std": 0.00018828500283698434,
+          "importance_pct": 0.9235566277749799,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_inflation_5y_chg_1m",
+          "importance_score": 0.0009833597295973912,
+          "importance_std": 0.00020658587012558008,
+          "importance_pct": 0.8854931597808197,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_imports_chg_3m",
+          "importance_score": 0.0009529130810632568,
+          "importance_std": 0.00021495584330107734,
+          "importance_pct": 0.8580766425046191,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_building_permits_chg_1m",
+          "importance_score": 0.0009321152983433293,
+          "importance_std": 0.00018377124989009112,
+          "importance_pct": 0.8393487103117445,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_business_loans_chg_1m",
+          "importance_score": 0.0009035665423092757,
+          "importance_std": 0.00045934771510991153,
+          "importance_pct": 0.8136412022376077,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "macd_signal",
+          "importance_score": 0.000901560694050018,
+          "importance_std": 0.00028806436484774163,
+          "importance_pct": 0.811834981320001,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_high_yield_spread_chg_3m",
+          "importance_score": 0.000900142180922725,
+          "importance_std": 0.0003396479317875655,
+          "importance_pct": 0.8105576423834233,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "vix_regime_low_vol_lag21",
+          "importance_score": 0.000875843855235595,
+          "importance_std": 0.00036286478565249615,
+          "importance_pct": 0.7886775505487806,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "vix_regime_medium_vol_lag21",
+          "importance_score": 0.0008510561153216602,
+          "importance_std": 0.0003099169885503742,
+          "importance_pct": 0.7663567522899362,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "ratio_momentum",
+          "importance_score": 0.0008377609984621202,
+          "importance_std": 0.00022150843577125578,
+          "importance_pct": 0.7543848007413108,
+          "category": "Alpha - Technical"
+        }
+      ],
+      "category_breakdown": {
+        "Beta - Inflation": 16.472511876658025,
+        "Alpha - Technical": 23.860112323806558,
+        "Beta - Sentiment": 8.495668459805717,
+        "Beta - Market": 18.115477358527233,
+        "Beta - Money Supply": 11.003734283414975,
+        "VIX Regime": 8.115646023756948,
+        "Beta - Other": 5.812929371144108,
+        "Beta - Interest Rates": 5.495613886835933,
+        "Beta - Economic": 2.628306416050493
+      }
+    },
+    "XLV": {
+      "etf": "XLV",
+      "total_features": 219,
+      "top_n": 50,
+      "top_features": [
+        {
+          "feature": "momentum_1w",
+          "importance_score": -0.004093736078241519,
+          "importance_std": 0.0004793884777433516,
+          "importance_pct": 2.8188875434263885,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_inflation_5y_chg_1m",
+          "importance_score": -0.003263266851448225,
+          "importance_std": 0.00010967194848995696,
+          "importance_pct": 2.2470384271511286,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_building_permits",
+          "importance_score": -0.0032006525945373343,
+          "importance_std": 7.390476036245521e-05,
+          "importance_pct": 2.203923154091604,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_usd_eur_chg_3m",
+          "importance_score": -0.0030807916055694577,
+          "importance_std": 0.000315745406671655,
+          "importance_pct": 2.1213886080713706,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_investment_grade_spread",
+          "importance_score": -0.003021780828147289,
+          "importance_std": 7.132333949277284e-05,
+          "importance_pct": 2.0807546389478135,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_nonfarm_payrolls_chg_1m",
+          "importance_score": -0.0030131923471699838,
+          "importance_std": 5.11033181849553e-05,
+          "importance_pct": 2.0748407349781464,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_business_loans_chg_3m",
+          "importance_score": -0.003002741607354518,
+          "importance_std": 0.0001394068464524904,
+          "importance_pct": 2.067644506466498,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_employment_ratio_chg_1m",
+          "importance_score": -0.002986154743700394,
+          "importance_std": 0.00011070538715401535,
+          "importance_pct": 2.056223031694923,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_real_gdp_chg_1m",
+          "importance_score": -0.0029672242460262515,
+          "importance_std": 6.20072194328456e-05,
+          "importance_pct": 2.0431877643829606,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_unemployment_rate_chg_1m",
+          "importance_score": -0.0029639316994323405,
+          "importance_std": 5.8611868685098835e-05,
+          "importance_pct": 2.0409205643479957,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_yield_curve_10y2y_chg_3m",
+          "importance_score": -0.0029445479869566822,
+          "importance_std": 0.00022357898977374153,
+          "importance_pct": 2.027573219868851,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_treasury_2y_chg_1m",
+          "importance_score": -0.0029362618845834407,
+          "importance_std": 3.719304500378594e-05,
+          "importance_pct": 2.021867529439115,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_exports_chg_3m",
+          "importance_score": -0.0029291413813093965,
+          "importance_std": 0.0001017601577510882,
+          "importance_pct": 2.0169644537159845,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_net_exports_chg_3m",
+          "importance_score": -0.0029211595809220557,
+          "importance_std": 4.199562495095204e-05,
+          "importance_pct": 2.011468301239136,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_participation_rate_chg_3m",
+          "importance_score": -0.0029191283826373285,
+          "importance_std": 8.366121983885687e-05,
+          "importance_pct": 2.0100696474340025,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_inflation_10y_chg_1m",
+          "importance_score": -0.0029146940329975984,
+          "importance_std": 0.00016970574063999525,
+          "importance_pct": 2.0070162183111355,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_monetary_base_chg_3m",
+          "importance_score": -0.002904366577752766,
+          "importance_std": 2.800353917857209e-05,
+          "importance_pct": 1.9999048817743998,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_industrial_production_chg_1m",
+          "importance_score": -0.0029023752202000175,
+          "importance_std": 5.399313870583251e-05,
+          "importance_pct": 1.9985336617219431,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_investment_grade_spread_chg_1m",
+          "importance_score": -0.0028968334695966937,
+          "importance_std": 0.00010430231444470303,
+          "importance_pct": 1.9947176922881746,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_net_exports",
+          "importance_score": -0.002878779130277677,
+          "importance_std": 3.455931462237463e-05,
+          "importance_pct": 1.9822857349664336,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_oil_wti",
+          "importance_score": -0.002871340370435025,
+          "importance_std": 7.333633394287871e-05,
+          "importance_pct": 1.9771635123662903,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_treasury_5y_chg_1m",
+          "importance_score": -0.002871336955721455,
+          "importance_std": 4.8506194687407356e-05,
+          "importance_pct": 1.9771611610438395,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_auto_sales_chg_3m",
+          "importance_score": -0.0028577663703868855,
+          "importance_std": 0.00010535168979264333,
+          "importance_pct": 1.9678166519632605,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_oil_wti_chg_3m",
+          "importance_score": -0.002853983734877039,
+          "importance_std": 6.694124979170416e-05,
+          "importance_pct": 1.9652119837784445,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_mortgage_30y_chg_1m",
+          "importance_score": -0.0028517874928663815,
+          "importance_std": 0.00011535969044365444,
+          "importance_pct": 1.9636996832471287,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_treasury_10y",
+          "importance_score": -0.0028491554294530147,
+          "importance_std": 3.09910606703187e-05,
+          "importance_pct": 1.9618872823918603,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_employment_ratio",
+          "importance_score": -0.0028467890320747033,
+          "importance_std": 1.6095444183682624e-05,
+          "importance_pct": 1.9602578153316914,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_treasury_6m_chg_1m",
+          "importance_score": -0.002845657118459951,
+          "importance_std": 1.3555157197056743e-05,
+          "importance_pct": 1.9594783959632034,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_inflation_5y",
+          "importance_score": -0.0028442346800064576,
+          "importance_std": 4.311339150957142e-05,
+          "importance_pct": 1.9584989253863982,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_treasury_30y_chg_3m",
+          "importance_score": -0.0028394782220030586,
+          "importance_std": 4.7142135584005974e-05,
+          "importance_pct": 1.9552236970960657,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_financial_conditions_chg_1m",
+          "importance_score": -0.0028367779256285655,
+          "importance_std": 1.6921221184815295e-05,
+          "importance_pct": 1.953364312009158,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_exports",
+          "importance_score": -0.002826561388803421,
+          "importance_std": 3.4318868516111656e-05,
+          "importance_pct": 1.9463293522943812,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "low_20d",
+          "importance_score": -0.002823641628986147,
+          "importance_std": 0.00013660554389198154,
+          "importance_pct": 1.9443188478501752,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_monetary_base",
+          "importance_score": -0.002821959273880581,
+          "importance_std": 2.949960585432694e-05,
+          "importance_pct": 1.9431604024203624,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_m1_money_chg_1m",
+          "importance_score": -0.002818165462365195,
+          "importance_std": 6.18888680119201e-06,
+          "importance_pct": 1.940548038599531,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_treasury_30y",
+          "importance_score": -0.002817136644500221,
+          "importance_std": 2.567020250987701e-05,
+          "importance_pct": 1.939839609475474,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_avg_hourly_earnings",
+          "importance_score": -0.002805622524674237,
+          "importance_std": 1.3107680238048249e-05,
+          "importance_pct": 1.9319111528454787,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_vix_chg_1m",
+          "importance_score": -0.0027943058333119984,
+          "importance_std": 0.00016863168868454833,
+          "importance_pct": 1.9241186426044377,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_capacity_utilization",
+          "importance_score": -0.0027922313776232144,
+          "importance_std": 1.9561891621099924e-05,
+          "importance_pct": 1.9226902023755759,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_participation_rate_chg_1m",
+          "importance_score": -0.0027901262818004154,
+          "importance_std": 0.00016561420555771645,
+          "importance_pct": 1.9212406637929236,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_inflation_5y_chg_3m",
+          "importance_score": -0.002789690076314914,
+          "importance_std": 2.8160836901454792e-05,
+          "importance_pct": 1.9209402989951072,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_fed_funds_upper_chg_3m",
+          "importance_score": -0.0027881983370886846,
+          "importance_std": 2.0964930617443927e-05,
+          "importance_pct": 1.9199131089070094,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_prime_rate_chg_1m",
+          "importance_score": -0.0027849763508522862,
+          "importance_std": 6.380047719223327e-05,
+          "importance_pct": 1.917694495715224,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_yield_curve_10y3m",
+          "importance_score": -0.0027849667851995935,
+          "importance_std": 1.760013614175162e-05,
+          "importance_pct": 1.917687908944923,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_real_gdp",
+          "importance_score": -0.0027839712489134546,
+          "importance_std": 2.353772628748859e-05,
+          "importance_pct": 1.9170023970354129,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_treasury_3m",
+          "importance_score": -0.0027826712316772586,
+          "importance_std": 9.112152959824804e-06,
+          "importance_pct": 1.9161072239408816,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_treasury_6m",
+          "importance_score": -0.0027803990436654764,
+          "importance_std": 1.7237281643391038e-05,
+          "importance_pct": 1.9145426280899724,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_fed_funds_lower_chg_3m",
+          "importance_score": -0.002778530185156741,
+          "importance_std": 9.614828705549778e-06,
+          "importance_pct": 1.9132557591101422,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_retail_sales_chg_3m",
+          "importance_score": -0.0027777603340388016,
+          "importance_std": 3.4759919737053455e-05,
+          "importance_pct": 1.912725650748202,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_gdp",
+          "importance_score": -0.0027752540813768397,
+          "importance_std": 1.932361006124849e-05,
+          "importance_pct": 1.9109998813594438,
+          "category": "Beta - Economic"
+        }
+      ],
+      "category_breakdown": {
+        "Alpha - Technical": 4.763206391276563,
+        "Beta - Inflation": 12.075869365988504,
+        "Beta - Other": 29.936071188657298,
+        "Beta - Market": 4.045507250675808,
+        "Beta - Money Supply": 7.951257829260792,
+        "Beta - Economic": 15.839850766622572,
+        "Beta - Interest Rates": 25.38823720751847
+      }
+    },
+    "XLI": {
+      "etf": "XLI",
+      "total_features": 219,
+      "top_n": 50,
+      "top_features": [
+        {
+          "feature": "momentum_1w",
+          "importance_score": 0.004071039148992547,
+          "importance_std": 0.0008836462484776147,
+          "importance_pct": 8.997682817242358,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_consumer_sentiment_chg_3m",
+          "importance_score": 0.0029639145006872527,
+          "importance_std": 0.0005009202496299389,
+          "importance_pct": 6.550750704819121,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_dollar_index_chg_3m",
+          "importance_score": 0.0026360217436763324,
+          "importance_std": 0.0004588422932464564,
+          "importance_pct": 5.826052435487695,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "macd_signal",
+          "importance_score": 0.002350018718893736,
+          "importance_std": 0.0003440102767051244,
+          "importance_pct": 5.193937536174447,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_consumer_credit_chg_3m",
+          "importance_score": 0.0020032584919822847,
+          "importance_std": 0.0004886059071699644,
+          "importance_pct": 4.427538977674626,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_usd_eur_chg_3m",
+          "importance_score": 0.0015316252714190203,
+          "importance_std": 0.0003248161811859574,
+          "importance_pct": 3.3851500520478814,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "vix_volatility_lag21",
+          "importance_score": 0.00145980670803264,
+          "importance_std": 0.0002654160862888131,
+          "importance_pct": 3.2264189197519464,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_dollar_index",
+          "importance_score": 0.001324553339186455,
+          "importance_std": 0.0002624244120793828,
+          "importance_pct": 2.927486173516229,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "macd_hist",
+          "importance_score": 0.001263986548167772,
+          "importance_std": 0.00030965667856488603,
+          "importance_pct": 2.793623354982741,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "vix_regime_low_vol_lag21",
+          "importance_score": 0.001221753283070824,
+          "importance_std": 0.0001787123907016491,
+          "importance_pct": 2.7002807194119463,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_housing_starts_chg_1m",
+          "importance_score": 0.0011193089123214535,
+          "importance_std": 0.00014915318603965226,
+          "importance_pct": 2.4738613899287296,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "kdj_j",
+          "importance_score": 0.0011183381683151999,
+          "importance_std": 0.0002218259162552744,
+          "importance_pct": 2.4717158820263627,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "kdj_d",
+          "importance_score": 0.0010868492997555142,
+          "importance_std": 0.00011775549992725775,
+          "importance_pct": 2.402120174099063,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_consumer_credit_chg_1m",
+          "importance_score": 0.0010316151638253377,
+          "importance_std": 0.0002595828314799186,
+          "importance_pct": 2.2800434222930375,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_consumer_sentiment_chg_1m",
+          "importance_score": 0.0008903953507944304,
+          "importance_std": 0.0002863979393602378,
+          "importance_pct": 1.9679238285827145,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_usd_jpy_chg_1m",
+          "importance_score": 0.000888600192566248,
+          "importance_std": 0.00029964215221097687,
+          "importance_pct": 1.963956226269692,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_consumer_sentiment",
+          "importance_score": -0.0008357625444752005,
+          "importance_std": 0.0001277704525605756,
+          "importance_pct": 1.8471761165893497,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "ratio_momentum",
+          "importance_score": 0.000810548595626061,
+          "importance_std": 0.0003136183093580073,
+          "importance_pct": 1.7914490390516962,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_yield_curve_10y2y_chg_3m",
+          "importance_score": 0.0007637465001290502,
+          "importance_std": 0.000282176213290061,
+          "importance_pct": 1.688008518080877,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_ppi_metals",
+          "importance_score": -0.0007340403217452713,
+          "importance_std": 0.00012346607211840516,
+          "importance_pct": 1.6223528559691998,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "vix_percentile_rank_lag21",
+          "importance_score": 0.0007191733116658839,
+          "importance_std": 0.00025192037027560845,
+          "importance_pct": 1.5894942574052002,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "kdj_k",
+          "importance_score": 0.0006621950973062795,
+          "importance_std": 0.0001877835237366266,
+          "importance_pct": 1.4635627982524595,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_core_cpi_chg_3m",
+          "importance_score": -0.0006606248796129031,
+          "importance_std": 0.00020236793650989636,
+          "importance_pct": 1.4600923524419542,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "sharpe_10d",
+          "importance_score": -0.0006350741871413237,
+          "importance_std": 0.0001844984731342761,
+          "importance_pct": 1.4036210147302879,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_usd_eur_chg_1m",
+          "importance_score": 0.0006128759845847639,
+          "importance_std": 0.00014620710580920672,
+          "importance_pct": 1.3545592448953672,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_cpi_chg_1m",
+          "importance_score": 0.00060132248023363,
+          "importance_std": 0.0003568968841040755,
+          "importance_pct": 1.3290240525833852,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "rsi_14d",
+          "importance_score": 0.0005861862945144931,
+          "importance_std": 0.00017806575649639126,
+          "importance_pct": 1.2955705304777652,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "high_20d",
+          "importance_score": 0.000582625421129822,
+          "importance_std": 0.0001353043704006771,
+          "importance_pct": 1.287700400003692,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_avg_weekly_hours_chg_3m",
+          "importance_score": -0.00056360865790744,
+          "importance_std": 7.364808090620724e-05,
+          "importance_pct": 1.2456701474260579,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "macd",
+          "importance_score": -0.0005609211859149095,
+          "importance_std": 0.00022640729407413432,
+          "importance_pct": 1.239730381267092,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_ppi_chg_3m",
+          "importance_score": 0.0005537326432000242,
+          "importance_std": 0.0001260439713878348,
+          "importance_pct": 1.2238424900187992,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "vix_chg_1m_lag21",
+          "importance_score": 0.0005464977463413782,
+          "importance_std": 0.0002706136420639503,
+          "importance_pct": 1.2078521482983886,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_m2_money_chg_3m",
+          "importance_score": 0.0005170278922587816,
+          "importance_std": 8.24653217752135e-05,
+          "importance_pct": 1.1427188027320023,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_building_permits",
+          "importance_score": -0.0005150293941768878,
+          "importance_std": 9.875411785203341e-05,
+          "importance_pct": 1.1383017850631358,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_ppi_metals_chg_3m",
+          "importance_score": -0.0004860737773362482,
+          "importance_std": 0.00013009298345555094,
+          "importance_pct": 1.0743049904918651,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "mfi_14d",
+          "importance_score": 0.00047637048450408225,
+          "importance_std": 0.00015667395729068324,
+          "importance_pct": 1.052859077546455,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "volatility_21d",
+          "importance_score": -0.0004710100689045399,
+          "importance_std": 0.00013727574823629455,
+          "importance_pct": 1.0410116554097222,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_exports_chg_1m",
+          "importance_score": 0.00045595179017289544,
+          "importance_std": 0.00020499476475753837,
+          "importance_pct": 1.007730320880062,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_imports_chg_3m",
+          "importance_score": 0.00045568946590313563,
+          "importance_std": 0.00012127696979406041,
+          "importance_pct": 1.0071505400211265,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_oil_brent_chg_3m",
+          "importance_score": 0.00044543270451118057,
+          "importance_std": 9.146321597231049e-05,
+          "importance_pct": 0.984481368254555,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_business_loans_chg_3m",
+          "importance_score": 0.00044039855360930406,
+          "importance_std": 0.00012645682928719745,
+          "importance_pct": 0.9733550461015419,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_high_yield_spread_chg_1m",
+          "importance_score": 0.0004400067170646204,
+          "importance_std": 0.0001313394390310474,
+          "importance_pct": 0.9724890212817756,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_core_cpi_chg_1m",
+          "importance_score": 0.0004220585887776115,
+          "importance_std": 0.00017929381007365442,
+          "importance_pct": 0.9328206320623682,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_dollar_index_chg_1m",
+          "importance_score": 0.00040917050528312907,
+          "importance_std": 0.00020972994834738296,
+          "importance_pct": 0.9043357948595164,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_oil_wti_chg_1m",
+          "importance_score": 0.00039658591972495106,
+          "importance_std": 9.39751323669846e-05,
+          "importance_pct": 0.8765217392597425,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_participation_rate_chg_1m",
+          "importance_score": -0.0003948829767465776,
+          "importance_std": 0.00019486011514619844,
+          "importance_pct": 0.8727579481944941,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_vix_chg_1m",
+          "importance_score": -0.00038973816139930043,
+          "importance_std": 0.00016980487010096284,
+          "importance_pct": 0.8613870389612739,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_mortgage_30y_chg_3m",
+          "importance_score": 0.000382269768643847,
+          "importance_std": 7.109775351486913e-05,
+          "importance_pct": 0.8448806319460551,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_vix_chg_3m",
+          "importance_score": 0.0003808923892405787,
+          "importance_std": 9.708951253561306e-05,
+          "importance_pct": 0.8418363912654717,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_treasury_2y_chg_1m",
+          "importance_score": 0.0003768075707899448,
+          "importance_std": 6.307035728538708e-05,
+          "importance_pct": 0.8328082538686801,
+          "category": "Beta - Interest Rates"
+        }
+      ],
+      "category_breakdown": {
+        "Alpha - Technical": 32.43458466126414,
+        "Beta - Sentiment": 10.365850649991184,
+        "Beta - Market": 18.064763357303125,
+        "Beta - Money Supply": 8.823656248801207,
+        "VIX Regime": 8.724046044867482,
+        "Beta - Economic": 2.4738613899287296,
+        "Beta - Interest Rates": 4.338186425177388,
+        "Beta - Inflation": 9.503440481081869,
+        "Beta - Other": 5.271610741584877
+      }
+    },
+    "XLB": {
+      "etf": "XLB",
+      "total_features": 219,
+      "top_n": 50,
+      "top_features": [
+        {
+          "feature": "fred_consumer_sentiment_chg_3m",
+          "importance_score": 0.002175182186988343,
+          "importance_std": 0.00048259525032789686,
+          "importance_pct": 3.9580696245831763,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "macd_hist",
+          "importance_score": 0.0021503837239612066,
+          "importance_std": 0.0004965229395623866,
+          "importance_pct": 3.912945108654716,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_business_loans_chg_1m",
+          "importance_score": 0.002081254195035726,
+          "importance_std": 0.0006108912547828886,
+          "importance_pct": 3.7871535817479387,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "momentum_1w",
+          "importance_score": 0.0019431308188564186,
+          "importance_std": 0.0005987555551304712,
+          "importance_pct": 3.5358174210481623,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_cpi_chg_1m",
+          "importance_score": 0.0017984797893638692,
+          "importance_std": 0.0002478156407827146,
+          "importance_pct": 3.272603217923478,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_usd_eur_chg_3m",
+          "importance_score": 0.0017599378174697172,
+          "importance_std": 0.0001650447970943181,
+          "importance_pct": 3.2024703301413298,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "ratio_momentum",
+          "importance_score": 0.001759272402718674,
+          "importance_std": 0.00022598462915485843,
+          "importance_pct": 3.2012595083859807,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_ppi_metals_chg_3m",
+          "importance_score": 0.0016375244949792043,
+          "importance_std": 0.0004360999350050937,
+          "importance_pct": 2.979720963999798,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_usd_gbp",
+          "importance_score": 0.0016032871160808718,
+          "importance_std": 0.0005020788561421081,
+          "importance_pct": 2.917420927592061,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_usd_eur",
+          "importance_score": 0.0011634987697547107,
+          "importance_std": 0.0003457812109060775,
+          "importance_pct": 2.117160192996144,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "vix_percentile_rank_lag21",
+          "importance_score": -0.001072376875640988,
+          "importance_std": 0.00030085689070721025,
+          "importance_pct": 1.9513502652652752,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_consumer_credit",
+          "importance_score": -0.001022759257563655,
+          "importance_std": 7.603525746087642e-05,
+          "importance_pct": 1.861063581174701,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "price_position",
+          "importance_score": 0.001006136886110926,
+          "importance_std": 0.0004006890365726999,
+          "importance_pct": 1.8308166878665697,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_m2_money",
+          "importance_score": -0.0010011839397318146,
+          "importance_std": 6.316092048691293e-05,
+          "importance_pct": 1.821804060449602,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_unemployment_rate_chg_1m",
+          "importance_score": -0.000998891566711728,
+          "importance_std": 6.08339164573099e-05,
+          "importance_pct": 1.8176327445601586,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_capacity_utilization_chg_1m",
+          "importance_score": -0.0009910940405371267,
+          "importance_std": 4.500729329039883e-05,
+          "importance_pct": 1.80344397835786,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_treasury_30y_chg_3m",
+          "importance_score": -0.0009835521955354116,
+          "importance_std": 0.00012127142833364896,
+          "importance_pct": 1.789720462326344,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_usd_eur_chg_1m",
+          "importance_score": 0.0009827771822942207,
+          "importance_std": 0.00048751326363550407,
+          "importance_pct": 1.7883102097107437,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_gas_price_chg_3m",
+          "importance_score": -0.0009733651789073551,
+          "importance_std": 5.4774031565869386e-05,
+          "importance_pct": 1.7711836605256357,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_treasury_5y",
+          "importance_score": -0.0009704419795228604,
+          "importance_std": 4.562413144100085e-05,
+          "importance_pct": 1.7658644616283754,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_financial_conditions",
+          "importance_score": -0.0009596255477545883,
+          "importance_std": 7.046601425912308e-05,
+          "importance_pct": 1.7461823447535354,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_inflation_5y_chg_1m",
+          "importance_score": -0.000957094476426229,
+          "importance_std": 8.198318949449932e-05,
+          "importance_pct": 1.7415766815578917,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "yield_curve_10y3m",
+          "importance_score": -0.0009563248620249179,
+          "importance_std": 8.312603343608286e-05,
+          "importance_pct": 1.7401762529396851,
+          "category": "Derived"
+        },
+        {
+          "feature": "fred_yield_curve_10y2y",
+          "importance_score": -0.0009526082414728634,
+          "importance_std": 3.519787994413183e-05,
+          "importance_pct": 1.7334133054490404,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_mortgage_30y",
+          "importance_score": -0.0009397874995081985,
+          "importance_std": 3.265657417569632e-05,
+          "importance_pct": 1.710084046116874,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_imports",
+          "importance_score": -0.0009326715226979072,
+          "importance_std": 1.8741453708386903e-05,
+          "importance_pct": 1.6971354610141944,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_treasury_1y",
+          "importance_score": -0.0009278118907923979,
+          "importance_std": 1.916040057716907e-05,
+          "importance_pct": 1.6882926332515769,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "momentum_1m",
+          "importance_score": 0.0009201427889825985,
+          "importance_std": 0.0002550133783930554,
+          "importance_pct": 1.674337554406788,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_prime_rate_chg_3m",
+          "importance_score": -0.0009153754037970393,
+          "importance_std": 4.111158224995412e-05,
+          "importance_pct": 1.6656625833609024,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_retail_sales",
+          "importance_score": -0.0009139505621812858,
+          "importance_std": 5.973713571492649e-05,
+          "importance_pct": 1.6630698707353155,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_real_gdp",
+          "importance_score": -0.0009061869109720162,
+          "importance_std": 2.852900607615553e-05,
+          "importance_pct": 1.6489427451036855,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_net_exports",
+          "importance_score": -0.000902464812477818,
+          "importance_std": 2.9328348840883616e-05,
+          "importance_pct": 1.6421698296772356,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_oil_wti_chg_1m",
+          "importance_score": -0.0008986650873563054,
+          "importance_std": 0.00010343506605401027,
+          "importance_pct": 1.6352556609813031,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "vix_level_lag21",
+          "importance_score": -0.0008928108701291633,
+          "importance_std": 0.0001201844664066668,
+          "importance_pct": 1.6246030363317125,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_real_gdp_chg_3m",
+          "importance_score": -0.0008919021315982425,
+          "importance_std": 4.9011163233550106e-05,
+          "importance_pct": 1.622949450532122,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_m2_money_chg_3m",
+          "importance_score": -0.0008862946432394809,
+          "importance_std": 0.00010116275033380962,
+          "importance_pct": 1.6127457859950616,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_exports",
+          "importance_score": -0.0008851035285635208,
+          "importance_std": 5.701673041738546e-05,
+          "importance_pct": 1.6105783745264894,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "real_rate_10y",
+          "importance_score": -0.0008836392492598905,
+          "importance_std": 3.191475963148671e-05,
+          "importance_pct": 1.607913899123797,
+          "category": "Derived"
+        },
+        {
+          "feature": "fred_fed_funds_upper_chg_3m",
+          "importance_score": -0.0008806380113935612,
+          "importance_std": 1.5683030993383904e-05,
+          "importance_pct": 1.602452697526098,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_fed_funds_lower_chg_1m",
+          "importance_score": -0.000880508526200041,
+          "importance_std": 7.88917373487528e-06,
+          "importance_pct": 1.6022170798319246,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_oil_wti",
+          "importance_score": -0.0008763307325142437,
+          "importance_std": 8.168158060309423e-05,
+          "importance_pct": 1.5946149587845724,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_fed_funds_lower",
+          "importance_score": -0.0008694891060215298,
+          "importance_std": 1.1044620416575171e-05,
+          "importance_pct": 1.5821655951563016,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_treasury_2y",
+          "importance_score": -0.0008656045848327862,
+          "importance_std": 1.691665153636061e-05,
+          "importance_pct": 1.5750971273216587,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_building_permits",
+          "importance_score": -0.0008646105481887104,
+          "importance_std": 0.00012443787964051288,
+          "importance_pct": 1.57328832883564,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_fed_funds_upper",
+          "importance_score": -0.0008584582824496496,
+          "importance_std": 5.431107528914886e-06,
+          "importance_pct": 1.5620933602993008,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_financial_conditions_chg_3m",
+          "importance_score": -0.0008547778411405046,
+          "importance_std": 1.600989250265725e-05,
+          "importance_pct": 1.5553962463573383,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_m1_money_chg_1m",
+          "importance_score": -0.0008544005945347639,
+          "importance_std": 4.896262451472936e-06,
+          "importance_pct": 1.5547097896825406,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_monetary_base",
+          "importance_score": -0.0008524487176101287,
+          "importance_std": 2.0828785265695454e-05,
+          "importance_pct": 1.5511580574126933,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_prime_rate",
+          "importance_score": -0.0008511337576090931,
+          "importance_std": 1.1376706436427707e-05,
+          "importance_pct": 1.5487652908348983,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_ppi_metals_chg_1m",
+          "importance_score": 0.0008502410980665519,
+          "importance_std": 0.00039299907915008313,
+          "importance_pct": 1.5471409631617674,
+          "category": "Beta - Inflation"
+        }
+      ],
+      "category_breakdown": {
+        "Beta - Sentiment": 3.9580696245831763,
+        "Alpha - Technical": 14.155176280362218,
+        "Beta - Money Supply": 12.188634856462539,
+        "Beta - Inflation": 14.542096106934444,
+        "Beta - Market": 10.025361660440279,
+        "VIX Regime": 3.5759533015969875,
+        "Beta - Economic": 6.752594810931281,
+        "Beta - Other": 14.842622437718095,
+        "Beta - Interest Rates": 16.611400768907494,
+        "Derived": 3.348090152063482
+      }
+    },
+    "XLRE": {
+      "etf": "XLRE",
+      "total_features": 219,
+      "top_n": 50,
+      "top_features": [
+        {
+          "feature": "fred_building_permits_chg_3m",
+          "importance_score": -0.0027783472412570946,
+          "importance_std": 0.0001453630934223618,
+          "importance_pct": 2.157510511793787,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_prime_rate_chg_3m",
+          "importance_score": -0.0027498355445571693,
+          "importance_std": 5.254373904621155e-05,
+          "importance_pct": 2.135369908047176,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_capacity_utilization_chg_1m",
+          "importance_score": -0.0027350202706302785,
+          "importance_std": 6.32474238444339e-05,
+          "importance_pct": 2.123865187270118,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_inflation_10y_chg_3m",
+          "importance_score": -0.0027243950853297364,
+          "importance_std": 9.657097652841269e-05,
+          "importance_pct": 2.115614257136092,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_imports_chg_3m",
+          "importance_score": -0.002691419455502683,
+          "importance_std": 0.00014282489471114138,
+          "importance_pct": 2.0900072102816107,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_ppi_chg_1m",
+          "importance_score": -0.002676281542913327,
+          "importance_std": 0.00015548727654402146,
+          "importance_pct": 2.0782519461975677,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "volatility_21d",
+          "importance_score": -0.0026611263588118285,
+          "importance_std": 9.691544185648778e-05,
+          "importance_pct": 2.0664832700142552,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_avg_hourly_earnings_chg_1m",
+          "importance_score": -0.002642925251836349,
+          "importance_std": 6.724830989203923e-05,
+          "importance_pct": 2.0523492989098684,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_financial_conditions",
+          "importance_score": -0.0026383478391290628,
+          "importance_std": 7.614560420511167e-05,
+          "importance_pct": 2.0487947338482604,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_unemployment_rate_chg_1m",
+          "importance_score": -0.002625795658774839,
+          "importance_std": 2.8448935696469917e-05,
+          "importance_pct": 2.0390474061355746,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_high_yield_spread_chg_3m",
+          "importance_score": -0.002617666977434566,
+          "importance_std": 0.00015028852535878032,
+          "importance_pct": 2.0327351226390284,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_investment_grade_spread",
+          "importance_score": -0.002617567149033021,
+          "importance_std": 9.192772691518653e-05,
+          "importance_pct": 2.0326576014341518,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_avg_weekly_hours_chg_3m",
+          "importance_score": -0.002611666645487537,
+          "importance_std": 5.9805249415631764e-05,
+          "importance_pct": 2.0280755973436553,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "yield_curve_10y2y",
+          "importance_score": -0.002603514869958879,
+          "importance_std": 4.739295748480239e-05,
+          "importance_pct": 2.0217453801801217,
+          "category": "Derived"
+        },
+        {
+          "feature": "fred_coincident_index",
+          "importance_score": -0.002600814537603413,
+          "importance_std": 4.2949016481554075e-05,
+          "importance_pct": 2.0196484517056166,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_bank_reserves_chg_3m",
+          "importance_score": -0.0025992563299152447,
+          "importance_std": 0.00012832663227121084,
+          "importance_pct": 2.018438433959505,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_bank_reserves",
+          "importance_score": -0.002598335418192319,
+          "importance_std": 3.067140961359725e-05,
+          "importance_pct": 2.017723304945701,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_retail_sales_chg_3m",
+          "importance_score": -0.002593434771234948,
+          "importance_std": 4.997507057843958e-05,
+          "importance_pct": 2.0139177340767636,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "kdj_d",
+          "importance_score": -0.0025880859663580816,
+          "importance_std": 0.0003249281086308665,
+          "importance_pct": 2.009764148601195,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_fed_funds_upper_chg_3m",
+          "importance_score": -0.0025807040251287867,
+          "importance_std": 1.800894195984949e-05,
+          "importance_pct": 2.004031742095937,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_building_permits",
+          "importance_score": -0.0025797739609678414,
+          "importance_std": 0.00012744491272194484,
+          "importance_pct": 2.003309505805928,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_avg_weekly_hours_chg_1m",
+          "importance_score": -0.002568535343836802,
+          "importance_std": 7.165321031828792e-05,
+          "importance_pct": 1.9945822185042614,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_oil_brent_chg_3m",
+          "importance_score": -0.002564562430978549,
+          "importance_std": 9.486439821794963e-05,
+          "importance_pct": 1.991497074528434,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_treasury_5y_chg_3m",
+          "importance_score": -0.0025606685075434906,
+          "importance_std": 5.65829537222551e-05,
+          "importance_pct": 1.9884732693616407,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_housing_starts_chg_3m",
+          "importance_score": -0.0025553861782835995,
+          "importance_std": 8.976332946707358e-05,
+          "importance_pct": 1.98437130516662,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_nonfarm_payrolls_chg_1m",
+          "importance_score": -0.0025522468059411664,
+          "importance_std": 4.6179976258830856e-05,
+          "importance_pct": 1.9819334425666344,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "real_rate_10y",
+          "importance_score": -0.0025439105497534085,
+          "importance_std": 8.007772055589711e-05,
+          "importance_pct": 1.9754599679458178,
+          "category": "Derived"
+        },
+        {
+          "feature": "fred_net_exports",
+          "importance_score": -0.0025428318633030017,
+          "importance_std": 3.125681307605947e-05,
+          "importance_pct": 1.974622319821378,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_inflation_5y",
+          "importance_score": -0.0025419771991637475,
+          "importance_std": 5.155250525418672e-05,
+          "importance_pct": 1.9739586350100942,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_auto_sales",
+          "importance_score": -0.0025386604202613503,
+          "importance_std": 5.753442813388231e-05,
+          "importance_pct": 1.9713830083062198,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "vix_regime_medium_vol_lag21",
+          "importance_score": -0.0025382434994245737,
+          "importance_std": 0.00012385192587035013,
+          "importance_pct": 1.9710592506870948,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_treasury_6m",
+          "importance_score": -0.0025300621351713845,
+          "importance_std": 1.3525848563426736e-05,
+          "importance_pct": 1.9647060565596814,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_monetary_base_chg_3m",
+          "importance_score": -0.0025247206251859575,
+          "importance_std": 6.970995496680726e-05,
+          "importance_pct": 1.9605581358925743,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_real_gdp",
+          "importance_score": -0.0025214328851577033,
+          "importance_std": 1.4737931506300746e-05,
+          "importance_pct": 1.9580050591692364,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_m1_money_chg_1m",
+          "importance_score": -0.0025191298330434473,
+          "importance_std": 4.4340614226823795e-06,
+          "importance_pct": 1.956216636515678,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_fed_funds_lower_chg_1m",
+          "importance_score": -0.0025190850069149316,
+          "importance_std": 1.2380008140970747e-05,
+          "importance_pct": 1.95618182702821,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_treasury_3m_chg_3m",
+          "importance_score": -0.0025179205585804283,
+          "importance_std": 1.2673673258194468e-05,
+          "importance_pct": 1.9552775809768794,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_imports_chg_1m",
+          "importance_score": -0.0025173661432856933,
+          "importance_std": 8.141165059389612e-05,
+          "importance_pct": 1.9548470527806456,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_inflation_5y_chg_3m",
+          "importance_score": -0.002516552116330949,
+          "importance_std": 0.00011293214135897559,
+          "importance_pct": 1.9542149245550355,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_total_loans_chg_3m",
+          "importance_score": -0.002515691263959701,
+          "importance_std": 0.00010581220092465134,
+          "importance_pct": 1.9535464343056923,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_treasury_1y_chg_3m",
+          "importance_score": -0.002513258971307681,
+          "importance_std": 1.609621483143371e-05,
+          "importance_pct": 1.9516576506120753,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_retail_sales",
+          "importance_score": -0.002513012885582244,
+          "importance_std": 2.7695849306820484e-05,
+          "importance_pct": 1.9514665540739793,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_financial_conditions_chg_1m",
+          "importance_score": -0.002510398125428876,
+          "importance_std": 3.725316297673438e-05,
+          "importance_pct": 1.9494360762298355,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_oil_brent",
+          "importance_score": -0.002509542253384537,
+          "importance_std": 5.8166343032724335e-05,
+          "importance_pct": 1.9487714534263962,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_treasury_30y_chg_1m",
+          "importance_score": -0.002507206398638407,
+          "importance_std": 0.00016433746951973935,
+          "importance_pct": 1.9469575580666074,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_total_loans",
+          "importance_score": -0.002504880111904115,
+          "importance_std": 8.069106098992195e-06,
+          "importance_pct": 1.9451510926946223,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_treasury_5y_chg_1m",
+          "importance_score": -0.0025038656924993774,
+          "importance_std": 4.849973316507169e-05,
+          "importance_pct": 1.9443633507966371,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_treasury_3m_chg_1m",
+          "importance_score": -0.0025034081099006714,
+          "importance_std": 1.0761994769058458e-05,
+          "importance_pct": 1.9440080175063768,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_employment_ratio",
+          "importance_score": -0.0025033939483277883,
+          "importance_std": 2.089895916078807e-05,
+          "importance_pct": 1.943997020413607,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_gas_price_chg_1m",
+          "importance_score": -0.0025033414769846797,
+          "importance_std": 8.236273313828932e-05,
+          "importance_pct": 1.9439562740761283,
+          "category": "Beta - Inflation"
+        }
+      ],
+      "category_breakdown": {
+        "Beta - Other": 36.554553863554354,
+        "Beta - Inflation": 14.006264564929747,
+        "Alpha - Technical": 4.07624741861545,
+        "Beta - Economic": 11.89080507903578,
+        "Beta - Interest Rates": 19.688392175643074,
+        "Derived": 3.9972053481259398,
+        "VIX Regime": 1.9710592506870948,
+        "Beta - Money Supply": 7.815472299408567
+      }
+    },
+    "XLK": {
+      "etf": "XLK",
+      "total_features": 219,
+      "top_n": 50,
+      "top_features": [
+        {
+          "feature": "fred_consumer_sentiment_chg_3m",
+          "importance_score": 0.008098169235732231,
+          "importance_std": 0.000648640377116131,
+          "importance_pct": 4.281970509810094,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "momentum_1m",
+          "importance_score": 0.007640833982213975,
+          "importance_std": 0.001074114450211278,
+          "importance_pct": 4.040150906927391,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_consumer_credit_chg_1m",
+          "importance_score": 0.0072665425632125104,
+          "importance_std": 0.0012125703287572454,
+          "importance_pct": 3.8422413829861655,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "atr_14d",
+          "importance_score": 0.006819479967858586,
+          "importance_std": 0.0007964663106944722,
+          "importance_pct": 3.605853528692135,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "rsi_14d",
+          "importance_score": 0.006015989824686929,
+          "importance_std": 0.0009513524942220815,
+          "importance_pct": 3.181001812479139,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "kdj_d",
+          "importance_score": 0.005988451441137443,
+          "importance_std": 0.001269241430314677,
+          "importance_pct": 3.166440676151382,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_participation_rate_chg_1m",
+          "importance_score": 0.005874806095246875,
+          "importance_std": 0.000658686927803373,
+          "importance_pct": 3.106349808016225,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_ppi_metals_chg_1m",
+          "importance_score": 0.005824591567222729,
+          "importance_std": 0.0010328434075415772,
+          "importance_pct": 3.079798482413558,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_dollar_index_chg_3m",
+          "importance_score": 0.005563243156200641,
+          "importance_std": 0.00091120440158143,
+          "importance_pct": 2.9416084599274295,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "ratio_momentum",
+          "importance_score": 0.005487987731468631,
+          "importance_std": 0.0008558759107582306,
+          "importance_pct": 2.901816563756151,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_usd_eur_chg_3m",
+          "importance_score": 0.0050905214700226,
+          "importance_std": 0.0007341850196495655,
+          "importance_pct": 2.69165316007637,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "macd_signal",
+          "importance_score": 0.005068560943976903,
+          "importance_std": 0.001025053315811509,
+          "importance_pct": 2.6800413596594717,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_consumer_credit_chg_3m",
+          "importance_score": 0.005068236824996299,
+          "importance_std": 0.0006933114736315332,
+          "importance_pct": 2.679869979205913,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_usd_eur_chg_1m",
+          "importance_score": 0.004687346586846666,
+          "importance_std": 0.00037870268630692884,
+          "importance_pct": 2.478471277875389,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_vix_chg_3m",
+          "importance_score": 0.004494324744665659,
+          "importance_std": 0.0006066120977181414,
+          "importance_pct": 2.37640946465452,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "high_20d",
+          "importance_score": 0.00447645697615894,
+          "importance_std": 0.0006875734394510018,
+          "importance_pct": 2.3669617418921587,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_high_yield_spread_chg_1m",
+          "importance_score": 0.004371297646150434,
+          "importance_std": 0.000723468737196964,
+          "importance_pct": 2.311357921223536,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "price_position",
+          "importance_score": 0.004368346440857365,
+          "importance_std": 0.001287598006925779,
+          "importance_pct": 2.3097974482739763,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "macd",
+          "importance_score": 0.00430268167974438,
+          "importance_std": 0.000833915789367274,
+          "importance_pct": 2.275076690725606,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "macd_hist",
+          "importance_score": 0.004109581283522787,
+          "importance_std": 0.000914061916842764,
+          "importance_pct": 2.172973341439557,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "low_20d",
+          "importance_score": 0.004024862162305793,
+          "importance_std": 0.00042299767128244585,
+          "importance_pct": 2.1281774415134924,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_consumer_sentiment",
+          "importance_score": 0.003783801707804027,
+          "importance_std": 0.0005623980334665343,
+          "importance_pct": 2.0007148351871815,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_usd_gbp_chg_1m",
+          "importance_score": 0.0037365351176103026,
+          "importance_std": 0.0004483008333098021,
+          "importance_pct": 1.975722254837568,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "volatility_21d",
+          "importance_score": 0.003650421545907134,
+          "importance_std": 0.000994661780590659,
+          "importance_pct": 1.9301890282781156,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "vix_regime_low_vol_lag21",
+          "importance_score": 0.003473148636281879,
+          "importance_std": 0.0003828879687435814,
+          "importance_pct": 1.8364545866892397,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_inflation_10y_chg_1m",
+          "importance_score": 0.0034550684446881864,
+          "importance_std": 0.00030474954333436436,
+          "importance_pct": 1.8268945435532793,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_dollar_index",
+          "importance_score": 0.003409088334128137,
+          "importance_std": 0.0006396943519803712,
+          "importance_pct": 1.802582199401813,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_consumer_sentiment_chg_1m",
+          "importance_score": 0.003340941567118971,
+          "importance_std": 0.00034865122543662017,
+          "importance_pct": 1.7665490617656419,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_core_cpi_chg_3m",
+          "importance_score": 0.003256149594785822,
+          "importance_std": 0.0004397658802342693,
+          "importance_pct": 1.7217146412404265,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_usd_jpy_chg_1m",
+          "importance_score": 0.003087511485666503,
+          "importance_std": 0.0005087391148247869,
+          "importance_pct": 1.632545918155107,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_exports_chg_3m",
+          "importance_score": 0.002953580592825519,
+          "importance_std": 0.0002670242530929451,
+          "importance_pct": 1.5617289079391217,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "bb_pctb",
+          "importance_score": 0.0028473542319078864,
+          "importance_std": 0.0006078526776350518,
+          "importance_pct": 1.5055608863069312,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_usd_eur",
+          "importance_score": 0.0027061115550690564,
+          "importance_std": 0.0006176684294928053,
+          "importance_pct": 1.4308777129444987,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_vix",
+          "importance_score": 0.002596703109368208,
+          "importance_std": 0.0003745020019412568,
+          "importance_pct": 1.3730271390211901,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_dollar_index_chg_1m",
+          "importance_score": 0.0025317643176705927,
+          "importance_std": 0.0002551814564344123,
+          "importance_pct": 1.3386902434960934,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_yield_curve_10y2y_chg_3m",
+          "importance_score": 0.0025139518937484246,
+          "importance_std": 0.0007108574247997258,
+          "importance_pct": 1.329271784616966,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_usd_jpy_chg_3m",
+          "importance_score": 0.0023993930606056426,
+          "importance_std": 0.000557800170258856,
+          "importance_pct": 1.268697902931312,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "vix_above_sma20_lag21",
+          "importance_score": 0.002251515467079162,
+          "importance_std": 0.00043031728768054073,
+          "importance_pct": 1.1905064653224116,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_m2_money_chg_1m",
+          "importance_score": 0.0022275281985148694,
+          "importance_std": 0.00016901340439751968,
+          "importance_pct": 1.1778230088999415,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "vix_level_lag21",
+          "importance_score": 0.002174228818981514,
+          "importance_std": 0.0003290090454318405,
+          "importance_pct": 1.1496405438625377,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "volume_ratio",
+          "importance_score": 0.0021251133921722856,
+          "importance_std": 0.0005648410302339042,
+          "importance_pct": 1.1236703766492024,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_high_yield_spread_chg_3m",
+          "importance_score": 0.0021113750676603387,
+          "importance_std": 0.0004495672485311209,
+          "importance_pct": 1.1164061297926675,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "mfi_14d",
+          "importance_score": 0.002102285625282574,
+          "importance_std": 0.0005266977685116734,
+          "importance_pct": 1.1116000158329253,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_usd_gbp",
+          "importance_score": 0.0018760475642408136,
+          "importance_std": 0.0005206387022462647,
+          "importance_pct": 0.9919748663234582,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "vix_regime_medium_vol_lag21",
+          "importance_score": 0.0018490994567217141,
+          "importance_std": 0.0005324541994678497,
+          "importance_pct": 0.9777258430772132,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_ppi_metals",
+          "importance_score": 0.0017238909324591878,
+          "importance_std": 0.0005457574923706952,
+          "importance_pct": 0.9115208536700609,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_treasury_30y_chg_1m",
+          "importance_score": 0.0016963931657213791,
+          "importance_std": 0.0005843318888812839,
+          "importance_pct": 0.8969811938000992,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_vix_chg_1m",
+          "importance_score": 0.0016446013583048702,
+          "importance_std": 0.0006985829437695598,
+          "importance_pct": 0.8695958693456884,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_bank_reserves_chg_1m",
+          "importance_score": 0.001481803961383071,
+          "importance_std": 0.00018747141038877264,
+          "importance_pct": 0.783515468652511,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_high_yield_spread",
+          "importance_score": 0.0014747691571077842,
+          "importance_std": 0.00013906673246806526,
+          "importance_pct": 0.779795760707146,
+          "category": "Beta - Interest Rates"
+        }
+      ],
+      "category_breakdown": {
+        "Beta - Sentiment": 8.049234406762917,
+        "Alpha - Technical": 36.49931181857764,
+        "Beta - Money Supply": 7.699934371092019,
+        "Beta - Other": 5.451594184607857,
+        "Beta - Inflation": 7.539928520877325,
+        "Beta - Market": 23.171856468990434,
+        "Beta - Interest Rates": 6.433812790140414,
+        "VIX Regime": 5.154327438951402
+      }
+    },
+    "XLU": {
+      "etf": "XLU",
+      "total_features": 219,
+      "top_n": 50,
+      "top_features": [
+        {
+          "feature": "fred_consumer_sentiment_chg_3m",
+          "importance_score": -0.0025763144788876037,
+          "importance_std": 0.0003764500085274212,
+          "importance_pct": 2.36672732178814,
+          "category": "Beta - Sentiment"
+        },
+        {
+          "feature": "fred_ppi_metals",
+          "importance_score": -0.0024908683370449573,
+          "importance_std": 0.00014798089788370318,
+          "importance_pct": 2.28823235539425,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_yield_curve_10y3m_chg_3m",
+          "importance_score": -0.0023644760717052896,
+          "importance_std": 7.962604114339789e-05,
+          "importance_pct": 2.1721222958136166,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_usd_eur",
+          "importance_score": -0.002288546653576212,
+          "importance_std": 0.00015643524166792028,
+          "importance_pct": 2.102369852978627,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "high_20d",
+          "importance_score": -0.0022710291405466316,
+          "importance_std": 0.00021742182700507852,
+          "importance_pct": 2.0862774166566496,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "vix_level_lag21",
+          "importance_score": -0.002259369001375115,
+          "importance_std": 0.00017252985491322345,
+          "importance_pct": 2.0755658477937535,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_monetary_base_chg_1m",
+          "importance_score": -0.0022445675356196435,
+          "importance_std": 4.0527620711025886e-05,
+          "importance_pct": 2.0619685041103413,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_core_cpi_chg_3m",
+          "importance_score": -0.002221224274175403,
+          "importance_std": 0.00011840406772314868,
+          "importance_pct": 2.040524252994079,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_vix_chg_1m",
+          "importance_score": -0.002216067499359669,
+          "importance_std": 7.092894429408597e-05,
+          "importance_pct": 2.0357869897644845,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "volume_ratio",
+          "importance_score": -0.002204251753128114,
+          "importance_std": 0.00014798887021393137,
+          "importance_pct": 2.024932472715925,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_coincident_index_chg_1m",
+          "importance_score": -0.0021986358078657803,
+          "importance_std": 0.00015380770191352977,
+          "importance_pct": 2.019773393263881,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "vix_regime_high_vol_lag21",
+          "importance_score": -0.0021969240769274334,
+          "importance_std": 0.00019161952118382363,
+          "importance_pct": 2.0182009142778976,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_core_cpi",
+          "importance_score": -0.002196754730114042,
+          "importance_std": 2.3910760289381473e-05,
+          "importance_pct": 2.0180453440890114,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_housing_starts_chg_1m",
+          "importance_score": -0.0021906887941508997,
+          "importance_std": 6.843151750193557e-05,
+          "importance_pct": 2.012472881373829,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_building_permits_chg_3m",
+          "importance_score": -0.002186641827186416,
+          "importance_std": 0.00013703316909198578,
+          "importance_pct": 2.0087551414147873,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_capacity_utilization_chg_1m",
+          "importance_score": -0.0021830763253336645,
+          "importance_std": 3.644952901711746e-05,
+          "importance_pct": 2.0054796986379264,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_prime_rate_chg_3m",
+          "importance_score": -0.002177192836201878,
+          "importance_std": 5.80827597888167e-05,
+          "importance_pct": 2.000074840422925,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_net_exports_chg_3m",
+          "importance_score": -0.0021754142608257704,
+          "importance_std": 3.817381343102442e-05,
+          "importance_pct": 1.9984409548973077,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_treasury_2y",
+          "importance_score": -0.002173647380053321,
+          "importance_std": 1.934292515642198e-05,
+          "importance_pct": 1.996817812601301,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_ppi",
+          "importance_score": -0.0021717793807347905,
+          "importance_std": 4.639239240574534e-05,
+          "importance_pct": 1.9951017779089222,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_treasury_2y_chg_3m",
+          "importance_score": -0.0021715738494648474,
+          "importance_std": 4.837541040328515e-05,
+          "importance_pct": 1.994912966924843,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_mortgage_30y_chg_3m",
+          "importance_score": -0.002164823399908614,
+          "importance_std": 6.273185149587749e-05,
+          "importance_pct": 1.9887116768533029,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_treasury_10y",
+          "importance_score": -0.0021522213523994665,
+          "importance_std": 4.345363795885737e-05,
+          "importance_pct": 1.9771348253490375,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "momentum_1m",
+          "importance_score": -0.0021453423128617232,
+          "importance_std": 0.00010363861135602327,
+          "importance_pct": 1.9708154062893475,
+          "category": "Alpha - Technical"
+        },
+        {
+          "feature": "fred_business_loans_chg_1m",
+          "importance_score": -0.0021439588552521166,
+          "importance_std": 0.00017057593823146985,
+          "importance_pct": 1.9695444950904144,
+          "category": "Beta - Money Supply"
+        },
+        {
+          "feature": "fred_auto_sales_chg_3m",
+          "importance_score": -0.002142784585973265,
+          "importance_std": 4.684163379792888e-05,
+          "importance_pct": 1.9684657544288338,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_coincident_index",
+          "importance_score": -0.0021426658829564607,
+          "importance_std": 2.2146635177286735e-05,
+          "importance_pct": 1.9683567080855588,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_usd_jpy",
+          "importance_score": -0.0021414476053373504,
+          "importance_std": 3.98308904874882e-05,
+          "importance_pct": 1.9672375392300872,
+          "category": "Beta - Market"
+        },
+        {
+          "feature": "fred_oil_wti_chg_3m",
+          "importance_score": -0.002138236106131091,
+          "importance_std": 6.428003777628063e-05,
+          "importance_pct": 1.9642873004383394,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_employment_ratio_chg_3m",
+          "importance_score": -0.002135795127019362,
+          "importance_std": 4.709164682651888e-05,
+          "importance_pct": 1.962044898742822,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_capacity_utilization",
+          "importance_score": -0.00213368093730453,
+          "importance_std": 1.540844802176509e-05,
+          "importance_pct": 1.9601027016226569,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_imports_chg_3m",
+          "importance_score": -0.0021334759508369818,
+          "importance_std": 0.00016499380277510328,
+          "importance_pct": 1.9599143911204573,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_inflation_10y",
+          "importance_score": -0.0021319411721400826,
+          "importance_std": 2.5939712134554126e-05,
+          "importance_pct": 1.958504469038112,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_inflation_5y_chg_1m",
+          "importance_score": -0.002131521204639979,
+          "importance_std": 7.544967240572409e-05,
+          "importance_pct": 1.958118666541987,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_ppi_chg_1m",
+          "importance_score": -0.002131066203412899,
+          "importance_std": 7.598003210491759e-05,
+          "importance_pct": 1.957700680366618,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_treasury_30y",
+          "importance_score": -0.002126088694778286,
+          "importance_std": 2.036782991950199e-05,
+          "importance_pct": 1.9531280997377727,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_treasury_5y",
+          "importance_score": -0.002125656778950438,
+          "importance_std": 1.680065669208056e-05,
+          "importance_pct": 1.952731320928797,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_financial_conditions_chg_1m",
+          "importance_score": -0.002122613428118089,
+          "importance_std": 2.8502843606634025e-05,
+          "importance_pct": 1.949935551381355,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_gdp_chg_3m",
+          "importance_score": -0.0021203161956465035,
+          "importance_std": 7.937338111856551e-05,
+          "importance_pct": 1.947825202315061,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_inflation_5y_chg_3m",
+          "importance_score": -0.0021197293507805503,
+          "importance_std": 7.125189776996255e-05,
+          "importance_pct": 1.9472860981842244,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_capacity_utilization_chg_3m",
+          "importance_score": -0.002119135875484728,
+          "importance_std": 8.541627995261506e-05,
+          "importance_pct": 1.9467409030192167,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_housing_starts_chg_3m",
+          "importance_score": -0.0021180374928577764,
+          "importance_std": 7.285628875371755e-05,
+          "importance_pct": 1.9457318755133408,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_employment_ratio_chg_1m",
+          "importance_score": -0.0021171656073434983,
+          "importance_std": 5.6774410094914565e-05,
+          "importance_pct": 1.9449309192306263,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_yield_curve_10y3m",
+          "importance_score": -0.0021151193839994684,
+          "importance_std": 2.4039808014663375e-05,
+          "importance_pct": 1.9430511593121529,
+          "category": "Beta - Interest Rates"
+        },
+        {
+          "feature": "fred_industrial_production",
+          "importance_score": -0.0021101918108332477,
+          "importance_std": 5.410378840917342e-05,
+          "importance_pct": 1.9385244518243152,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "fred_financial_conditions_chg_3m",
+          "importance_score": -0.0021085769995275723,
+          "importance_std": 2.9775936078872868e-05,
+          "importance_pct": 1.9370410079093765,
+          "category": "Beta - Other"
+        },
+        {
+          "feature": "fred_cpi",
+          "importance_score": -0.0021071174780691853,
+          "importance_std": 2.3430471522333048e-05,
+          "importance_pct": 1.935700220773098,
+          "category": "Beta - Inflation"
+        },
+        {
+          "feature": "fred_real_gdp_chg_3m",
+          "importance_score": -0.0021066965990890903,
+          "importance_std": 3.144754882081008e-05,
+          "importance_pct": 1.9353135809472848,
+          "category": "Beta - Economic"
+        },
+        {
+          "feature": "vix_regime_medium_vol_lag21",
+          "importance_score": -0.002105710104022915,
+          "importance_std": 0.00020719687285577186,
+          "importance_pct": 1.9344073387765177,
+          "category": "VIX Regime"
+        },
+        {
+          "feature": "fred_nonfarm_payrolls_chg_1m",
+          "importance_score": -0.002105407901752288,
+          "importance_std": 6.319009971016471e-05,
+          "importance_pct": 1.9341297211267854,
+          "category": "Beta - Other"
+        }
+      ],
+      "category_breakdown": {
+        "Beta - Sentiment": 2.36672732178814,
+        "Beta - Inflation": 20.063501165728642,
+        "Beta - Interest Rates": 15.978610157520825,
+        "Beta - Market": 6.105394381973198,
+        "Alpha - Technical": 6.082025295661921,
+        "VIX Regime": 6.028174100848169,
+        "Beta - Money Supply": 4.031512999200755,
+        "Beta - Other": 25.657210767331065,
+        "Beta - Economic": 13.68684380994728
+      }
+    }
+  },
+  "aggregate_importance": {
+    "top_features": [
+      {
+        "feature": "momentum_1w",
+        "avg_importance_pct": 5.176674427755544,
+        "std_importance_pct": 2.3918209690691077,
+        "n_sectors": 4,
+        "category": "Alpha - Technical"
+      },
+      {
+        "feature": "fred_consumer_credit_chg_1m",
+        "avg_importance_pct": 5.027391497182041,
+        "std_importance_pct": 2.596392790877298,
+        "n_sectors": 5,
+        "category": "Beta - Money Supply"
+      },
+      {
+        "feature": "fred_consumer_credit_chg_3m",
+        "avg_importance_pct": 3.9219965218165815,
+        "std_importance_pct": 0.720758819426251,
+        "n_sectors": 4,
+        "category": "Beta - Money Supply"
+      },
+      {
+        "feature": "fred_consumer_sentiment_chg_3m",
+        "avg_importance_pct": 3.83727928138432,
+        "std_importance_pct": 1.6076987860857752,
+        "n_sectors": 7,
+        "category": "Beta - Sentiment"
+      },
+      {
+        "feature": "atr_14d",
+        "avg_importance_pct": 3.559036752072166,
+        "std_importance_pct": 0.33213340532185903,
+        "n_sectors": 4,
+        "category": "Alpha - Technical"
+      },
+      {
+        "feature": "fred_consumer_sentiment_chg_1m",
+        "avg_importance_pct": 3.51956948552722,
+        "std_importance_pct": 2.4580517710492833,
+        "n_sectors": 5,
+        "category": "Beta - Sentiment"
+      },
+      {
+        "feature": "fred_dollar_index_chg_3m",
+        "avg_importance_pct": 3.4379443837390498,
+        "std_importance_pct": 1.7821533043046565,
+        "n_sectors": 3,
+        "category": "Beta - Market"
+      },
+      {
+        "feature": "vix_volatility_lag21",
+        "avg_importance_pct": 3.2264189197519464,
+        "std_importance_pct": 0.0,
+        "n_sectors": 1,
+        "category": "VIX Regime"
+      },
+      {
+        "feature": "fred_usd_eur_chg_3m",
+        "avg_importance_pct": 3.1486220394760767,
+        "std_importance_pct": 1.5115709932623582,
+        "n_sectors": 7,
+        "category": "Beta - Market"
+      },
+      {
+        "feature": "fred_ppi_metals_chg_3m",
+        "avg_importance_pct": 2.9437369374759403,
+        "std_importance_pct": 1.465689618833576,
+        "n_sectors": 4,
+        "category": "Beta - Inflation"
+      },
+      {
+        "feature": "macd_signal",
+        "avg_importance_pct": 2.8952712923846398,
+        "std_importance_pct": 1.795447695937539,
+        "n_sectors": 3,
+        "category": "Alpha - Technical"
+      },
+      {
+        "feature": "fred_ppi_metals",
+        "avg_importance_pct": 2.6837057688212114,
+        "std_importance_pct": 1.8278197409255315,
+        "n_sectors": 6,
+        "category": "Beta - Inflation"
+      },
+      {
+        "feature": "macd_hist",
+        "avg_importance_pct": 2.603522007190198,
+        "std_importance_pct": 0.7326757922257437,
+        "n_sectors": 6,
+        "category": "Alpha - Technical"
+      },
+      {
+        "feature": "fred_ppi_metals_chg_1m",
+        "avg_importance_pct": 2.5661821177209143,
+        "std_importance_pct": 1.258695974101882,
+        "n_sectors": 4,
+        "category": "Beta - Inflation"
+      },
+      {
+        "feature": "fred_usd_jpy_chg_3m",
+        "avg_importance_pct": 2.5049687695461635,
+        "std_importance_pct": 0.8847879960910111,
+        "n_sectors": 3,
+        "category": "Beta - Market"
+      },
+      {
+        "feature": "fred_dollar_index",
+        "avg_importance_pct": 2.4165153398681407,
+        "std_importance_pct": 0.7569776787101177,
+        "n_sectors": 5,
+        "category": "Beta - Market"
+      },
+      {
+        "feature": "fred_usd_eur_chg_1m",
+        "avg_importance_pct": 2.3123307904172727,
+        "std_importance_pct": 1.0045171305960678,
+        "n_sectors": 6,
+        "category": "Beta - Market"
+      },
+      {
+        "feature": "rsi_14d",
+        "avg_importance_pct": 2.306153680466823,
+        "std_importance_pct": 1.2321476645760883,
+        "n_sectors": 5,
+        "category": "Alpha - Technical"
+      },
+      {
+        "feature": "fred_usd_eur",
+        "avg_importance_pct": 2.274503418364301,
+        "std_importance_pct": 0.7318231774608379,
+        "n_sectors": 4,
+        "category": "Beta - Market"
+      },
+      {
+        "feature": "momentum_1m",
+        "avg_importance_pct": 2.1522151238496265,
+        "std_importance_pct": 1.1549000010725394,
+        "n_sectors": 4,
+        "category": "Alpha - Technical"
+      },
+      {
+        "feature": "fred_inflation_10y_chg_3m",
+        "avg_importance_pct": 2.115614257136092,
+        "std_importance_pct": 0.0,
+        "n_sectors": 1,
+        "category": "Beta - Inflation"
+      },
+      {
+        "feature": "kdj_d",
+        "avg_importance_pct": 2.1074429040619327,
+        "std_importance_pct": 0.7107359088113768,
+        "n_sectors": 5,
+        "category": "Alpha - Technical"
+      },
+      {
+        "feature": "ratio_momentum",
+        "avg_importance_pct": 2.105909936229243,
+        "std_importance_pct": 0.8728700408219975,
+        "n_sectors": 5,
+        "category": "Alpha - Technical"
+      },
+      {
+        "feature": "kdj_j",
+        "avg_importance_pct": 2.0990649994421497,
+        "std_importance_pct": 0.37265088258421275,
+        "n_sectors": 2,
+        "category": "Alpha - Technical"
+      },
+      {
+        "feature": "high_20d",
+        "avg_importance_pct": 2.094340274089123,
+        "std_importance_pct": 0.5047047298451656,
+        "n_sectors": 4,
+        "category": "Alpha - Technical"
+      },
+      {
+        "feature": "fred_investment_grade_spread_chg_1m",
+        "avg_importance_pct": 2.0857994364693155,
+        "std_importance_pct": 0.09108174418114079,
+        "n_sectors": 2,
+        "category": "Beta - Other"
+      },
+      {
+        "feature": "price_position",
+        "avg_importance_pct": 2.072626898007629,
+        "std_importance_pct": 0.35382624757272385,
+        "n_sectors": 4,
+        "category": "Alpha - Technical"
+      },
+      {
+        "feature": "fred_monetary_base_chg_1m",
+        "avg_importance_pct": 2.0619685041103413,
+        "std_importance_pct": 0.0,
+        "n_sectors": 1,
+        "category": "Beta - Money Supply"
+      },
+      {
+        "feature": "fred_treasury_5y_chg_3m",
+        "avg_importance_pct": 2.056927469201912,
+        "std_importance_pct": 0.06845419984027112,
+        "n_sectors": 2,
+        "category": "Beta - Interest Rates"
+      },
+      {
+        "feature": "fred_real_gdp_chg_1m",
+        "avg_importance_pct": 2.0539210494325406,
+        "std_importance_pct": 0.010733285049580266,
+        "n_sectors": 2,
+        "category": "Beta - Economic"
+      },
+      {
+        "feature": "fred_avg_hourly_earnings_chg_1m",
+        "avg_importance_pct": 2.050622027654896,
+        "std_importance_pct": 0.0017272712549722957,
+        "n_sectors": 2,
+        "category": "Beta - Other"
+      },
+      {
+        "feature": "fred_participation_rate_chg_3m",
+        "avg_importance_pct": 2.0432715275084337,
+        "std_importance_pct": 0.220052272549872,
+        "n_sectors": 3,
+        "category": "Beta - Other"
+      },
+      {
+        "feature": "fred_yield_curve_10y3m_chg_1m",
+        "avg_importance_pct": 2.0379161074286545,
+        "std_importance_pct": 0.0,
+        "n_sectors": 1,
+        "category": "Beta - Interest Rates"
+      },
+      {
+        "feature": "fred_mortgage_30y_chg_1m",
+        "avg_importance_pct": 2.0362920249983554,
+        "std_importance_pct": 0.07259234175122664,
+        "n_sectors": 2,
+        "category": "Beta - Interest Rates"
+      },
+      {
+        "feature": "vwap",
+        "avg_importance_pct": 2.024989027488855,
+        "std_importance_pct": 0.0,
+        "n_sectors": 1,
+        "category": "Alpha - Technical"
+      },
+      {
+        "feature": "yield_curve_10y2y",
+        "avg_importance_pct": 2.0217453801801217,
+        "std_importance_pct": 0.0,
+        "n_sectors": 1,
+        "category": "Derived"
+      },
+      {
+        "feature": "fred_industrial_production_chg_1m",
+        "avg_importance_pct": 2.0176889400444344,
+        "std_importance_pct": 0.03209274593544855,
+        "n_sectors": 3,
+        "category": "Beta - Economic"
+      },
+      {
+        "feature": "fred_core_cpi",
+        "avg_importance_pct": 2.0154550147120154,
+        "std_importance_pct": 0.0025903293769959923,
+        "n_sectors": 2,
+        "category": "Beta - Inflation"
+      },
+      {
+        "feature": "fred_cpi_chg_1m",
+        "avg_importance_pct": 2.0152975594448126,
+        "std_importance_pct": 0.7616453793527468,
+        "n_sectors": 4,
+        "category": "Beta - Inflation"
+      },
+      {
+        "feature": "fred_participation_rate",
+        "avg_importance_pct": 2.015163810046489,
+        "std_importance_pct": 0.0,
+        "n_sectors": 1,
+        "category": "Beta - Other"
+      },
+      {
+        "feature": "fred_capacity_utilization_chg_1m",
+        "avg_importance_pct": 2.0087422204638306,
+        "std_importance_pct": 0.1266312872855976,
+        "n_sectors": 4,
+        "category": "Beta - Other"
+      },
+      {
+        "feature": "fred_retail_sales_chg_1m",
+        "avg_importance_pct": 2.0013294703106093,
+        "std_importance_pct": 0.0,
+        "n_sectors": 1,
+        "category": "Beta - Economic"
+      },
+      {
+        "feature": "fred_treasury_2y_chg_3m",
+        "avg_importance_pct": 1.994912966924843,
+        "std_importance_pct": 0.0,
+        "n_sectors": 1,
+        "category": "Beta - Interest Rates"
+      },
+      {
+        "feature": "fred_yield_curve_10y3m_chg_3m",
+        "avg_importance_pct": 1.994848694254195,
+        "std_importance_pct": 0.181579063511426,
+        "n_sectors": 3,
+        "category": "Beta - Interest Rates"
+      },
+      {
+        "feature": "fred_coincident_index",
+        "avg_importance_pct": 1.9940025798955876,
+        "std_importance_pct": 0.025645871810028864,
+        "n_sectors": 2,
+        "category": "Beta - Other"
+      },
+      {
+        "feature": "fred_ppi",
+        "avg_importance_pct": 1.9939162868212486,
+        "std_importance_pct": 0.001185491087673518,
+        "n_sectors": 2,
+        "category": "Beta - Inflation"
+      },
+      {
+        "feature": "fred_bank_reserves_chg_3m",
+        "avg_importance_pct": 1.9927960865926275,
+        "std_importance_pct": 0.025642347366877313,
+        "n_sectors": 2,
+        "category": "Beta - Other"
+      },
+      {
+        "feature": "fred_avg_hourly_earnings_chg_3m",
+        "avg_importance_pct": 1.9858668604992085,
+        "std_importance_pct": 0.2324924149319919,
+        "n_sectors": 2,
+        "category": "Beta - Other"
+      },
+      {
+        "feature": "fred_building_permits_chg_3m",
+        "avg_importance_pct": 1.9813442430838102,
+        "std_importance_pct": 0.15623654557425343,
+        "n_sectors": 3,
+        "category": "Beta - Other"
+      },
+      {
+        "feature": "fred_monetary_base_chg_3m",
+        "avg_importance_pct": 1.9802315088334872,
+        "std_importance_pct": 0.01967337294091276,
+        "n_sectors": 2,
+        "category": "Beta - Money Supply"
+      }
+    ],
+    "category_breakdown": {
+      "Alpha - Technical": 31.19724732303793,
+      "Beta - Money Supply": 12.99158803194245,
+      "Beta - Sentiment": 7.35684876691154,
+      "Beta - Market": 16.094884741411004,
+      "VIX Regime": 3.2264189197519464,
+      "Beta - Inflation": 16.333907942132235,
+      "Beta - Other": 18.157608792214198,
+      "Beta - Interest Rates": 10.12089726280796,
+      "Beta - Economic": 6.072939459787585,
+      "Derived": 2.0217453801801217
+    }
+  }
+}

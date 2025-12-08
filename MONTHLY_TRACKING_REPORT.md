@@ -1,7 +1,7 @@
 # ETF Trading Intelligence - Monthly Tracking Report
 *Living document tracking model performance, feature importance, and predictions*
 
-**Last Updated:** 2025-11-10 21:46 UTC
+**Last Updated:** 2025-12-08 16:34 UTC
 
 ---
 
@@ -9,12 +9,12 @@
 
 | Metric | Value |
 |--------|-------|
-| **Latest Prediction** | November 2025 |
-| **Last Validated Month** | October 2025 |
-| **Overall Direction Accuracy** | 69.7% |
-| **Win Rate (Profitable Months)** | 3/3 (100%) if validated else 'N/A' |
-| **Cumulative Strategy Return** | +13.26% |
-| **Total Cycles Tracked** | 5 |
+| **Latest Prediction** | December 2025 |
+| **Last Validated Month** | November 2025 |
+| **Overall Direction Accuracy** | 63.6% |
+| **Win Rate (Profitable Months)** | 4/4 (100%) if validated else 'N/A' |
+| **Cumulative Strategy Return** | +14.20% |
+| **Total Cycles Tracked** | 6 |
 
 ---
 
@@ -25,7 +25,8 @@
 
 | Month | Direction Accuracy | Correlation | MAE | Strategy Return | Status | Training Through |
 |-------|-------------------|-------------|-----|-----------------|--------|------------------|
-| November 2025 | *Pending* | *Pending* | *Pending* | *Pending* | 🔮 Predicted | *Unknown* |
+| December 2025 | *Pending* | *Pending* | *Pending* | *Pending* | 🔮 Predicted | *Unknown* |
+| November 2025 | 45.5% | 0.333 | 4.15% | +0.94% | ✅ Validated | 2025-10-31 |
 | October 2025 | 63.6% | 0.268 | 3.29% | +3.05% | ✅ Validated | 2025-09-30T00:00:00 |
 | September 2025 | 72.7% | 0.739 | 1.87% | +5.59% | ✅ Validated | 2025-08-29 |
 | August 2025 | 72.7% | 0.776 | 1.67% | +4.63% | ✅ Validated | 2025-07-31 |
@@ -33,9 +34,31 @@
 
 ---
 
-## 🔮 November 2025 Cycle
+## 🔮 December 2025 Cycle
 
 **Latest Prediction - Awaiting Validation**
+
+### 📊 Predicted Returns (vs SPY)
+
+| Rank | ETF | Predicted Return | Recommendation |
+|------|-----|------------------|----------------|
+| 1 | XLV 🟢 | +8.21% | LONG |
+| 2 | XLY 🟢 | +2.44% | LONG |
+| 3 | XLB 🟢 | +1.98% | LONG |
+| 4 | XLRE ⚪ | +1.72% | NEUTRAL |
+| 5 | XLP ⚪ | +1.54% | NEUTRAL |
+| 6 | XLF ⚪ | +0.86% | NEUTRAL |
+| 7 | XLU ⚪ | +0.04% | NEUTRAL |
+| 8 | XLC ⚪ | -0.17% | NEUTRAL |
+| 9 | XLE 🔴 | -1.17% | SHORT |
+| 10 | XLI 🔴 | -1.84% | SHORT |
+| 11 | XLK 🔴 | -2.88% | SHORT |
+
+**Trading Strategy:** Long top 3, Short bottom 3
+
+---
+
+## ✅ November 2025 Cycle
 
 ### 📊 Predicted Returns (vs SPY)
 
@@ -54,6 +77,179 @@
 | 11 | XLB 🔴 | -3.91% | SHORT |
 
 **Trading Strategy:** Long top 3, Short bottom 3
+
+### 🔬 Feature Importance
+**Calculated:** 2025-11-10
+**Method:** Permutation Importance (10 repeats)
+
+<iframe src="plots/aggregate_feature_importance_november_2025.html" width="100%" height="700" frameborder="0"></iframe>
+
+#### Top 20 Features (Aggregate)
+
+| Rank | Feature | Avg Importance | Std | Category |
+|------|---------|----------------|-----|----------|
+| 1 | momentum_1w | 5.18% | ±2.39% | Alpha - Technical |
+| 2 | fred_consumer_credit_chg_1m | 5.03% | ±2.60% | Beta - Money Supply |
+| 3 | fred_consumer_credit_chg_3m | 3.92% | ±0.72% | Beta - Money Supply |
+| 4 | fred_consumer_sentiment_chg_3m | 3.84% | ±1.61% | Beta - Sentiment |
+| 5 | atr_14d | 3.56% | ±0.33% | Alpha - Technical |
+| 6 | fred_consumer_sentiment_chg_1m | 3.52% | ±2.46% | Beta - Sentiment |
+| 7 | fred_dollar_index_chg_3m | 3.44% | ±1.78% | Beta - Market |
+| 8 | vix_volatility_lag21 | 3.23% | ±0.00% | VIX Regime |
+| 9 | fred_usd_eur_chg_3m | 3.15% | ±1.51% | Beta - Market |
+| 10 | fred_ppi_metals_chg_3m | 2.94% | ±1.47% | Beta - Inflation |
+| 11 | macd_signal | 2.90% | ±1.80% | Alpha - Technical |
+| 12 | fred_ppi_metals | 2.68% | ±1.83% | Beta - Inflation |
+| 13 | macd_hist | 2.60% | ±0.73% | Alpha - Technical |
+| 14 | fred_ppi_metals_chg_1m | 2.57% | ±1.26% | Beta - Inflation |
+| 15 | fred_usd_jpy_chg_3m | 2.50% | ±0.88% | Beta - Market |
+| 16 | fred_dollar_index | 2.42% | ±0.76% | Beta - Market |
+| 17 | fred_usd_eur_chg_1m | 2.31% | ±1.00% | Beta - Market |
+| 18 | rsi_14d | 2.31% | ±1.23% | Alpha - Technical |
+| 19 | fred_usd_eur | 2.27% | ±0.73% | Beta - Market |
+| 20 | momentum_1m | 2.15% | ±1.15% | Alpha - Technical |
+
+#### Category Importance Breakdown
+
+| Category | Importance |
+|----------|------------|
+| Alpha - Technical | 31.20% |
+| Beta - Other | 18.16% |
+| Beta - Inflation | 16.33% |
+| Beta - Market | 16.09% |
+| Beta - Money Supply | 12.99% |
+| Beta - Interest Rates | 10.12% |
+| Beta - Sentiment | 7.36% |
+| Beta - Economic | 6.07% |
+| VIX Regime | 3.23% |
+| Derived | 2.02% |
+
+<details>
+<summary><b>📋 Sector-Specific Feature Importance (Click to expand)</b></summary>
+
+
+**XLF** - Top 5:
+1. fred_consumer_credit_chg_1m (9.52%) - Beta - Money Supply
+2. fred_usd_eur_chg_3m (6.59%) - Beta - Market
+3. fred_ppi_metals_chg_3m (5.17%) - Beta - Inflation
+4. fred_ppi_metals_chg_1m (4.39%) - Beta - Inflation
+5. rsi_14d (4.24%) - Alpha - Technical
+
+**XLC** - Top 5:
+1. fred_consumer_sentiment_chg_1m (8.28%) - Beta - Sentiment
+2. fred_ppi_metals (4.09%) - Beta - Inflation
+3. macd_hist (2.96%) - Alpha - Technical
+4. macd (2.64%) - Alpha - Technical
+5. fred_building_permits_chg_1m (2.54%) - Beta - Other
+
+**XLY** - Top 5:
+1. fred_consumer_credit_chg_1m (6.23%) - Beta - Money Supply
+2. fred_usd_eur (3.45%) - Beta - Market
+3. atr_14d (3.05%) - Alpha - Technical
+4. high_20d (2.64%) - Alpha - Technical
+5. price_position (2.51%) - Alpha - Technical
+
+**XLP** - Top 5:
+1. fred_investment_grade_spread_chg_1m (2.18%) - Beta - Other
+2. fred_treasury_5y_chg_3m (2.13%) - Beta - Interest Rates
+3. fred_capacity_utilization_chg_1m (2.10%) - Beta - Other
+4. fred_gas_price_chg_3m (2.10%) - Beta - Inflation
+5. vix_above_sma20_lag21 (2.09%) - VIX Regime
+
+**XLE** - Top 5:
+1. fred_ppi_metals (6.05%) - Beta - Inflation
+2. momentum_1w (5.35%) - Alpha - Technical
+3. fred_consumer_sentiment_chg_3m (5.34%) - Beta - Sentiment
+4. fred_usd_eur_chg_1m (4.41%) - Beta - Market
+5. fred_consumer_credit_chg_3m (4.35%) - Beta - Money Supply
+
+**XLV** - Top 5:
+1. momentum_1w (2.82%) - Alpha - Technical
+2. fred_inflation_5y_chg_1m (2.25%) - Beta - Inflation
+3. fred_building_permits (2.20%) - Beta - Other
+4. fred_usd_eur_chg_3m (2.12%) - Beta - Market
+5. fred_investment_grade_spread (2.08%) - Beta - Other
+
+**XLI** - Top 5:
+1. momentum_1w (9.00%) - Alpha - Technical
+2. fred_consumer_sentiment_chg_3m (6.55%) - Beta - Sentiment
+3. fred_dollar_index_chg_3m (5.83%) - Beta - Market
+4. macd_signal (5.19%) - Alpha - Technical
+5. fred_consumer_credit_chg_3m (4.43%) - Beta - Money Supply
+
+**XLB** - Top 5:
+1. fred_consumer_sentiment_chg_3m (3.96%) - Beta - Sentiment
+2. macd_hist (3.91%) - Alpha - Technical
+3. fred_business_loans_chg_1m (3.79%) - Beta - Money Supply
+4. momentum_1w (3.54%) - Alpha - Technical
+5. fred_cpi_chg_1m (3.27%) - Beta - Inflation
+
+**XLRE** - Top 5:
+1. fred_building_permits_chg_3m (2.16%) - Beta - Other
+2. fred_prime_rate_chg_3m (2.14%) - Beta - Other
+3. fred_capacity_utilization_chg_1m (2.12%) - Beta - Other
+4. fred_inflation_10y_chg_3m (2.12%) - Beta - Inflation
+5. fred_imports_chg_3m (2.09%) - Beta - Other
+
+**XLK** - Top 5:
+1. fred_consumer_sentiment_chg_3m (4.28%) - Beta - Sentiment
+2. momentum_1m (4.04%) - Alpha - Technical
+3. fred_consumer_credit_chg_1m (3.84%) - Beta - Money Supply
+4. atr_14d (3.61%) - Alpha - Technical
+5. rsi_14d (3.18%) - Alpha - Technical
+
+**XLU** - Top 5:
+1. fred_consumer_sentiment_chg_3m (2.37%) - Beta - Sentiment
+2. fred_ppi_metals (2.29%) - Beta - Inflation
+3. fred_yield_curve_10y3m_chg_3m (2.17%) - Beta - Interest Rates
+4. fred_usd_eur (2.10%) - Beta - Market
+5. high_20d (2.09%) - Alpha - Technical
+
+</details>
+
+### ✅ Validation Results
+**Period:** 2025-10-31 to 2025-11-28
+**SPY Return:** +0.20%
+
+#### Overall Metrics
+
+| Metric | Value | Assessment |
+|--------|-------|------------|
+| **Direction Accuracy** | **45.5%** (5/11) | ⚠️ BELOW THRESHOLD |
+| Correlation | 0.333 | Moderate |
+| Mean Absolute Error | 4.15% | - |
+| R² Score | -0.915 | - |
+| **Strategy Return** | **+0.94%** | ✅ PROFITABLE |
+
+#### Prediction vs Actual
+
+<iframe src="plots/pred_vs_actual_november_2025.html" width="100%" height="600" frameborder="0"></iframe>
+
+| ETF | Predicted | Actual | Error | Direction |
+|-----|-----------|--------|-------|-----------|
+| XLB | -3.91% | +4.16% | +8.06% | ❌ |
+| XLC | -3.86% | +0.31% | +4.17% | ❌ |
+| XLE | -3.56% | +2.44% | +6.00% | ❌ |
+| XLF | -1.43% | +1.64% | +3.06% | ❌ |
+| XLI | -2.60% | -1.08% | +1.52% | ✅ |
+| XLK | -1.97% | -5.00% | -3.04% | ✅ |
+| XLP | -2.26% | +3.86% | +6.11% | ❌ |
+| XLRE | -3.83% | +1.69% | +5.52% | ❌ |
+| XLU | +1.04% | +1.52% | +0.48% | ✅ |
+| XLV | +2.54% | +9.09% | +6.55% | ✅ |
+| XLY | -0.47% | -1.64% | -1.17% | ✅ |
+
+<iframe src="plots/error_distribution_november_2025.html" width="100%" height="500" frameborder="0"></iframe>
+
+#### Top/Bottom 3 Analysis
+
+**Top 3 Predicted:** XLU, XLV, XLY
+**Top 3 Actual:** XLB, XLP, XLV
+**Overlap:** 1/3 (33%)
+
+**Bottom 3 Predicted:** XLB, XLC, XLRE
+**Bottom 3 Actual:** XLI, XLK, XLY
+**Overlap:** 0/3 (0%)
 
 ---
 
