@@ -51,12 +51,32 @@ This system predicts 21-day forward relative returns (ETF return - SPY return) f
 - **Strategy Return**: +0.94% ✅ **PROFITABLE**
 - **Notable**: XLV prediction (+2.54%) performed well with actual +9.09%
 
-**Overall Summary (4-Month Period: Aug-Nov 2025):**
-- **Average Direction Accuracy**: 63.6%
-- **Average Correlation**: 0.529
-- **Average MAE**: 2.74%
-- **Total Strategy Return**: +14.20% - **ALL FOUR MONTHS PROFITABLE!**
-- **Profitable Months**: 4/4 (100%)
+**December 2025 Results (trained through Oct 31, 2025):**
+- **Direction Accuracy**: 36.4% (4/11 correct) - ⚠️ **BELOW THRESHOLD**
+- **Correlation**: -0.183 (weak negative correlation)
+- **Mean Absolute Error**: 3.19%
+- **Top 3 Identification**: 33.3% (1/3 correct - XLB)
+- **Bottom 3 Identification**: 0% (0/3 correct)
+- **Strategy Return**: +0.02% ✅ **PROFITABLE** (narrowly)
+- **Notable**: XLV predicted +8.21% but actual was -1.47% (Healthcare reversal after Nov surge)
+- **Root Cause Analysis**:
+  - XLV experienced mean reversion after its 4th strongest month ever (+9.30% in Nov)
+  - Value-to-Growth rotation partially unwound (one of widest Value beats in 2 decades reversed)
+  - Utilities (XLU) dropped -5.17% as Fed rate cut expectations diminished
+  - Financials (+2.98%) and Communication Services (+2.27%) led December gains
+
+**Overall Summary (5-Month Period: Aug 2025 - Dec 2025):**
+- **Average Direction Accuracy**: 58.2%
+- **Average Correlation**: 0.387
+- **Average MAE**: 2.83%
+- **Total Strategy Return**: +14.22% - **ALL FIVE MONTHS PROFITABLE!**
+- **Profitable Months**: 5/5 (100%)
+
+**January 2026 Predictions (trained through Nov 30, 2025):**
+- **Top 3 (LONG)**: XLI (+3.77%), XLY (+2.38%), XLC (+2.10%)
+- **Bottom 3 (SHORT)**: XLU (-3.46%), XLRE (-3.03%), XLE (-2.88%)
+- **Trading Strategy**: Long top 3, Short bottom 3
+- **Status**: Awaiting validation at end of January 2026
 
 ## 🛠️ Actual Implementation
 

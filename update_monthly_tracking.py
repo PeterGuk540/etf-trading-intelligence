@@ -32,14 +32,27 @@ class MonthlyTrackingUpdater:
 
     def load_existing_cycles(self):
         """Load all existing cycle data from JSON files"""
-        prediction_files = sorted(Path('.').glob('*_2025_predictions.json'))
+        import re
+
+        # Find all prediction files for any year
+        prediction_files = sorted(Path('.').glob('*_predictions.json'))
 
         for pred_file in prediction_files:
-            month = pred_file.stem.replace('_2025_predictions', '').capitalize()
+            # Extract month and year from filename (e.g., "january_2026_predictions.json")
+            match = re.match(r'(.+)_(\d{4})_predictions\.json', pred_file.name)
+            if not match:
+                continue
+
+            month = match.group(1).capitalize()
+            year = int(match.group(2))
+
+            # Skip mid-month predictions
+            if 'mid_' in pred_file.name.lower():
+                continue
 
             cycle = {
                 'month': month,
-                'year': 2025,
+                'year': year,
                 'prediction_file': str(pred_file),
                 'has_validation': False,
                 'has_feature_importance': False,
@@ -53,7 +66,7 @@ class MonthlyTrackingUpdater:
                 cycle['predictions'] = json.load(f)
 
             # Check for validation
-            actual_file = Path(f"{month.lower()}_2025_actual_returns.json")
+            actual_file = Path(f"{month.lower()}_{year}_actual_returns.json")
             if actual_file.exists():
                 with open(actual_file, 'r') as f:
                     actuals_data = json.load(f)
@@ -64,7 +77,7 @@ class MonthlyTrackingUpdater:
                     )
 
             # Check for feature importance
-            fi_file = Path(f"feature_importance_{month.lower()}_2025.json")
+            fi_file = Path(f"feature_importance_{month.lower()}_{year}.json")
             if fi_file.exists():
                 with open(fi_file, 'r') as f:
                     cycle['feature_importance'] = json.load(f)
@@ -72,12 +85,13 @@ class MonthlyTrackingUpdater:
 
             self.cycles.append(cycle)
 
-        # Sort by month (newest first)
+        # Sort by year and month (newest first)
         month_order = {
-            'December': 12, 'November': 11, 'October': 10, 'September': 9,
-            'August': 8, 'July': 7, 'June': 6
+            'January': 1, 'February': 2, 'March': 3, 'April': 4,
+            'May': 5, 'June': 6, 'July': 7, 'August': 8,
+            'September': 9, 'October': 10, 'November': 11, 'December': 12
         }
-        self.cycles.sort(key=lambda x: month_order.get(x['month'], 0), reverse=True)
+        self.cycles.sort(key=lambda x: (x['year'], month_order.get(x['month'], 0)), reverse=True)
 
     def _calculate_validation_metrics(self, predictions, actuals_data):
         """Calculate validation metrics from predictions and actuals"""
