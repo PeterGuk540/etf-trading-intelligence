@@ -158,6 +158,29 @@ The 36.4% direction accuracy (below the 55% profitability threshold) can be attr
 3. **Rate sensitivity**: Fed policy expectations shifted rapidly, hurting utilities/REITs
 4. **Strategy resilience**: Despite poor direction accuracy, the long/short strategy still returned +0.02% (profitable)
 
+#### Proposed Solution: Add Mean Reversion Features
+
+**Root Cause Diagnosis**: The current feature set contains ~20 momentum/trend-following features but **no mean reversion indicators**. When XLV surged +9.30% in November (99th percentile of monthly returns), the momentum features signaled "continue bullish" while the market mean-reverted.
+
+**Proposed New Features** (to be added to `etf_monthly_prediction_system.py`):
+
+| Feature | Description | Purpose |
+|---------|-------------|---------|
+| `return_zscore_1m` | Z-score of last month's return vs 2-year history | Detect statistically extreme moves |
+| `return_percentile_1m` | Percentile rank of recent return (0-100) | Flag 90th+ percentile extremes |
+| `rsi_extreme` | Binary flag: RSI > 70 (overbought) or < 30 (oversold) | Classic mean reversion signal |
+| `bb_deviation` | Standard deviations from 20-day Bollinger mean | Overextension from mean |
+| `distance_from_sma50` | % distance from 50-day SMA | Trend overextension signal |
+| `mean_reversion_prob` | Historical probability of reversion after similar moves | Direct reversion probability |
+
+**Why This Solution**:
+- Stays within existing framework (no architectural changes required)
+- Lets the model learn *when* to expect mean reversion vs. momentum continuation
+- Well-documented in academic literature (Jegadeesh & Titman, De Bondt & Thaler)
+- For December 2025, `return_zscore_1m` for XLV would have been ~2.5+ standard deviations, signaling high reversion probability
+
+**Implementation Status**: Pending (to be implemented in future update)
+
 ---
 
 ## ✅ November 2025 Cycle
