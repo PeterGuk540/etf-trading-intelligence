@@ -1,7 +1,7 @@
 # ETF Trading Intelligence - Monthly Tracking Report
 *Living document tracking model performance, feature importance, and predictions*
 
-**Last Updated:** 2026-01-05 18:04 UTC
+**Last Updated:** 2026-02-02 15:04 UTC
 
 ---
 
@@ -9,12 +9,12 @@
 
 | Metric | Value |
 |--------|-------|
-| **Latest Prediction** | January 2026 |
-| **Last Validated Month** | December 2025 |
-| **Overall Direction Accuracy** | 58.2% |
-| **Win Rate (Profitable Months)** | 5/5 (100%) if validated else 'N/A' |
-| **Cumulative Strategy Return** | +14.22% |
-| **Total Cycles Tracked** | 6 |
+| **Latest Prediction** | February 2026 |
+| **Last Validated Month** | January 2026 |
+| **Overall Direction Accuracy** | 57.6% |
+| **Win Rate (Profitable Months)** | 5/6 (83%) if validated else 'N/A' |
+| **Cumulative Strategy Return** | +11.54% |
+| **Total Cycles Tracked** | 7 |
 
 ---
 
@@ -25,7 +25,8 @@
 
 | Month | Direction Accuracy | Correlation | MAE | Strategy Return | Status | Training Through |
 |-------|-------------------|-------------|-----|-----------------|--------|------------------|
-| January 2026 | *Pending* | *Pending* | *Pending* | *Pending* | 🔮 Predicted | *Unknown* |
+| February 2026 | *Pending* | *Pending* | *Pending* | *Pending* | 🔮 Predicted | 2026-01-30 |
+| January 2026 | 54.5% | -0.217 | 4.55% | -2.68% | ✅ Validated | 2025-12-31 |
 | December 2025 | 36.4% | -0.183 | 3.19% | +0.02% | ✅ Validated | 2025-11-28 |
 | November 2025 | 45.5% | 0.333 | 4.15% | +0.94% | ✅ Validated | 2025-10-31 |
 | October 2025 | 63.6% | 0.268 | 3.29% | +3.05% | ✅ Validated | 2025-09-30T00:00:00 |
@@ -34,9 +35,31 @@
 
 ---
 
-## 🔮 January 2026 Cycle
+## 🔮 February 2026 Cycle
 
 **Latest Prediction - Awaiting Validation**
+
+### 📊 Predicted Returns (vs SPY)
+
+| Rank | ETF | Predicted Return | Recommendation |
+|------|-----|------------------|----------------|
+| 1 | XLB 🟢 | +6.73% | LONG |
+| 2 | XLE 🟢 | +6.33% | LONG |
+| 3 | XLI 🟢 | +4.61% | LONG |
+| 4 | XLK ⚪ | +4.17% | NEUTRAL |
+| 5 | XLU ⚪ | +1.71% | NEUTRAL |
+| 6 | XLP ⚪ | +1.68% | NEUTRAL |
+| 7 | XLRE ⚪ | -0.04% | NEUTRAL |
+| 8 | XLC ⚪ | -0.10% | NEUTRAL |
+| 9 | XLV 🔴 | -1.46% | SHORT |
+| 10 | XLY 🔴 | -2.59% | SHORT |
+| 11 | XLF 🔴 | -5.49% | SHORT |
+
+**Trading Strategy:** Long top 3, Short bottom 3
+
+---
+
+## ✅ January 2026 Cycle
 
 ### 📊 Predicted Returns (vs SPY)
 
@@ -55,6 +78,50 @@
 | 11 | XLU 🔴 | -3.46% | SHORT |
 
 **Trading Strategy:** Long top 3, Short bottom 3
+
+### ✅ Validation Results
+**Period:** 2025-12-31 to 2026-01-30
+**SPY Return:** +1.47%
+
+#### Overall Metrics
+
+| Metric | Value | Assessment |
+|--------|-------|------------|
+| **Direction Accuracy** | **54.5%** (6/11) | ⚠️ BELOW THRESHOLD |
+| Correlation | -0.217 | Weak |
+| Mean Absolute Error | 4.55% | - |
+| R² Score | -0.800 | - |
+| **Strategy Return** | **-2.68%** | ❌ LOSS |
+
+#### Prediction vs Actual
+
+<iframe src="plots/pred_vs_actual_january_2026.html" width="100%" height="600" frameborder="0"></iframe>
+
+| ETF | Predicted | Actual | Error | Direction |
+|-----|-----------|--------|-------|-----------|
+| XLB | -0.64% | +7.17% | +7.81% | ❌ |
+| XLC | +2.10% | +0.53% | -1.57% | ✅ |
+| XLE | -2.88% | +12.71% | +15.58% | ❌ |
+| XLF | +1.71% | -3.90% | -5.61% | ❌ |
+| XLI | +3.77% | +5.18% | +1.41% | ✅ |
+| XLK | -0.71% | -1.54% | -0.83% | ✅ |
+| XLP | -1.23% | +6.03% | +7.26% | ❌ |
+| XLRE | -3.03% | +1.20% | +4.23% | ❌ |
+| XLU | -3.46% | -0.16% | +3.30% | ✅ |
+| XLV | -1.56% | -1.51% | +0.05% | ✅ |
+| XLY | +2.38% | +0.00% | -2.38% | ✅ |
+
+<iframe src="plots/error_distribution_january_2026.html" width="100%" height="500" frameborder="0"></iframe>
+
+#### Top/Bottom 3 Analysis
+
+**Top 3 Predicted:** XLC, XLI, XLY
+**Top 3 Actual:** XLB, XLE, XLP
+**Overlap:** 0/3 (0%)
+
+**Bottom 3 Predicted:** XLE, XLRE, XLU
+**Bottom 3 Actual:** XLF, XLK, XLV
+**Overlap:** 0/3 (0%)
 
 ---
 
@@ -121,65 +188,6 @@
 **Bottom 3 Predicted:** XLE, XLI, XLK
 **Bottom 3 Actual:** XLRE, XLU, XLV
 **Overlap:** 0/3 (0%)
-
-### 📰 December 2025 Underperformance Analysis
-
-**Why did the model underperform in December 2025?**
-
-The 36.4% direction accuracy (below the 55% profitability threshold) can be attributed to several key market dynamics:
-
-#### 1. Healthcare (XLV) Mean Reversion After Historic November Surge
-- **November 2025**: XLV gained **+9.30%** (its 4th strongest month since inception in 1998) as investors sought defensive stability
-- **December 2025**: XLV reversed sharply with **-1.47%** relative return as profit-taking ensued
-- **Model Impact**: Our prediction of +8.21% extrapolated November's momentum, missing the mean reversion
-- **Source**: [ETF Trends - TACK Commentary December 2025](https://www.etftrends.com/etf-strategist-content-hub/tack-portfolio-manager-commentary-december-2025/)
-
-#### 2. Value-to-Growth Rotation Reversal
-- November saw one of the **widest monthly Value beats in two decades** (Value +2% vs Growth -2.3%)
-- December brought a partial unwinding of this trade, with Financials (+2.98%) and Communication Services (+2.27%) outperforming
-- Technology (XLK) recovered modestly (+0.67%) after November's -4% decline
-- **Source**: [Towne Bank Market Commentary December 2025](https://www.townebank.com/trust/resources/market-commentary-december-2025/)
-
-#### 3. Defensive-to-Cyclical Shift
-- **Utilities (XLU)**: Predicted near-neutral (+0.04%), actual **-5.17%** - worst performer
-- **Real Estate (XLRE)**: Predicted positive (+1.72%), actual **-2.19%**
-- Investors rotated OUT of rate-sensitive defensives as Fed rate cut expectations diminished
-- **Source**: [Charles Schwab Sector Outlook 2025](https://www.schwab.com/learn/story/stock-sector-outlook)
-
-#### 4. Industrials (XLI) Surprise Outperformance
-- Predicted: -1.84% (SHORT recommendation)
-- Actual: +1.20% (one of top performers)
-- Strong economic data and infrastructure spending supported cyclicals
-- **Source**: [Stock Titan 2025 Year-End Analysis](https://www.stocktitan.net/articles/stock-market-2025-year-end-comprehensive-analysis)
-
-#### Key Lessons for Model Improvement
-1. **Mean reversion signals**: After extreme monthly moves (>8%), factor in reversion probability
-2. **Momentum decay**: November's defensive rotation was too short-lived to extrapolate
-3. **Rate sensitivity**: Fed policy expectations shifted rapidly, hurting utilities/REITs
-4. **Strategy resilience**: Despite poor direction accuracy, the long/short strategy still returned +0.02% (profitable)
-
-#### Proposed Solution: Add Mean Reversion Features
-
-**Root Cause Diagnosis**: The current feature set contains ~20 momentum/trend-following features but **no mean reversion indicators**. When XLV surged +9.30% in November (99th percentile of monthly returns), the momentum features signaled "continue bullish" while the market mean-reverted.
-
-**Proposed New Features** (to be added to `etf_monthly_prediction_system.py`):
-
-| Feature | Description | Purpose |
-|---------|-------------|---------|
-| `return_zscore_1m` | Z-score of last month's return vs 2-year history | Detect statistically extreme moves |
-| `return_percentile_1m` | Percentile rank of recent return (0-100) | Flag 90th+ percentile extremes |
-| `rsi_extreme` | Binary flag: RSI > 70 (overbought) or < 30 (oversold) | Classic mean reversion signal |
-| `bb_deviation` | Standard deviations from 20-day Bollinger mean | Overextension from mean |
-| `distance_from_sma50` | % distance from 50-day SMA | Trend overextension signal |
-| `mean_reversion_prob` | Historical probability of reversion after similar moves | Direct reversion probability |
-
-**Why This Solution**:
-- Stays within existing framework (no architectural changes required)
-- Lets the model learn *when* to expect mean reversion vs. momentum continuation
-- Well-documented in academic literature (Jegadeesh & Titman, De Bondt & Thaler)
-- For December 2025, `return_zscore_1m` for XLV would have been ~2.5+ standard deviations, signaling high reversion probability
-
-**Implementation Status**: Pending (to be implemented in future update)
 
 ---
 

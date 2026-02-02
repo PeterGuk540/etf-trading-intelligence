@@ -207,7 +207,7 @@ class RealFeatureImportanceCalculator:
             wrapper, X_val_flat, y_val,
             n_repeats=n_repeats,
             random_state=42,
-            n_jobs=-1,
+            n_jobs=1,
             scoring='neg_mean_absolute_error'
         )
 
