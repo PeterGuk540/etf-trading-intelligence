@@ -1,0 +1,51 @@
+{
+  "spy_return": -0.008641965290305326,
+  "baseline_date": "2026-01-30",
+  "target_date": "2026-02-27",
+  "sector_returns": {
+    "XLF": {
+      "absolute_return": -0.03761224500721859,
+      "relative_return": -0.028970279716913263
+    },
+    "XLC": {
+      "absolute_return": -0.016905385978865664,
+      "relative_return": -0.008263420688560338
+    },
+    "XLY": {
+      "absolute_return": -0.03556984091544173,
+      "relative_return": -0.0269278756251364
+    },
+    "XLP": {
+      "absolute_return": 0.07783498783051764,
+      "relative_return": 0.08647695312082296
+    },
+    "XLE": {
+      "absolute_return": 0.09539665043421418,
+      "relative_return": 0.1040386157245195
+    },
+    "XLV": {
+      "absolute_return": 0.03528493771004377,
+      "relative_return": 0.0439269030003491
+    },
+    "XLI": {
+      "absolute_return": 0.07072048341141657,
+      "relative_return": 0.07936244870172189
+    },
+    "XLB": {
+      "absolute_return": 0.08402677798222105,
+      "relative_return": 0.09266874327252637
+    },
+    "XLRE": {
+      "absolute_return": 0.05817040380545283,
+      "relative_return": 0.06681236909575816
+    },
+    "XLK": {
+      "absolute_return": -0.03558528080497851,
+      "relative_return": -0.026943315514673185
+    },
+    "XLU": {
+      "absolute_return": 0.1035838044447706,
+      "relative_return": 0.11222576973507592
+    }
+  }
+}

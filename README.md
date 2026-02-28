@@ -16,67 +16,28 @@ This system predicts 21-day forward relative returns (ETF return - SPY return) f
 
 ### Real-World Performance (TRUE 4-Model Ensemble with Adaptive Weighting)
 
-**✅ ENSEMBLE VALIDATION - ALL MONTHS PROFITABLE!**
+| Month | Direction Accuracy | Correlation | MAE | Strategy Return | Status |
+|-------|-------------------|-------------|-----|-----------------|--------|
+| Aug 2025 | **72.7%** (8/11) ✅ | 0.776 | 1.67% | **+4.63%** | Profitable |
+| Sep 2025 | **72.7%** (8/11) ✅ | 0.739 | 1.87% | **+5.59%** | Profitable |
+| Oct 2025 | **63.6%** (7/11) 👍 | 0.268 | 3.29% | **+3.05%** | Profitable |
+| Nov 2025 | 45.5% (5/11) ⚠️ | 0.333 | 4.15% | **+0.94%** | Profitable |
+| Dec 2025 | 36.4% (4/11) ⚠️ | -0.183 | 3.19% | **+0.02%** | Profitable |
+| Jan 2026 | 54.5% (6/11) ⚠️ | -0.217 | 4.55% | **-2.68%** | Loss |
+| Feb 2026 | **72.7%** (8/11) ✅ | 0.614 | 4.48% | **+9.60%** | Profitable |
 
-**August 2025 Results (trained through July 31, 2025):**
-- **Direction Accuracy**: 72.7% (8/11 correct) - ✅ **VERY GOOD**
-- **Correlation**: 0.776 (very strong positive correlation)
-- **Mean Absolute Error**: 1.67%
-- **Top 3 Identification**: 66.7% (2/3 correct)
-- **Bottom 3 Identification**: 100% (3/3 correct) - Perfect!
-- **Strategy Return**: +4.63% ✅ **PROFITABLE**
+**Overall Summary (7-Month Period: Aug 2025 - Feb 2026):**
+- **Average Direction Accuracy**: 59.7%
+- **Win Rate**: 6/7 months profitable (86%)
+- **Cumulative Strategy Return**: +21.14%
+- **Best Month**: February 2026 (+9.60% return, 72.7% accuracy)
+- **Worst Month**: January 2026 (-2.68% loss, regime shift from Tech to Physical Economy)
 
-**September 2025 Results (trained through Aug 31, 2025):**
-- **Direction Accuracy**: 72.7% (8/11 correct) - ✅ **VERY GOOD**
-- **Correlation**: 0.739 (strong positive correlation)
-- **Mean Absolute Error**: 1.87%
-- **Top 3 Identification**: 66.7% (2/3 correct)
-- **Bottom 3 Identification**: 66.7% (2/3 correct)
-- **Strategy Return**: +5.59% ✅ **PROFITABLE**
-
-**October 2025 Results (trained through Aug 31, 2025):**
-- **Direction Accuracy**: 63.6% (7/11 correct) - 👍 **GOOD**
-- **Correlation**: 0.268 (moderate positive correlation)
-- **Mean Absolute Error**: 3.29%
-- **Top 3 Identification**: 33.3% (1/3 correct)
-- **Bottom 3 Identification**: 33.3% (1/3 correct)
-- **Strategy Return**: +3.05% ✅ **PROFITABLE**
-
-**November 2025 Results (trained through Sep 30, 2025):**
-- **Direction Accuracy**: 45.5% (5/11 correct) - ⚠️ **BELOW THRESHOLD**
-- **Correlation**: 0.333 (moderate positive correlation)
-- **Mean Absolute Error**: 4.15%
-- **Top 3 Identification**: 33.3% (1/3 correct)
-- **Bottom 3 Identification**: 0% (0/3 correct)
-- **Strategy Return**: +0.94% ✅ **PROFITABLE**
-- **Notable**: XLV prediction (+2.54%) performed well with actual +9.09%
-
-**December 2025 Results (trained through Oct 31, 2025):**
-- **Direction Accuracy**: 36.4% (4/11 correct) - ⚠️ **BELOW THRESHOLD**
-- **Correlation**: -0.183 (weak negative correlation)
-- **Mean Absolute Error**: 3.19%
-- **Top 3 Identification**: 33.3% (1/3 correct - XLB)
-- **Bottom 3 Identification**: 0% (0/3 correct)
-- **Strategy Return**: +0.02% ✅ **PROFITABLE** (narrowly)
-- **Notable**: XLV predicted +8.21% but actual was -1.47% (Healthcare reversal after Nov surge)
-- **Root Cause Analysis**:
-  - XLV experienced mean reversion after its 4th strongest month ever (+9.30% in Nov)
-  - Value-to-Growth rotation partially unwound (one of widest Value beats in 2 decades reversed)
-  - Utilities (XLU) dropped -5.17% as Fed rate cut expectations diminished
-  - Financials (+2.98%) and Communication Services (+2.27%) led December gains
-
-**Overall Summary (5-Month Period: Aug 2025 - Dec 2025):**
-- **Average Direction Accuracy**: 58.2%
-- **Average Correlation**: 0.387
-- **Average MAE**: 2.83%
-- **Total Strategy Return**: +14.22% - **ALL FIVE MONTHS PROFITABLE!**
-- **Profitable Months**: 5/5 (100%)
-
-**January 2026 Predictions (trained through Nov 30, 2025):**
-- **Top 3 (LONG)**: XLI (+3.77%), XLY (+2.38%), XLC (+2.10%)
-- **Bottom 3 (SHORT)**: XLU (-3.46%), XLRE (-3.03%), XLE (-2.88%)
+**March 2026 Predictions (trained through Feb 27, 2026):**
+- **Top 3 (LONG)**: XLE (+9.67%), XLU (+9.34%), XLB (+6.98%)
+- **Bottom 3 (SHORT)**: XLY (-3.31%), XLF (-1.66%), XLC (+0.75%)
 - **Trading Strategy**: Long top 3, Short bottom 3
-- **Status**: Awaiting validation at end of January 2026
+- **Status**: Awaiting validation at end of March 2026
 
 ## 🛠️ Actual Implementation
 
@@ -186,13 +147,19 @@ uncertainty = std_deviation(all_model_predictions)
 │   ├── september_2025_predictions.json
 │   ├── october_2025_predictions.json
 │   ├── november_2025_predictions.json
-│   └── december_2025_predictions.json    # Latest prediction
+│   ├── december_2025_predictions.json
+│   ├── january_2026_predictions.json
+│   ├── february_2026_predictions.json
+│   └── march_2026_predictions.json       # Latest prediction
 │
 ├── Actual Returns (Real Market Data)
 │   ├── august_2025_actual_returns.json
 │   ├── september_2025_actual_returns.json
 │   ├── october_2025_actual_returns.json
-│   └── november_2025_actual_returns.json  # Latest validation
+│   ├── november_2025_actual_returns.json
+│   ├── december_2025_actual_returns.json
+│   ├── january_2026_actual_returns.json
+│   └── february_2026_actual_returns.json  # Latest validation
 │
 ├── Feature Importance (Real Permutation Data)
 │   └── feature_importance_{month}_{year}.json
@@ -242,7 +209,7 @@ pip install -r requirements.txt
 
 **Generate new monthly prediction:**
 ```bash
-python run_complete_cycle.py --month december --year 2025 --train-end 2025-10-31
+python run_complete_cycle.py --month march --year 2026 --train-end 2026-02-27
 ```
 
 This automatically:
@@ -253,9 +220,9 @@ This automatically:
 
 **Add validation after month completes:**
 ```bash
-# First: Collect actual returns and save to december_2025_actual_returns.json
+# First: Collect actual returns and save to march_2026_actual_returns.json
 # Then run:
-python run_complete_cycle.py --validate --month december --year 2025
+python run_complete_cycle.py --validate --month march --year 2026
 ```
 
 This automatically:
@@ -263,6 +230,15 @@ This automatically:
 2. ✅ Calculates all validation metrics
 3. ✅ Updates `MONTHLY_TRACKING_REPORT.md` with validation results
 4. ✅ Creates validation visualizations
+
+##**Monthly workflow (backtest + predict next month):**
+```bash
+# 1. Collect actual returns for the completed month (e.g., via yfinance)
+# 2. Backtest the completed month:
+python run_complete_cycle.py --validate --month february --year 2026
+# 3. Generate next month's predictions (retrained through end of completed month):
+python run_complete_cycle.py --month march --year 2026 --train-end 2026-02-27
+```
 
 #### 📊 View Results
 
@@ -272,7 +248,7 @@ cat MONTHLY_TRACKING_REPORT.md
 
 # Or open in browser to see interactive plots
 # plots/performance_timeline.html
-# plots/pred_vs_actual_december_2025.html
+# plots/pred_vs_actual_february_2026.html
 ```
 
 #### 🔧 Advanced Usage
@@ -312,10 +288,12 @@ View the latest feature importance in **`MONTHLY_TRACKING_REPORT.md`**
 
 1. **Data Availability**: System may encounter "insufficient data" errors when validation period is too recent
 2. **Negative R² Values**: This is expected for relative return predictions due to high noise
-3. **✅ SOLVED**: Direction accuracy now 72.7% - **WELL ABOVE PROFITABLE THRESHOLD!**
-4. **✅ SOLVED**: VIX regime detection with corrected 21-day lag methodology
-5. **✅ SOLVED**: Data leakage issue fixed with lagged VIX regime features
-6. **Fixed**: ✅ All 62 FRED indicators now working with robust retry/alternative mechanisms
+3. **Regime Shifts**: Model struggles with unprecedented macroeconomic catalysts (e.g., Jan 2026 "Great Rotation" from Tech to Physical Economy)
+4. **Feature Importance**: scikit-learn >= 1.8 requires `BaseEstimator` inheritance for custom wrappers (fixed in `calculate_feature_importance_real.py`)
+5. **✅ SOLVED**: Direction accuracy averages 59.7% over 7 months with 86% win rate
+6. **✅ SOLVED**: VIX regime detection with corrected 21-day lag methodology
+7. **✅ SOLVED**: Data leakage issue fixed with lagged VIX regime features
+8. **✅ SOLVED**: All 62 FRED indicators working with robust retry/alternative mechanisms
 
 ## 📊 Validation Methodology
 
@@ -330,17 +308,18 @@ Used in `validate_all_models.py` for robust model selection:
 
 ### Production Predictions (Single Split)
 Used in `etf_monthly_prediction_system.py` for actual predictions:
-- **Training Period**: Jan 2020 to (current month - 2)
-- **Validation Period**: (current month - 2) single month
-- **Prediction Period**: Current month onwards
-- **Note**: September 2025 predictions used Jan 2020 - July 2025 training
+- **Training Period**: Jan 2020 to end of last completed month
+- **Validation Period**: Previous month (for model selection)
+- **Prediction Period**: Next month forward
+- **Latest**: March 2026 predictions trained through Feb 27, 2026 (1526 training samples per ETF)
 
 ## 🔍 Key Insights
 
-1. **Volatility is King**: Volatility measures are the strongest predictors
-2. **Economic Matters**: Economic indicators (beta) contribute nearly 48% of predictive power
-3. **Sector Specificity**: Each sector responds differently to economic drivers
+1. **Technical Indicators Dominate**: Momentum and volatility account for 31.2% of predictive power
+2. **Economic Matters**: Economic indicators (beta) contribute significant predictive power across multiple categories
+3. **Sector Specificity**: Each sector responds differently to economic drivers (e.g., XLE best predicted by LSTM-GARCH, XLK by LSTM)
 4. **Direction > Magnitude**: Direction accuracy matters more than R² for trading profitability
+5. **Regime Vulnerability**: Model performs best in trending markets (72.7% in Aug/Sep/Feb) but struggles during regime shifts (36.4% in Dec, -2.68% loss in Jan)
 
 ## 📝 Documentation & Reports
 

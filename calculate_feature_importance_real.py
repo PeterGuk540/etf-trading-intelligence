@@ -17,6 +17,7 @@ warnings.filterwarnings('ignore')
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.inspection import permutation_importance
+from sklearn.base import BaseEstimator, RegressorMixin
 import torch
 
 from generate_ensemble_predictions import EnsemblePredictor
@@ -155,9 +156,9 @@ class RealFeatureImportanceCalculator:
         print(f"  Validation samples: {len(y_val)}")
 
         # Create wrapper for permutation importance
-        class EnsembleWrapper:
+        class EnsembleWrapper(BaseEstimator, RegressorMixin):
             """Wrapper to make ensemble compatible with sklearn's permutation_importance"""
-            def __init__(self, ensemble_model, etf_name, seq_length):
+            def __init__(self, ensemble_model=None, etf_name=None, seq_length=20):
                 self.ensemble = ensemble_model
                 self.etf = etf_name
                 self.seq_length = seq_length

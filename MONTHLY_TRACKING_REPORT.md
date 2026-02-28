@@ -1,7 +1,7 @@
 # ETF Trading Intelligence - Monthly Tracking Report
 *Living document tracking model performance, feature importance, and predictions*
 
-**Last Updated:** 2026-02-02 15:04 UTC
+**Last Updated:** 2026-02-28 13:24 UTC
 
 ---
 
@@ -9,12 +9,12 @@
 
 | Metric | Value |
 |--------|-------|
-| **Latest Prediction** | February 2026 |
-| **Last Validated Month** | January 2026 |
-| **Overall Direction Accuracy** | 57.6% |
-| **Win Rate (Profitable Months)** | 5/6 (83%) if validated else 'N/A' |
-| **Cumulative Strategy Return** | +11.54% |
-| **Total Cycles Tracked** | 7 |
+| **Latest Prediction** | March 2026 |
+| **Last Validated Month** | February 2026 |
+| **Overall Direction Accuracy** | 59.7% |
+| **Win Rate (Profitable Months)** | 6/7 (86%) if validated else 'N/A' |
+| **Cumulative Strategy Return** | +21.14% |
+| **Total Cycles Tracked** | 8 |
 
 ---
 
@@ -25,7 +25,8 @@
 
 | Month | Direction Accuracy | Correlation | MAE | Strategy Return | Status | Training Through |
 |-------|-------------------|-------------|-----|-----------------|--------|------------------|
-| February 2026 | *Pending* | *Pending* | *Pending* | *Pending* | 🔮 Predicted | 2026-01-30 |
+| March 2026 | *Pending* | *Pending* | *Pending* | *Pending* | 🔮 Predicted | *Unknown* |
+| February 2026 | 72.7% | 0.614 | 4.48% | +9.60% | ✅ Validated | 2026-01-30 |
 | January 2026 | 54.5% | -0.217 | 4.55% | -2.68% | ✅ Validated | 2025-12-31 |
 | December 2025 | 36.4% | -0.183 | 3.19% | +0.02% | ✅ Validated | 2025-11-28 |
 | November 2025 | 45.5% | 0.333 | 4.15% | +0.94% | ✅ Validated | 2025-10-31 |
@@ -35,9 +36,31 @@
 
 ---
 
-## 🔮 February 2026 Cycle
+## 🔮 March 2026 Cycle
 
 **Latest Prediction - Awaiting Validation**
+
+### 📊 Predicted Returns (vs SPY)
+
+| Rank | ETF | Predicted Return | Recommendation |
+|------|-----|------------------|----------------|
+| 1 | XLE 🟢 | +9.67% | LONG |
+| 2 | XLU 🟢 | +9.34% | LONG |
+| 3 | XLB 🟢 | +6.98% | LONG |
+| 4 | XLI ⚪ | +6.20% | NEUTRAL |
+| 5 | XLP ⚪ | +4.93% | NEUTRAL |
+| 6 | XLRE ⚪ | +4.16% | NEUTRAL |
+| 7 | XLV ⚪ | +3.20% | NEUTRAL |
+| 8 | XLK ⚪ | +1.87% | NEUTRAL |
+| 9 | XLC 🔴 | +0.75% | SHORT |
+| 10 | XLF 🔴 | -1.66% | SHORT |
+| 11 | XLY 🔴 | -3.31% | SHORT |
+
+**Trading Strategy:** Long top 3, Short bottom 3
+
+---
+
+## ✅ February 2026 Cycle
 
 ### 📊 Predicted Returns (vs SPY)
 
@@ -56,6 +79,50 @@
 | 11 | XLF 🔴 | -5.49% | SHORT |
 
 **Trading Strategy:** Long top 3, Short bottom 3
+
+### ✅ Validation Results
+**Period:** 2026-01-30 to 2026-02-27
+**SPY Return:** -0.86%
+
+#### Overall Metrics
+
+| Metric | Value | Assessment |
+|--------|-------|------------|
+| **Direction Accuracy** | **72.7%** (8/11) | ✅ VERY GOOD |
+| Correlation | 0.614 | Strong |
+| Mean Absolute Error | 4.48% | - |
+| R² Score | 0.050 | - |
+| **Strategy Return** | **+9.60%** | ✅ PROFITABLE |
+
+#### Prediction vs Actual
+
+<iframe src="plots/pred_vs_actual_february_2026.html" width="100%" height="600" frameborder="0"></iframe>
+
+| ETF | Predicted | Actual | Error | Direction |
+|-----|-----------|--------|-------|-----------|
+| XLB | +6.73% | +9.27% | +2.53% | ✅ |
+| XLC | -0.10% | -0.83% | -0.72% | ✅ |
+| XLE | +6.33% | +10.40% | +4.08% | ✅ |
+| XLF | -5.49% | -2.90% | +2.59% | ✅ |
+| XLI | +4.61% | +7.94% | +3.32% | ✅ |
+| XLK | +4.17% | -2.69% | -6.86% | ❌ |
+| XLP | +1.68% | +8.65% | +6.97% | ✅ |
+| XLRE | -0.04% | +6.68% | +6.73% | ❌ |
+| XLU | +1.71% | +11.22% | +9.51% | ✅ |
+| XLV | -1.46% | +4.39% | +5.86% | ❌ |
+| XLY | -2.59% | -2.69% | -0.11% | ✅ |
+
+<iframe src="plots/error_distribution_february_2026.html" width="100%" height="500" frameborder="0"></iframe>
+
+#### Top/Bottom 3 Analysis
+
+**Top 3 Predicted:** XLB, XLE, XLI
+**Top 3 Actual:** XLB, XLE, XLU
+**Overlap:** 2/3 (67%)
+
+**Bottom 3 Predicted:** XLF, XLV, XLY
+**Bottom 3 Actual:** XLF, XLK, XLY
+**Overlap:** 2/3 (67%)
 
 ---
 
@@ -122,35 +189,6 @@
 **Bottom 3 Predicted:** XLE, XLRE, XLU
 **Bottom 3 Actual:** XLF, XLK, XLV
 **Overlap:** 0/3 (0%)
-
-#### Prediction Gap Analysis
-
-**Macroeconomic Context -- The "Great Rotation" of January 2026:**
-January 2026 was dominated by a historic sector rotation that caught most quantitative models off-guard. Several unprecedented macro events converged to drive a sharp pivot away from the tech/growth leadership that had characterized 2024-2025, toward physical-economy sectors (energy, materials, industrials, staples):
-
-1. **Venezuela regime change (Jan 3-5):** The U.S. capture of Nicolas Maduro triggered an immediate rally in energy stocks. Chevron (17% of XLE) surged 5.1% in a single session, and oil services names Halliburton and Schlumberger gained over 10%. This geopolitical shock was the single largest driver of the XLE prediction miss (predicted -2.88%, actual +12.71%) -- a 15.6 percentage point error. The model's GARCH component, which held 70% weight for XLE, was calibrated on oil price volatility patterns that could not anticipate a sudden geopolitical supply narrative.
-
-2. **OPEC+ production pause extension:** In late December 2025, OPEC+ extended its 3.4 million bpd production cuts into Q1 2026, tightening the supply backdrop. This gave further fundamental support to energy names, reinforcing the Maduro-driven momentum.
-
-3. **Hedge fund defensive pivot:** After a frothy AI-fueled rally in 2025, institutional capital rotated billions out of mega-cap tech into defensive and real-asset sectors. Consumer Staples (XLP) surged +6.03% relative to SPY as Colgate-Palmolive, Walmart, and Coca-Cola drew inflows from funds seeking stable cash flows. The model predicted XLP at -1.23% -- a 7.26pp miss -- because the momentum and technical signals from late 2025 (when staples were out of favor) were still dominant in the feature set.
-
-4. **Commodities and materials breakout:** Gold, metals, and mining companies posted "outstanding" performance (per State Street's Michael Arone), propelling XLB to +7.17% relative. Freeport-McMoRan and Newmont (top XLB holdings) benefited from safe-haven demand and a weakening dollar. The model predicted XLB at -0.64%, missing by 7.81pp.
-
-5. **Financials drag (XLF -3.90%):** JPMorgan slid after Trump criticized the Fed and proposed a credit card cap, while rising Treasury yields created uncertainty ahead of bank earnings. The model predicted XLF at +1.71%, one of only two sectors where it predicted the wrong direction with material magnitude.
-
-**Technical/Model Factors:**
-
-- **Regime-shift blindness:** The ensemble's 219-feature set is heavily weighted toward trailing technical and macroeconomic indicators (momentum, FRED economic data with 21-day lags). These features extrapolate recent trends -- but January 2026 represented a structural break in sector leadership. The "Great Rotation" from tech to physical economy was a regime change that backward-looking features could not anticipate.
-
-- **Mean reversion bias in energy:** The LSTM-GARCH model (70% weight for XLE) learned from 2020-2025 data where energy had frequent mean-reverting drawdowns. After XLE's modest 2025 (+7.8%), the model predicted continued underperformance (-2.88%), failing to detect the geopolitical catalyst that would overwhelm the statistical prior.
-
-- **Momentum trap in cyclicals:** The model favored XLI (+3.77%) and XLY (+2.38%) based on their late-2025 momentum signals. While XLI did outperform (+5.18%), XLY was flat (+0.00%) as the defensive rotation specifically punished consumer discretionary -- a distinction the model's broad cyclical features could not make.
-
-- **VIX regime limitation:** January's VIX remained in a moderate regime (~18-22), so the VIX-adaptive weighting system did not trigger defensive adjustments. The rotation was driven by fundamental reallocation rather than volatility spikes, falling outside the model's risk-regime detection framework.
-
-- **0/3 top and bottom overlap:** This is the worst overlap score in the system's 6-month validated history. The complete miss on both top 3 (predicted cyclicals, actual was energy/materials/staples) and bottom 3 (predicted energy/real estate/utilities, actual was financials/tech/healthcare) confirms that the January sector landscape was driven by macro catalysts entirely outside the model's feature space.
-
-*Sources: [Morningstar - Sector Rotation 2026](https://www.morningstar.com/markets/is-stock-market-rotation-underway-these-sectors-are-outpacing-tech-2026), [Capital Spectator - Materials & Energy Lead](https://www.capitalspectator.com/materials-and-energy-stocks-take-early-lead-in-2026/), [CNBC - Maduro Oil Impact](https://www.cnbc.com/2026/01/05/venezuela-oil-sour-crude-control-chevron-post-maduro-arrest.html), [24/7 Wall St - Tech Migration](https://247wallst.com/investing/2026/01/09/there-is-a-quiet-but-massive-migration-away-from-tech-stocks-in-2026/), [CNBC - XLB Breakout](https://www.cnbc.com/2026/01/07/materials-are-on-a-hot-streak-and-this-etf-is-ready-to-break-out-charts-show.html)*
 
 ---
 
