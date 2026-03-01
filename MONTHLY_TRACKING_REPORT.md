@@ -1,7 +1,7 @@
 # ETF Trading Intelligence - Monthly Tracking Report
 *Living document tracking model performance, feature importance, and predictions*
 
-**Last Updated:** 2026-02-28 13:24 UTC
+**Last Updated:** 2026-02-28 18:48 UTC
 
 ---
 
@@ -57,6 +57,134 @@
 | 11 | XLY 🔴 | -3.31% | SHORT |
 
 **Trading Strategy:** Long top 3, Short bottom 3
+
+### 🔬 Feature Importance
+**Calculated:** 2026-02-28
+**Method:** Permutation Importance (10 repeats)
+
+<iframe src="plots/aggregate_feature_importance_march_2026.html" width="100%" height="700" frameborder="0"></iframe>
+
+#### Top 20 Features (Aggregate)
+
+| Rank | Feature | Avg Importance | Std | Category |
+|------|---------|----------------|-----|----------|
+| 1 | fred_consumer_sentiment_chg_3m | 4.31% | ±1.73% | Beta - Sentiment |
+| 2 | fred_consumer_credit_chg_1m | 3.61% | ±2.84% | Beta - Money Supply |
+| 3 | fred_consumer_credit_chg_3m | 3.42% | ±1.35% | Beta - Money Supply |
+| 4 | fred_ppi_metals_chg_1m | 3.12% | ±1.16% | Beta - Inflation |
+| 5 | atr_14d | 3.06% | ±1.54% | Alpha - Technical |
+| 6 | high_20d | 3.05% | ±0.00% | Alpha - Technical |
+| 7 | fred_business_loans_chg_1m | 2.99% | ±0.77% | Beta - Money Supply |
+| 8 | mfi_14d | 2.98% | ±2.37% | Alpha - Technical |
+| 9 | fred_exports_chg_1m | 2.94% | ±0.62% | Beta - Other |
+| 10 | fred_usd_eur_chg_1m | 2.74% | ±1.34% | Beta - Market |
+| 11 | low_20d | 2.71% | ±0.11% | Alpha - Technical |
+| 12 | fred_bank_reserves_chg_1m | 2.70% | ±1.15% | Beta - Other |
+| 13 | macd | 2.61% | ±1.17% | Alpha - Technical |
+| 14 | fred_imports_chg_1m | 2.59% | ±0.60% | Beta - Other |
+| 15 | fred_exports_chg_3m | 2.59% | ±0.72% | Beta - Other |
+| 16 | price_position | 2.54% | ±1.51% | Alpha - Technical |
+| 17 | fred_imports_chg_3m | 2.51% | ±0.81% | Beta - Other |
+| 18 | macd_hist | 2.46% | ±0.71% | Alpha - Technical |
+| 19 | fred_yield_curve_10y3m_chg_3m | 2.43% | ±0.85% | Beta - Interest Rates |
+| 20 | vix_volatility_lag21 | 2.42% | ±1.16% | VIX Regime |
+
+#### Category Importance Breakdown
+
+| Category | Importance |
+|----------|------------|
+| Alpha - Technical | 32.39% |
+| Beta - Other | 21.30% |
+| Beta - Money Supply | 18.44% |
+| Beta - Interest Rates | 12.63% |
+| Beta - Market | 11.06% |
+| Beta - Economic | 7.97% |
+| Beta - Inflation | 7.57% |
+| Beta - Sentiment | 6.52% |
+| VIX Regime | 2.42% |
+
+<details>
+<summary><b>📋 Sector-Specific Feature Importance (Click to expand)</b></summary>
+
+
+**XLF** - Top 5:
+1. fred_consumer_credit_chg_3m (4.90%) - Beta - Money Supply
+2. fred_business_loans_chg_1m (4.19%) - Beta - Money Supply
+3. vix_volatility_lag21 (3.71%) - VIX Regime
+4. fred_core_cpi_chg_3m (3.28%) - Beta - Inflation
+5. high_20d (3.05%) - Alpha - Technical
+
+**XLC** - Top 5:
+1. fred_consumer_credit_chg_1m (2.71%) - Beta - Money Supply
+2. fred_vix_chg_1m (2.64%) - Beta - Market
+3. fred_exports_chg_3m (2.53%) - Beta - Other
+4. fred_usd_jpy_chg_1m (2.50%) - Beta - Market
+5. fred_m2_money_chg_1m (2.41%) - Beta - Money Supply
+
+**XLY** - Top 5:
+1. atr_14d (5.25%) - Alpha - Technical
+2. fred_consumer_sentiment_chg_3m (4.61%) - Beta - Sentiment
+3. fred_exports_chg_1m (3.78%) - Beta - Other
+4. fred_exports_chg_3m (2.96%) - Beta - Other
+5. fred_ppi_metals (2.92%) - Beta - Inflation
+
+**XLP** - Top 5:
+1. fred_consumer_credit_chg_3m (5.24%) - Beta - Money Supply
+2. fred_yield_curve_10y3m_chg_3m (4.05%) - Beta - Interest Rates
+3. momentum_1w (4.03%) - Alpha - Technical
+4. vix_volatility_lag21 (3.93%) - VIX Regime
+5. macd_hist (3.09%) - Alpha - Technical
+
+**XLE** - Top 5:
+1. momentum_1m (2.23%) - Alpha - Technical
+2. fred_vix (2.19%) - Beta - Market
+3. fred_high_yield_spread_chg_3m (2.18%) - Beta - Interest Rates
+4. fred_cpi_chg_1m (2.16%) - Beta - Inflation
+5. fred_capacity_utilization_chg_1m (2.16%) - Beta - Other
+
+**XLV** - Top 5:
+1. fred_exports_chg_1m (3.48%) - Beta - Other
+2. fred_consumer_sentiment_chg_1m (3.02%) - Beta - Sentiment
+3. fred_business_loans_chg_3m (2.75%) - Beta - Money Supply
+4. ratio_momentum (2.61%) - Alpha - Technical
+5. fred_consumer_credit_chg_3m (2.58%) - Beta - Money Supply
+
+**XLI** - Top 5:
+1. fred_consumer_credit_chg_1m (9.61%) - Beta - Money Supply
+2. atr_14d (4.51%) - Alpha - Technical
+3. fred_business_loans_chg_3m (3.44%) - Beta - Money Supply
+4. fred_imports_chg_3m (3.23%) - Beta - Other
+5. fred_ppi_metals_chg_1m (3.12%) - Beta - Inflation
+
+**XLB** - Top 5:
+1. fred_consumer_sentiment_chg_3m (7.79%) - Beta - Sentiment
+2. price_position (5.82%) - Alpha - Technical
+3. fred_usd_eur_chg_1m (4.97%) - Beta - Market
+4. fred_imports_chg_1m (3.69%) - Beta - Other
+5. fred_exports_chg_1m (3.18%) - Beta - Other
+
+**XLRE** - Top 5:
+1. fred_consumer_sentiment_chg_3m (5.52%) - Beta - Sentiment
+2. fred_imports_chg_3m (3.67%) - Beta - Other
+3. fred_consumer_sentiment_chg_1m (3.48%) - Beta - Sentiment
+4. fred_imports_chg_1m (2.66%) - Beta - Other
+5. vix_regime_low_vol_lag21 (2.53%) - VIX Regime
+
+**XLK** - Top 5:
+1. fred_consumer_credit_chg_1m (7.15%) - Beta - Money Supply
+2. macd (5.14%) - Alpha - Technical
+3. fred_ppi_metals_chg_1m (5.06%) - Beta - Inflation
+4. fred_bank_reserves_chg_1m (4.64%) - Beta - Other
+5. fred_consumer_sentiment_chg_3m (4.02%) - Beta - Sentiment
+
+**XLU** - Top 5:
+1. mfi_14d (7.07%) - Alpha - Technical
+2. fred_consumer_credit_chg_3m (5.24%) - Beta - Money Supply
+3. macd_signal (4.39%) - Alpha - Technical
+4. fred_ppi_metals_chg_1m (4.10%) - Beta - Inflation
+5. fred_exports_chg_3m (3.95%) - Beta - Other
+
+</details>
 
 ---
 
