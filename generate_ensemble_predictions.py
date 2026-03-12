@@ -1,6 +1,11 @@
 """
 Ensemble Prediction System for ETF Sector Rotation
-Uses 4-model ensemble with sector-specific and VIX regime weighting
+Uses 7-model ensemble with sector-specific and VIX regime weighting.
+
+Models: LSTM, TFT, N-BEATS, LSTM-GARCH (PyTorch deep learning)
+        LightGBM (gradient boosting regression)
+        CatBoost (gradient boosting 3-class classification)
+        SARIMAX  (time-series with correlation-based feature selection)
 """
 
 import pandas as pd
@@ -11,7 +16,6 @@ from datetime import datetime, timedelta
 from sklearn.preprocessing import StandardScaler
 import torch
 import torch.nn as nn
-import torch.optim as optim
 import json
 import warnings
 warnings.filterwarnings('ignore')
@@ -25,7 +29,8 @@ PREDICTION_HORIZON = 21  # One month
 import sys
 sys.path.insert(0, '/home/aojie_ju/etf-trading-intelligence')
 
-# Model architectures from validate_all_models.py
+# ---- nn.Module definitions (kept here for backward compat imports) ----------
+
 class SimpleLSTM(nn.Module):
     """Basic LSTM for baseline"""
     def __init__(self, input_dim):
@@ -81,73 +86,97 @@ class SimpleLSTMGARCH(nn.Module):
     def forward(self, x):
         lstm_out, _ = self.lstm(x)
         last_hidden = lstm_out[:, -1, :]
-
         returns = x[:, :, 0]
         volatility = returns.std(dim=1, keepdim=True).clamp(min=1e-6)
-
         combined = torch.cat([last_hidden, volatility], dim=1)
         return self.fc(combined).squeeze()
 
 
+# ---- Wrapper imports --------------------------------------------------------
+
+from src.models.pytorch_wrappers import PyTorchModelWrapper
+from src.models.lightgbm_wrapper import LightGBMWrapper
+from src.models.catboost_wrapper import CatBoostWrapper
+from src.models.sarimax_wrapper import SARIMAXWrapper
+
+
+# ---- 7-Model Ensemble Predictor --------------------------------------------
+
 class EnsemblePredictor:
-    """4-Model Ensemble with sector-specific and VIX regime weighting"""
+    """7-Model Ensemble with sector-specific and VIX regime weighting.
 
-    def __init__(self, input_dim):
-        self.models = {
-            'lstm': SimpleLSTM(input_dim),
-            'tft': SimpleTFT(input_dim),
-            'nbeats': SimpleNBeats(input_dim),
-            'lstm_garch': SimpleLSTMGARCH(input_dim)
+    All wrappers receive flat 2D (n_samples, n_features) arrays; each wrapper
+    handles its own internal transformation (sliding window, feature selection,
+    target binning, etc.).
+    """
+
+    def __init__(self, input_dim, feature_names):
+        self.feature_names = list(feature_names)
+        self.input_dim = input_dim
+
+        # Build 7 model wrappers
+        self.wrappers = {
+            'lstm':       PyTorchModelWrapper(SimpleLSTM, 'lstm'),
+            'tft':        PyTorchModelWrapper(SimpleTFT, 'tft'),
+            'nbeats':     PyTorchModelWrapper(SimpleNBeats, 'nbeats'),
+            'lstm_garch': PyTorchModelWrapper(SimpleLSTMGARCH, 'lstm_garch'),
+            'lightgbm':   LightGBMWrapper(),
+            'catboost':   CatBoostWrapper(),
+            'sarimax':    SARIMAXWrapper(),
         }
 
-        # Sector-specific weights (from validation performance)
+        # Track which models trained successfully
+        self._failed_models = set()
+
+        # Sector-specific base weights (expanded for 7 models)
         self.sector_weights = {
-            'XLE': {'lstm_garch': 0.7, 'lstm': 0.2, 'tft': 0.1, 'nbeats': 0.0},
-            'XLK': {'lstm': 0.6, 'nbeats': 0.3, 'tft': 0.1, 'lstm_garch': 0.0},
-            'XLF': {'tft': 0.5, 'lstm': 0.3, 'nbeats': 0.2, 'lstm_garch': 0.0},
-            'default': {'lstm': 0.3, 'tft': 0.3, 'nbeats': 0.2, 'lstm_garch': 0.2}
+            'XLE': {
+                'lstm_garch': 0.40, 'lstm': 0.10, 'tft': 0.05, 'nbeats': 0.00,
+                'lightgbm': 0.20, 'catboost': 0.15, 'sarimax': 0.10,
+            },
+            'XLK': {
+                'lstm': 0.30, 'nbeats': 0.15, 'tft': 0.05, 'lstm_garch': 0.00,
+                'lightgbm': 0.25, 'catboost': 0.15, 'sarimax': 0.10,
+            },
+            'XLF': {
+                'tft': 0.25, 'lstm': 0.15, 'nbeats': 0.10, 'lstm_garch': 0.00,
+                'lightgbm': 0.20, 'catboost': 0.15, 'sarimax': 0.15,
+            },
+            'default': {
+                'lstm': 0.15, 'tft': 0.15, 'nbeats': 0.10, 'lstm_garch': 0.10,
+                'lightgbm': 0.20, 'catboost': 0.15, 'sarimax': 0.15,
+            },
         }
 
-        # VIX regime adjustments
+        # VIX regime multipliers (expanded for 7 models)
         self.vix_regime_adjustments = {
-            'LOW_VOL': {'lstm': 1.2, 'tft': 1.1, 'nbeats': 1.0, 'lstm_garch': 0.8},
-            'MEDIUM_VOL': {'lstm': 1.0, 'tft': 1.0, 'nbeats': 1.0, 'lstm_garch': 1.0},
-            'HIGH_VOL': {'lstm': 0.8, 'tft': 0.9, 'nbeats': 1.0, 'lstm_garch': 1.3}
+            'LOW_VOL': {
+                'lstm': 1.2, 'tft': 1.1, 'nbeats': 1.0, 'lstm_garch': 0.8,
+                'lightgbm': 1.1, 'catboost': 1.0, 'sarimax': 1.1,
+            },
+            'MEDIUM_VOL': {
+                'lstm': 1.0, 'tft': 1.0, 'nbeats': 1.0, 'lstm_garch': 1.0,
+                'lightgbm': 1.0, 'catboost': 1.0, 'sarimax': 1.0,
+            },
+            'HIGH_VOL': {
+                'lstm': 0.8, 'tft': 0.9, 'nbeats': 1.0, 'lstm_garch': 1.3,
+                'lightgbm': 0.9, 'catboost': 1.1, 'sarimax': 0.7,
+            },
         }
 
-        self.optimizers = {}
-        for name, model in self.models.items():
-            self.optimizers[name] = None
+    def train_models(self, X_scaled, y, sector, feature_names=None):
+        """Train all 7 wrappers on flat 2D data."""
+        if feature_names is None:
+            feature_names = self.feature_names
+        self._failed_models = set()
 
-    def train_models(self, X, y, sector, epochs=50, lr=0.001):
-        """Train all 4 models"""
-        X_tensor = torch.FloatTensor(X)
-        y_tensor = torch.FloatTensor(y)
-
-        # Initialize optimizers
-        for name, model in self.models.items():
-            self.optimizers[name] = torch.optim.Adam(model.parameters(), lr=lr)
-
-        # Train each model
-        for epoch in range(epochs):
-            for name, model in self.models.items():
-                model.train()
-                self.optimizers[name].zero_grad()
-
-                try:
-                    output = model(X_tensor)
-                    # Handle scalar vs array outputs
-                    if output.dim() == 0:
-                        output = output.unsqueeze(0)
-                    loss = nn.MSELoss()(output, y_tensor)
-                    loss.backward()
-                    self.optimizers[name].step()
-                except Exception as e:
-                    print(f"      Warning: {name} training error: {e}")
-                    continue
-
-            if (epoch + 1) % 10 == 0:
-                print(f"    Epoch {epoch+1}/{epochs}")
+        for name, wrapper in self.wrappers.items():
+            try:
+                print(f"      Training {name}...")
+                wrapper.train(X_scaled, y, sector, feature_names)
+            except Exception as e:
+                print(f"      Warning: {name} training failed: {e}")
+                self._failed_models.add(name)
 
     def classify_vix_regime(self, vix_value):
         """Classify VIX into LOW/MEDIUM/HIGH"""
@@ -160,48 +189,68 @@ class EnsemblePredictor:
         else:
             return 'HIGH_VOL'
 
-    def predict_ensemble(self, X, sector, vix_level):
-        """Generate ensemble prediction with sector and VIX weighting"""
-        X_tensor = torch.FloatTensor(X)
+    def predict_ensemble(self, X_scaled, sector, vix_level, feature_names=None):
+        """Generate ensemble prediction with sector and VIX weighting.
 
-        # Get predictions from all models
+        Parameters
+        ----------
+        X_scaled : np.ndarray, shape (n, n_features)
+            Flat 2D scaled features (e.g. the last ``seq_len`` rows for
+            PyTorch models or a single row for tree models).
+        sector : str
+        vix_level : float
+        feature_names : list[str] or None
+
+        Returns
+        -------
+        ensemble_pred : float
+        predictions : dict[str, float]
+        final_weights : dict[str, float]
+        vix_regime : str
+        """
+        if feature_names is None:
+            feature_names = self.feature_names
+
+        # Collect point predictions from each model
         predictions = {}
-        for name, model in self.models.items():
-            model.eval()
-            with torch.no_grad():
-                try:
-                    pred = model(X_tensor)
-                    if pred.dim() == 0:
-                        pred = pred.item()
-                    else:
-                        pred = pred.numpy()[0] if len(pred) > 0 else pred.item()
-                    predictions[name] = float(pred)
-                except Exception as e:
-                    print(f"      Warning: {name} prediction error: {e}")
-                    predictions[name] = 0.0
+        for name, wrapper in self.wrappers.items():
+            if name in self._failed_models:
+                predictions[name] = 0.0
+                continue
+            try:
+                preds = wrapper.predict(X_scaled, feature_names)
+                # Take last prediction as the point forecast
+                predictions[name] = float(preds[-1]) if len(preds) > 0 else 0.0
+            except Exception as e:
+                print(f"      Warning: {name} prediction error: {e}")
+                predictions[name] = 0.0
 
-        # Get sector-specific base weights
+        # Sector base weights
         base_weights = self.sector_weights.get(sector, self.sector_weights['default'])
 
-        # Get VIX regime adjustments
+        # VIX regime adjustments
         vix_regime = self.classify_vix_regime(vix_level)
-        regime_adjustments = self.vix_regime_adjustments[vix_regime]
+        regime_adj = self.vix_regime_adjustments[vix_regime]
 
-        # Calculate final weights
+        # Compute and normalise final weights (skip failed models)
         final_weights = {}
-        total_weight = 0
-        for model_name in self.models.keys():
-            weight = base_weights[model_name] * regime_adjustments[model_name]
-            final_weights[model_name] = weight
-            total_weight += weight
+        total_weight = 0.0
+        for model_name in self.wrappers:
+            if model_name in self._failed_models:
+                final_weights[model_name] = 0.0
+                continue
+            w = base_weights.get(model_name, 0.0) * regime_adj.get(model_name, 1.0)
+            final_weights[model_name] = w
+            total_weight += w
 
-        # Normalize weights
-        for model_name in final_weights:
-            final_weights[model_name] /= total_weight if total_weight > 0 else 1.0
+        if total_weight > 0:
+            for k in final_weights:
+                final_weights[k] /= total_weight
 
-        # Ensemble prediction
-        ensemble_pred = sum(predictions[name] * final_weights[name]
-                           for name in self.models.keys())
+        # Weighted ensemble prediction
+        ensemble_pred = sum(
+            predictions[name] * final_weights[name] for name in self.wrappers
+        )
 
         return ensemble_pred, predictions, final_weights, vix_regime
 
@@ -226,7 +275,7 @@ def generate_ensemble_predictions(month, year, train_end_date, val_start_date, v
     print(f"  Training: 2020-01-01 to {train_end_date.date()}")
     print(f"  Validation: {val_start_date.date()} to {val_end_date.date()}")
     print(f"  Prediction Target: {month} {year}")
-    print(f"  Ensemble: LSTM + TFT + N-BEATS + LSTM-GARCH")
+    print(f"  Ensemble: LSTM + TFT + N-BEATS + LSTM-GARCH + LightGBM + CatBoost + SARIMAX")
     print("="*80)
     print()
 
@@ -248,7 +297,7 @@ def generate_ensemble_predictions(month, year, train_end_date, val_start_date, v
     print("🔧 Creating features...")
     features = pipeline.create_features(market_data, fred_data)
 
-    print(f"\n🤖 Training Ensemble Models for {month} {year}:")
+    print(f"\n🤖 Training 7-Model Ensemble for {month} {year}:")
     print("-" * 80)
 
     results = {}
@@ -278,29 +327,22 @@ def generate_ensemble_predictions(month, year, train_end_date, val_start_date, v
         # Scale features
         scaler = StandardScaler()
         X_train = train_data[feature_cols]
-        y_train = train_data['target']
+        y_train = train_data['target'].values
         X_train_scaled = scaler.fit_transform(X_train)
 
-        # Create sequences
-        def create_sequences(X, y, seq_len):
-            X_seq, y_seq = [], []
-            for i in range(seq_len, len(X)):
-                X_seq.append(X[i-seq_len:i])
-                y_seq.append(y.iloc[i])
-            return np.array(X_seq), np.array(y_seq)
+        # Prepare optional validation data
+        val_X_scaled = None
+        val_y = None
+        if len(val_data) > 20:
+            val_X_scaled = scaler.transform(val_data[feature_cols])
+            val_y = val_data['target'].values
 
-        X_train_seq, y_train_seq = create_sequences(X_train_scaled, y_train, seq_length)
-
-        if len(X_train_seq) < 10:
-            print(f"  ⚠️ Insufficient sequences, skipping")
-            continue
-
-        # Initialize ensemble
-        ensemble = EnsemblePredictor(X_train_scaled.shape[1])
+        # Initialize 7-model ensemble (flat features — wrappers handle transforms)
+        ensemble = EnsemblePredictor(X_train_scaled.shape[1], list(feature_cols))
 
         # Train ensemble
-        print(f"  Training 4-model ensemble...")
-        ensemble.train_models(X_train_seq, y_train_seq, etf, epochs=50, lr=0.001)
+        print(f"  Training 7-model ensemble...")
+        ensemble.train_models(X_train_scaled, y_train, etf, list(feature_cols))
 
         # Get VIX level (21-day lagged)
         vix_col = [c for c in df.columns if 'vix' in c.lower() and 'lag' in c.lower()]
@@ -309,14 +351,13 @@ def generate_ensemble_predictions(month, year, train_end_date, val_start_date, v
         else:
             vix_level = fred_data['vix'].shift(PREDICTION_HORIZON).iloc[-1] if 'vix' in fred_data else 18.0
 
-        # Generate prediction
+        # Generate prediction — pass flat scaled features
         all_data = df[df.index <= train_end_date]
         if len(all_data) >= seq_length:
             X_pred = scaler.transform(all_data[feature_cols].iloc[-seq_length:])
-            X_pred_seq = X_pred.reshape(1, seq_length, -1)
 
             ensemble_pred, model_preds, weights, regime = ensemble.predict_ensemble(
-                X_pred_seq, etf, vix_level
+                X_pred, etf, vix_level, list(feature_cols)
             )
 
             print(f"  ✅ Ensemble Prediction: {ensemble_pred:+.4f} ({ensemble_pred*100:+.2f}%)")

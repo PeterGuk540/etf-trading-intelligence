@@ -1,10 +1,10 @@
 # ETF Trading Intelligence System
 
-A Python-based ETF sector rotation prediction system using an ensemble of 4 neural network architectures to forecast monthly relative returns across 11 major sector ETFs.
+A Python-based ETF sector rotation prediction system using an ensemble of 7 models (4 deep learning + 2 gradient boosting + 1 time-series) to forecast monthly relative returns across 11 major sector ETFs.
 
 ## 📊 System Overview
 
-This system predicts 21-day forward relative returns (ETF return - SPY return) for sector rotation strategies. It uses 219 features per ETF combining technical indicators, economic data, and VIX regime detection to train an ensemble of 4 neural network models with sector-specific weighting.
+This system predicts 21-day forward relative returns (ETF return - SPY return) for sector rotation strategies. It uses 219 features per ETF combining technical indicators, economic data, and VIX regime detection to train an ensemble of 7 models with sector-specific weighting.
 
 ## 🎯 Actual Performance
 
@@ -14,7 +14,7 @@ This system predicts 21-day forward relative returns (ETF return - SPY return) f
 - **Average R²**: -4.25 (negative due to noisy relative returns)
 - **MAE**: 3.77%
 
-### Real-World Performance (TRUE 4-Model Ensemble with Adaptive Weighting)
+### Real-World Performance (TRUE 7-Model Ensemble with Adaptive Weighting)
 
 | Month | Direction Accuracy | Correlation | MAE | Strategy Return | Status |
 |-------|-------------------|-------------|-----|-----------------|--------|
@@ -51,7 +51,7 @@ This system predicts 21-day forward relative returns (ETF return - SPY return) f
 - **VIX Regime**: ✅ Properly lagged 21 days to prevent data leakage
 
 ### Model Architectures
-The system implements an ensemble of 4 neural network architectures with sector-specific weighting:
+The system implements an ensemble of 7 models (4 deep learning + 2 gradient boosting + 1 time-series) with sector-specific weighting:
 
 1. **LSTM (Baseline)**: 2-layer LSTM with 64 hidden units
    - Direction Accuracy: 48.1%
@@ -69,6 +69,18 @@ The system implements an ensemble of 4 neural network architectures with sector-
    - Direction Accuracy: 47.6%
    - Best for: XLE (Energy) - 77.8% accuracy
 
+5. **LightGBM**: Gradient boosting regression
+   - Fast training, handles missing values natively
+   - Best for: High-dimensional tabular data
+
+6. **CatBoost**: Gradient boosting 3-class classification (Up/Down/Neutral)
+   - Ordered boosting to reduce prediction shift
+   - Best for: Categorical regime detection
+
+7. **SARIMAX**: Seasonal ARIMA with exogenous features
+   - Correlation-based feature selection (top-k most correlated)
+   - Best for: Sectors with strong seasonal patterns
+
 ### 🔗 Ensemble Methodology: Adaptive Weighted Averaging
 
 The system uses a **sophisticated multi-level weighted averaging approach** (not simple averaging or bagging):
@@ -76,17 +88,17 @@ The system uses a **sophisticated multi-level weighted averaging approach** (not
 #### **Level 1: Sector-Specific Base Weights**
 Each sector has optimized weights based on validation performance:
 ```
-XLE (Energy):     LSTM-GARCH: 70%, LSTM: 20%, TFT: 10%, N-BEATS: 0%
-XLK (Technology): LSTM: 60%, N-BEATS: 30%, TFT: 10%, LSTM-GARCH: 0%
-XLF (Financials): TFT: 50%, LSTM: 30%, N-BEATS: 20%, LSTM-GARCH: 0%
-Other Sectors:    LSTM: 30%, TFT: 30%, N-BEATS: 20%, LSTM-GARCH: 20%
+XLE (Energy):     LSTM-GARCH: 40%, LightGBM: 20%, CatBoost: 15%, LSTM: 10%, SARIMAX: 10%, TFT: 5%
+XLK (Technology): LSTM: 30%, LightGBM: 25%, N-BEATS: 15%, CatBoost: 15%, SARIMAX: 10%, TFT: 5%
+XLF (Financials): TFT: 25%, LightGBM: 20%, LSTM: 15%, CatBoost: 15%, SARIMAX: 15%, N-BEATS: 10%
+Other Sectors:    LightGBM: 20%, LSTM: 15%, TFT: 15%, CatBoost: 15%, SARIMAX: 15%, N-BEATS: 10%, LSTM-GARCH: 10%
 ```
 
 #### **Level 2: VIX Regime Adjustments (21-day lagged)**
 Base weights are multiplied by regime-specific factors:
-- **LOW_VOL (VIX < 20)**: LSTM ×1.2, TFT ×1.1, N-BEATS ×1.0, LSTM-GARCH ×0.8
+- **LOW_VOL (VIX < 20)**: LSTM ×1.2, TFT ×1.1, LightGBM ×1.1, SARIMAX ×1.1, N-BEATS ×1.0, CatBoost ×1.0, LSTM-GARCH ×0.8
 - **MEDIUM_VOL (20-30)**: All models ×1.0 (no adjustment)
-- **HIGH_VOL (VIX > 30)**: LSTM ×0.8, TFT ×0.9, N-BEATS ×1.0, LSTM-GARCH ×1.3
+- **HIGH_VOL (VIX > 30)**: LSTM-GARCH ×1.3, CatBoost ×1.1, N-BEATS ×1.0, TFT ×0.9, LightGBM ×0.9, LSTM ×0.8, SARIMAX ×0.7
 
 #### **Level 3: Final Ensemble Calculation**
 ```python
@@ -124,7 +136,7 @@ uncertainty = std_deviation(all_model_predictions)
 | Script | Purpose |
 |--------|---------|
 | **`run_complete_cycle.py`** | 🎯 **Master workflow** - Orchestrates complete monthly cycle |
-| `generate_ensemble_predictions.py` | 4-model ensemble prediction engine |
+| `generate_ensemble_predictions.py` | 7-model ensemble prediction engine |
 | `calculate_feature_importance_real.py` | Real permutation-based feature importance |
 | `update_monthly_tracking.py` | Auto-updates monthly tracking report |
 | `etf_monthly_prediction_system.py` | Data fetching & feature engineering pipeline |
@@ -213,7 +225,7 @@ python run_complete_cycle.py --month march --year 2026 --train-end 2026-02-27
 ```
 
 This automatically:
-1. ✅ Generates 4-model ensemble predictions
+1. ✅ Generates 7-model ensemble predictions
 2. ✅ Calculates real feature importance (permutation-based)
 3. ✅ Updates `MONTHLY_TRACKING_REPORT.md`
 4. ✅ Creates interactive HTML plots

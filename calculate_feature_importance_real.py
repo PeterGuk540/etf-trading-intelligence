@@ -128,78 +128,52 @@ class RealFeatureImportanceCalculator:
         scaler = StandardScaler()
         X_scaled = scaler.fit_transform(X)
 
-        # Create sequences for LSTM
-        seq_length = 20
-        X_seq, y_seq = [], []
-        for i in range(seq_length, len(X_scaled)):
-            X_seq.append(X_scaled[i-seq_length:i])
-            y_seq.append(y[i])
-        X_seq, y_seq = np.array(X_seq), np.array(y_seq)
-
-        if len(X_seq) < 50:
-            print(f"  ⚠️ Insufficient sequences: {len(X_seq)}")
+        if len(X_scaled) < 50:
+            print(f"  ⚠️ Insufficient samples: {len(X_scaled)}")
             return None
 
-        print(f"  Training sequences: {len(X_seq)}")
+        print(f"  Training samples: {len(X_scaled)}")
 
-        # Train ensemble model
-        print("  Training 4-model ensemble...")
-        ensemble = EnsemblePredictor(X_scaled.shape[1])
-        ensemble.train_models(X_seq, y_seq, etf, epochs=30, lr=0.001)
+        # Train 7-model ensemble (flat 2D API)
+        print("  Training 7-model ensemble...")
+        ensemble = EnsemblePredictor(X_scaled.shape[1], list(feature_cols))
+        ensemble.train_models(X_scaled, y, etf, list(feature_cols))
 
         # Prepare validation set for permutation importance
-        val_size = min(200, len(X_seq) // 5)
-        val_start = len(X_seq) - val_size
-        X_val_seq = X_seq[val_start:]
-        y_val = y_seq[val_start:]
+        val_size = min(200, len(X_scaled) // 5)
+        val_start = len(X_scaled) - val_size
+        X_val = X_scaled[val_start:]
+        y_val = y[val_start:]
 
         print(f"  Validation samples: {len(y_val)}")
 
         # Create wrapper for permutation importance
         class EnsembleWrapper(BaseEstimator, RegressorMixin):
             """Wrapper to make ensemble compatible with sklearn's permutation_importance"""
-            def __init__(self, ensemble_model=None, etf_name=None, seq_length=20):
+            def __init__(self, ensemble_model=None, etf_name=None, feat_names=None):
                 self.ensemble = ensemble_model
                 self.etf = etf_name
-                self.seq_length = seq_length
-                self.feature_history = []
+                self.feat_names = feat_names
 
             def fit(self, X, y):
                 """Dummy fit method (already trained)"""
                 return self
 
             def predict(self, X):
-                """Predict method for permutation importance"""
-                # X shape: (n_samples, n_features)
-                # Need to create sequences from single timesteps
+                """Predict using flat 2D input — each wrapper handles its own transform"""
                 predictions = []
-
                 for i in range(len(X)):
-                    # Store this sample for building sequences
-                    self.feature_history.append(X[i])
-
-                    # Build sequence (use repeated sample if not enough history)
-                    if len(self.feature_history) >= self.seq_length:
-                        seq = np.array(self.feature_history[-self.seq_length:])
-                    else:
-                        # Pad with repeated samples
-                        seq = np.tile(X[i], (self.seq_length, 1))
-
-                    # Reshape for ensemble
-                    seq_input = seq.reshape(1, self.seq_length, -1)
-
-                    # Get ensemble prediction
+                    row = X[i:i+1]
                     pred, _, _, _ = self.ensemble.predict_ensemble(
-                        seq_input, self.etf, vix_level=None
+                        row, self.etf, vix_level=None, feature_names=self.feat_names
                     )
-                    predictions.append(pred if isinstance(pred, float) else pred[0])
-
+                    predictions.append(float(pred))
                 return np.array(predictions)
 
-        wrapper = EnsembleWrapper(ensemble, etf, seq_length)
+        wrapper = EnsembleWrapper(ensemble, etf, list(feature_cols))
 
-        # Extract features from last timestep of each sequence
-        X_val_flat = X_val_seq[:, -1, :]
+        # Flat 2D validation features (already flat)
+        X_val_flat = X_val
 
         print(f"  Calculating permutation importance (this may take a few minutes)...")
 

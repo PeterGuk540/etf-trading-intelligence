@@ -1,6 +1,6 @@
 """
 Validate ensemble predictions for ALL three months: August, September, October 2025
-Compares TRUE 4-model ensemble predictions against actual market data
+Compares TRUE 7-model ensemble predictions against actual market data
 """
 
 import json
@@ -167,11 +167,14 @@ def main():
     print("\n" + "=" * 80)
     print("ENSEMBLE PREDICTIONS VALIDATION - ALL MONTHS")
     print("=" * 80)
-    print("\n🎯 TRUE 4-Model Ensemble:")
+    print("\n🎯 TRUE 7-Model Ensemble:")
     print("  • LSTM (baseline)")
     print("  • TFT (Temporal Fusion Transformer with attention)")
     print("  • N-BEATS (Neural Basis Expansion)")
     print("  • LSTM-GARCH (volatility modeling)")
+    print("  • LightGBM (gradient boosting regression)")
+    print("  • CatBoost (gradient boosting classification)")
+    print("  • SARIMAX (time-series with feature selection)")
     print("\n📊 Adaptive Weighting:")
     print("  • Sector-specific base weights")
     print("  • VIX regime adjustments (21-day lagged)")
@@ -230,7 +233,7 @@ def main():
         # Save summary
         summary = {
             'validation_date': datetime.now().isoformat(),
-            'ensemble_type': 'TRUE_4_MODEL_ENSEMBLE',
+            'ensemble_type': 'TRUE_7_MODEL_ENSEMBLE',
             'months_validated': list(all_metrics.keys()),
             'summary_metrics': {
                 'avg_direction_accuracy': float(avg_direction),
