@@ -159,4 +159,4 @@ Thumbs.db
 
 # Docker
 .dockerignore
-docker-compose.override.yml
+docker-compose.override.ymlcatboost_info/

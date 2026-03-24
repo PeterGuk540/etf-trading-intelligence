@@ -287,7 +287,11 @@ def generate_ensemble_predictions(month, year, train_end_date, val_start_date, v
     eps.TRAIN_END = train_end_date
     eps.VALIDATION_START = val_start_date
     eps.VALIDATION_END = val_end_date
-    eps.PREDICTION_START = datetime(year, list(calendar.month_name).index(month), 1) if month != "October" else datetime(year, 10, 1)
+    try:
+        eps.PREDICTION_START = datetime(year, list(calendar.month_name).index(month), 1)
+    except ValueError:
+        # Non-standard month name (e.g., "Mid_march") — keep existing PREDICTION_START
+        pass
 
     pipeline = MonthlyPredictionPipeline()
 
